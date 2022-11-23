@@ -1,0 +1,46 @@
+#cuerpo .p-3 {
+  height: 250px;
+  margin: auto;
+  justify-content: start;
+  align-items: end;
+  display: flex;
+  font-size: 30px;
+  font-weight: 800;
+  color: white;
+  background-color: #dcdcdc;
+}
+
+#cuerpo a {
+  text-decoration: none;
+}
+
+#bg-inicio {
+  background-image: url("../images/background/inicio.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 8px 24px 5px 24px
+}
+
+#bg-cursos {
+  background-image: url("../images/background/cursos.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#bg-emblemas {
+  background-image: url("../images/background/trofeos.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#bg-calificaciones {
+  background-image: url("../images/background/notas.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#borde-texto {
+  padding: 0px 15px;
+  border-radius: 15px;
+  background-color: #FF6720;
+}

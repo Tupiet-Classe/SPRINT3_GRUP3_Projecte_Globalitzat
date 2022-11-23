@@ -1,0 +1,11 @@
+#botones {
+  float: right;
+}
+
+#correcto {
+  display: none;
+}
+
+#editar-notas {
+  background-color: #FF6720;
+}

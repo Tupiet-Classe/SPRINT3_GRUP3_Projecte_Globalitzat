@@ -1,0 +1,17 @@
+[
+    {
+        "id": 0,
+        "nomActivitat": "Activitat 1",
+        "nota": 8
+    },
+    {
+        "id": 1,
+        "nomActivitat": "Activitat 2",
+        "nota": "No Entregado"
+    },
+    {
+        "id": 2,
+        "nomActivitat": "Activitat 3",
+        "nota": 5
+    }
+]

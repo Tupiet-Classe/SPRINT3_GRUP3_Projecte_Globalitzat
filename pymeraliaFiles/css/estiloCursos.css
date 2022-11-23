@@ -1,0 +1,24 @@
+#contenedor-cursos{
+    margin: 45px 0px;
+}
+
+main{
+    padding: 20px;
+}
+
+/* CURSO NO COMPRADO*/
+.curso-no-comprado{
+    opacity: 0.7;
+    filter: brightness(0.5);
+}
+
+.curso-no-comprado button {
+    display: none;
+}
+
+/* MEDIA QUERIES*/
+@media (max-width: 591px){
+    .vista-curso{
+        margin-bottom: 20px;
+    }
+}

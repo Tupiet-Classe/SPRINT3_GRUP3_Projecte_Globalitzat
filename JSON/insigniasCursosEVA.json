@@ -1,0 +1,18 @@
+ [
+   {
+      "id": 0,
+      "imagenInsignia": "imagenInsigniaCurso1.png",
+      "nombreInsignia": "Insignia Ciberseguridad para Empresas"
+   },
+   {
+      "id": 1,
+      "imagenInsignia": "imagenInsigniaCurso2.png",
+      "nombreInsignia": "Insignia Ciberseguridad para Autónomos"
+   },
+   {
+      "id": 3,
+      "imagenInsignia": "imagenInsigniaCurso3.png",
+      "nombreInsignia": "Insignia Como proteger Contraseñas"
+   }
+ ]   
+    

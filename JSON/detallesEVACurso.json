@@ -1,0 +1,20 @@
+[
+    {
+        "id": 0,
+        "nombreCurso": "Ciberseguridad para Empresas",
+        "descripcionCurso": "Ciberseguridad avanzada para empresas, impartido por Pymeralia",
+        "recurso": "video.mp4"
+    },
+    {
+        "id": 1,
+        "nombreCurso": "Ciberseguridad para Autónomos",
+        "descripcionCurso": "Ciberseguridad avanzada para autónomos, impartido por Pymeralia",
+        "recurso": "video.mp4"
+    },
+    {
+        "id": 2,
+        "nombreCurso": "Como proteger contraseñas",
+        "descripcionCurso": "Como proteger tu contraseña, impartido por Pymeralia",
+        "recurso": "video.mp4"
+    }
+]  

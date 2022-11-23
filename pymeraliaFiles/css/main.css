@@ -1,0 +1,109 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  background-color: #ffffff;
+  font-family: 'Montserrat';
+  font-size: 14px;
+}
+
+header {
+  background-color: #FF6720;
+}
+
+button{
+  border: none;
+  font-family: 'Montserrat';
+  background-color:unset;
+}
+
+.nav-item img {
+  height: 50px;
+}
+
+#main-navbar {
+  background-color: #ff9950;
+}
+
+#logo {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.nav-link {
+  color: rgb(23, 23, 23);
+}
+
+i {
+  margin-right: 5px;
+}
+
+#menu-user {
+  position: absolute;
+  inset: 0px 0px auto auto;
+  margin: 0px;
+  transform: translate3d(0px, 34.4px, 0px);
+}
+
+#menu-dropdown i {
+  font-size: 30px;
+}
+
+footer {
+  color: white;
+}
+
+footer a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #c43400;
+}
+
+#footer-rrss {
+  font-size: 24px;
+}
+
+#title-footer {
+  font-weight: bolder;
+}
+
+@media (max-width: 575.98px) {
+  .nav-item img {
+    height: 32px;
+  }
+
+  #menu-dropdown i {
+    font-size: 18px;
+  }
+}
+
+.toast {
+  --bs-toast-bg: white
+}
+
+.toast-success {
+  background: #FF6720;
+  color: white;
+}
+
+.toast-error {
+  background: #862b00;
+  color: white;
+}
+
+.orange-button {
+  background: #FF6720;
+  color: white;
+  padding: 0.4em 0.5em;
+  border-radius: 15px;
+  text-decoration: none;
+}
+
+.orange-button:hover {
+  color: white;
+  background: #ff9950;
+}

@@ -1,0 +1,47 @@
+version: '3.7'
+
+
+services:
+    php-httpd:
+      image: php:8.1-apache
+      build: .
+      links:
+        - 'mariadb:db'
+      extra_hosts:
+        - "host.docker.internal:host-gateway"
+      environment:
+        - XDEBUG_MODE=develop,debug
+      ports:
+        - 83:80
+      volumes:
+        - "./pymeraliaFiles:/var/www/html"
+        - "./xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+    
+    mariadb:
+      image: mariadb:10.6
+      volumes:
+        - "./pymeraliaDB:/var/lib/mysql"
+        - "./custom.cnf:/etc/mysql/conf.d/custom.cnf"
+      environment:
+        TZ: "Europe/Madrid"
+        MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+        MYSQL_ROOT_PASSWORD: "rootpwd"
+        #El pass rambe serveix per a accedir
+        #al phpmyadmin com a root
+        MYSQL_USER: 'pymeralia'
+        #Crea l'usuari gestinf i el pass gestinf en tots els permisos per a crear
+        #taules només a la base de dades Material
+        MYSQL_PASSWORD: 'pymeralia1'
+        #crea de forma automatica la base de dades Material_M10_gestinf
+        MYSQL_DATABASE: 'pymeralia'
+
+    
+    phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      links:
+        - 'mariadb:db'
+      ports:
+        - 8081:80
+    nodejs:
+      image: node:latest
+      tty: true
