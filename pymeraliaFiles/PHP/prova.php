@@ -1,5 +1,5 @@
 <?php
-include "../scripts/borrarURL.js"
+include "../scripts/borrarURL.js";
 function php_func(){
 echo "Stay Safe";
 }
