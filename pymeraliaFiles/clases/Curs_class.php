@@ -183,7 +183,7 @@ class Curs
     }
 
     public function get_all_categories() {
-        include_once '../PHP/connexio.php';
+        include '../PHP/connexio.php';
 
         $id_course = $this->idCurso;
 

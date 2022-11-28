@@ -109,6 +109,7 @@ if (isset($_GET['courseid'])) {
         
         <div class="course container col-lg-8 col-xxl-9 p-5">
             <?php
+                
                 $curs = new Curs($courseId);
                 $title = $curs->get_title();
                 $courseId = $_GET['courseid'];
