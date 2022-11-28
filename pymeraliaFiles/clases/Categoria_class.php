@@ -1,7 +1,7 @@
 <?php
-include("../PHP/databaseFunctions.php");
+include_once "../PHP/databaseFunctions.php";
 
-class Curs
+class Categoria
 {
     private $idCategoria;
     private $nombreCategoria;

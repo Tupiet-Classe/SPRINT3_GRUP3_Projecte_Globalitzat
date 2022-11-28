@@ -1,5 +1,5 @@
 <?php
-include("../PHP/databaseFunctions.php");
+include_once "../PHP/databaseFunctions.php";
 
 class Curs
 {
@@ -185,7 +185,13 @@ class Curs
     public function get_all_categories() {
         include_once '../PHP/connexio.php';
 
-        $categoriesQuery = $conn->prepare('SELECT ');
+        $id_course = $this->idCurso;
+
+        $categoriesQuery = $conn->prepare('SELECT id_category, name_category, hidden FROM categories WHERE id_course = ?');
+        $categoriesQuery->bind_param('i', $id_course);
+        $categoriesQuery->execute();
+
+        return $categoriesQuery->get_result();
     }
     
     /**
