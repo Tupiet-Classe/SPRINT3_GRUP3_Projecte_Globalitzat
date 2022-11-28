@@ -2,7 +2,7 @@ CREATE TABLE `courses` (
   `id_course` int PRIMARY KEY AUTO_INCREMENT,
   `name_course` varchar(50) UNIQUE NOT NULL,
   `description_course` varchar(50) NOT NULL,
-  `image` varchar(50) NOT NULL,
+  `image` varchar(500),
   `hidden` date
 );
 
@@ -10,7 +10,7 @@ CREATE TABLE `emblems` (
   `id_emblem` int PRIMARY KEY AUTO_INCREMENT,
   `name_emblem` varchar(50) NOT NULL,
   `description_emblem` varchar(50) NOT NULL,
-  `image` varchar(50) NOT NULL,
+  `image` varchar(500) NOT NULL,
   `id_course` int NOT NULL,
   `hidden` date
 );
