@@ -29,8 +29,8 @@ class Categoria
         $this->$idCategoria = $idCategoria;
     }
 
-    public function show_all_recursos(){
-        include_once '../PHP/connexio.php';
+    public function get_all_recursos(){
+        include '../PHP/connexio.php';
         $id_category = $this->idCategoria;
 
         $recursosQuery = $conn->prepare(
@@ -42,7 +42,7 @@ class Categoria
 
         SELECT id_resource_file, name_resource_file, location, id_category, hidden, 'file' as type 
         FROM resources_files 
-        where id_course = ?
+        where id_category = ?
 
         UNION
         

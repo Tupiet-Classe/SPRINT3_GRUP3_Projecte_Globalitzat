@@ -123,38 +123,42 @@ if (isset($_GET['courseid'])) {
                 $resultatCategories = $curs->get_all_categories();
 
                 foreach ($resultatCategories as $category){
-                    $category = new Categoria($category['id_category']);
-                    var_dump($category);
+                    $category_id = $category['id_category'];
+                    echo $category_id;
+                    echo 'hola';
 
-                    /* if($row['hidden'] != null){
+                    $category = new Categoria($category_id);
+                    $resources = $category->get_all_recursos();
 
-                    }else{
-                    echo "           
-                    <div class='course-element text' id='course-element-$row[type]-$row[id]'>
-                        <div class='d-flex justify-content-between h5'><h4 id='resource-primary-$row[type]-$row[id]'>$row[name]</h4><button type='button' class='fas fa-ellipsis-v ps-2 pe-2 flex-row-reverse'  data-bs-toggle='dropdown' aria-expanded='false'></button>
-                            <ul class='dropdown-menu'>
-                                <form action='../PHP/borrarRecursURL.php' method='post'>
-                                    <INPUT class='d-none' TYPE='hidden' NAME='id' value='$row[id]'>
-                                    <INPUT class='d-none' TYPE='hidden' NAME='type' value='$row[type]'>
-                                    <input type='hidden' name='id-course' id='delete-id-course' value='$courseId'>
+                    foreach ($resources as $row) {
+                        echo 'ddd';
+                        
+                        /* echo "           
+                        <div class='course-element text' id='course-element-$row[type]-$row[id]'>
+                            <div class='d-flex justify-content-between h5'><h4 id='resource-primary-$row[type]-$row[id]'>$row[name]</h4><button type='button' class='fas fa-ellipsis-v ps-2 pe-2 flex-row-reverse'  data-bs-toggle='dropdown' aria-expanded='false'></button>
+                                <ul class='dropdown-menu'>
+                                    <form action='../PHP/borrarRecursURL.php' method='post'>
+                                        <INPUT class='d-none' TYPE='hidden' NAME='id' value='$row[id]'>
+                                        <INPUT class='d-none' TYPE='hidden' NAME='type' value='$row[type]'>
+                                        <input type='hidden' name='id-course' id='delete-id-course' value='$courseId'>
 
-                                    <li><button type='submit' ><i class='fas fa-trash-alt'></i>Eliminar</button></li>
-                                </form>
-                                <li><button type='button' onclick='showEditModal($row[id], `$row[type]`)'><i class='fas fa-edit'></i>Editar</button></li>
-                            </ul> 
-                        </div>";
+                                        <li><button type='submit' ><i class='fas fa-trash-alt'></i>Eliminar</button></li>
+                                    </form>
+                                    <li><button type='button' onclick='showEditModal($row[id], `$row[type]`)'><i class='fas fa-edit'></i>Editar</button></li>
+                                </ul> 
+                            </div>";
 
-                    if ($row['type']=='url') {
-                        echo" <a id='resource-secondary-$row[type]-$row[id]' href=$row[location_or_description]>$row[location_or_description]</a>";
-                    } elseif ($row['type']=='file') {
-                        echo" <a id='resource-secondary-$row[type]-$row[id]' class='orange-button' href='$row[location_or_description]' download >$row[name]</a>";
+                        if ($row['type']=='url') {
+                            echo" <a id='resource-secondary-$row[type]-$row[id]' href=$row[location_or_description]>$row[location_or_description]</a>";
+                        } elseif ($row['type']=='file') {
+                            echo" <a id='resource-secondary-$row[type]-$row[id]' class='orange-button' href='$row[location_or_description]' download >$row[name]</a>";
+                        }
+                        else {
+                            echo "<p id='resource-secondary-$row[type]-$row[id]'>$row[location_or_description]</p>";
+                        }
+                        
+                        echo "</div>"; */
                     }
-                    else {
-                        echo "<p id='resource-secondary-$row[type]-$row[id]'>$row[location_or_description]</p>";
-                    }
-                    
-                    echo "</div>"; 
-                } */
 
                 };
                 ?>
