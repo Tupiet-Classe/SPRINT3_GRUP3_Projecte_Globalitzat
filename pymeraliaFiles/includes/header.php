@@ -52,16 +52,6 @@
                                   class="fa-solid fa-house"></i>Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="cursos.php"><i
                                   class="fa-solid fa-graduation-cap"></i>Listado Cursos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="usuariosCurso.php"><i
-                                    class="fa-solid fa-users"></i>Listado Alumnos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="crearActividad.php"><i 
-                        class="fa-solid fa-circle-plus"></i>Crear Actividad</a></li>
-                    <li class="nav-item"><a class="nav-link" href="editarCurso.php"><i
-                                  class="fa-solid fa-award"></i>Editar Curso</a></li>
-                    <li class="nav-item"><a class="nav-link" href="editarNotaUsuarios.php"><i
-                                  class="fa-solid fa-star"></i>Editar Nota</a>
-                                  
-                      </li>
                       <li class="nav-item"><a class="nav-link" href="emblemasAdmin.php"><i
                         class="fa-solid fa-certificate"></i>Editar Emblemas</a>
             </li>

@@ -88,7 +88,7 @@
     </div>
 
     <?php 
-    include_once '../includes/footer.php'; 
+      include_once '../includes/footer.php'; 
     ?>
    
   <script src="../scripts/cursos.js"></script>
