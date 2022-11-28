@@ -162,20 +162,21 @@ class Curs
     public function showAllRecursosURL(){
 
         
-        $sql = "SELECT `id_resource_url` as id, `name_resource_url` as name, `location` as location_or_description, `id_course`, `hidden`, 'url' as type 
-        FROM `resources_url` where id_course = $this->idCurso
+        $sql = "SELECT resources_url.`id_resource_url` as id, resources_url.`name_resource_url` as name, resources_url.`location` as location_or_description, resources_url.`id_category`, resources_url.`hidden`, 'url' as type 
+        FROM `resources_url` INNER JOIN categories ON categories.id_category = resources_url.id_category 
+        where categories.id_course = $this->idCurso
         
         UNION
 
-        SELECT `id_resource_file`, `name_resource_file`, `location`, `id_course`, `hidden`, 'file' as type 
-        FROM `resources_files`
-        where id_course = $this->idCurso
+        SELECT resources_files.id_resource_file, resources_files.name_resource_file, resources_files.location, resources_files.id_category, resources_files.hidden, 'file' as type 
+        FROM resources_files INNER JOIN categories ON categories.id_category = resources_files.id_category
+        where categories.id_course = $this->idCurso
 
         UNION
         
-        SELECT `id_resource_text`, `name_resource_text`, `description_resource_text`, `id_course`, `hidden`, 'text' as type 
-        FROM `resources_text`
-        where id_course = $this->idCurso"; 
+        SELECT resources_text.`id_resource_text`, resources_text.`name_resource_text`, resources_text.`description_resource_text`, resources_text.`id_category`, resources_text.`hidden`, 'text' as type 
+        FROM `resources_text` INNER JOIN categories ON categories.id_category = resources_text.id_category
+        where categories.id_course = $this->idCurso"; 
 
         $db=db_query($sql);
         return $db;
