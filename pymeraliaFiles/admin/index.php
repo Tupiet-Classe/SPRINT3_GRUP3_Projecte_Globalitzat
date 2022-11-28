@@ -17,7 +17,7 @@
 </head>
 
 <?php 
-  include_once '../includes/header  .php'; 
+  include_once '../includes/header.php'; 
 ?>
 
 <body class="d-flex flex-column min-vh-100">
