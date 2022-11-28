@@ -26,7 +26,7 @@
 </head>
 
 <?php 
-    include_once '../includes/header.php'; 
+  include_once '../includes/header.php'; 
 ?>
 
 <body class="d-flex flex-column min-vh-100">
@@ -113,10 +113,38 @@
     </div>
     <!--Política de Contraseñas-->
 
+        <!-- Add user to course div -->
+        <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addUserLabel">Añadir usuario al curso</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addUserForm" action="../PHP/asignarCurso.php" method="post">
+                        <div class="md-3">
+                            <label for="userToAdd" class="col-form-label">Nombre de usuario o correo electrónico</label>
+                            <input type="text" class="form-control" name="usertoadd" id="userToAdd">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="btn-add-user">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span id="courseId" style="display: none;"><?php echo $_GET['courseid']; ?></span>
+
+
+
     </div>
    
     <?php 
-    include_once '../includes/header.php'; 
+      include_once '../includes/footer.php';
     ?>
 
 </body>

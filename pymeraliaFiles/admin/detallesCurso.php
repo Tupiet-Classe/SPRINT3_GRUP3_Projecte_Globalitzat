@@ -1,5 +1,6 @@
 <?php
-include("../clases/Curs_class.php");
+include_once "../clases/Curs_class.php";
+include_once "../clases/Categoria_class.php";
 
 $courseId;
 
@@ -30,7 +31,7 @@ if (isset($_GET['courseid'])) {
 </head>
 
 <?php 
-    include_once '../includes/header.php'; 
+  include_once '../includes/header.php'; 
 ?>
 
 <body class="d-flex flex-column min-vh-100">
@@ -108,19 +109,24 @@ if (isset($_GET['courseid'])) {
         
         <div class="course container col-lg-8 col-xxl-9 p-5">
             <?php
+                
                 $curs = new Curs($courseId);
-                $resultat = $curs->showAllRecursosURL();
                 $title = $curs->get_title();
                 $courseId = $_GET['courseid'];
-
+                
                 echo "
                 <div class='course-element text' id='course-element'>     
-                    <h1 id='course-title'>$title</h1>
+                <h1 id='course-title'>$title</h1>
                 </div>
                 ";
 
-                foreach ($resultat as $row){
-                    if($row['hidden'] != null){
+                $resultatCategories = $curs->get_all_categories();
+
+                foreach ($resultatCategories as $category){
+                    $category = new Categoria($category['id_category']);
+                    var_dump($category);
+
+                    /* if($row['hidden'] != null){
 
                     }else{
                     echo "           
@@ -148,7 +154,7 @@ if (isset($_GET['courseid'])) {
                     }
                     
                     echo "</div>"; 
-                }
+                } */
 
                 };
                 ?>
@@ -156,10 +162,8 @@ if (isset($_GET['courseid'])) {
         </div>
     </main>
 
-
-
     <?php 
-    include_once '../includes/footer.php'; 
+      include_once '../includes/footer.php'; 
     ?>
 
     <!-- Hidden divs -->
