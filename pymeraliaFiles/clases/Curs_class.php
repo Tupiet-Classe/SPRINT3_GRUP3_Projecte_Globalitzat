@@ -181,6 +181,12 @@ class Curs
         $db=db_query($sql);
         return $db;
     }
+
+    public function get_all_categories() {
+        include_once '../PHP/connexio.php';
+
+        $categoriesQuery = $conn->prepare('SELECT ');
+    }
     
     /**
      * assignCurso - Método para asignar cursos
