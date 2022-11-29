@@ -115,23 +115,21 @@ if (isset($_GET['courseid'])) {
                 $courseId = $_GET['courseid'];
                 
                 echo "
-                <div class='course-element text' id='course-element'>     
-                <h1 id='course-title'>$title</h1>
-                </div>
+                    <div class='course-element text' id='course-element'>     
+                    <h1 id='course-title'>$title</h1>
+                    </div>
                 ";
 
                 $resultatCategories = $curs->get_all_categories();
 
                 foreach ($resultatCategories as $category){
                     $category_id = $category['id_category'];
-                    echo $category_id;
-                    echo 'hola';
 
                     $category = new Categoria($category_id);
                     $resources = $category->get_all_recursos();
 
                     foreach ($resources as $row) {
-                        echo 'ddd';
+                        echo "<p>$row[name]</p>";
                         
                         /* echo "           
                         <div class='course-element text' id='course-element-$row[type]-$row[id]'>
