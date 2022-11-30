@@ -281,21 +281,24 @@ if (isset($_GET['courseid'])) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 
-              <form id="formCreateActivity action="" method="post">
+              <form id="formCreateActivity action="../PHP/crearActividad.php" method="post">
                 <div class="modal-body">
                     <div class="md-3">
-                      <label for="nombre-del-curso">Nombre de la Actividad</label>
-                      <input type="text" class="form-control" id="nombre-del-curso">
+                      <label for="nombre-del-curso">Nombre de la actividad</label>
+                      <input type="text" class="form-control" id="nombre-del-curso" name="nombre-del-curso">
                     </div>
                     <div class="form-group campo-formulario">
-                      <label for="descripcion-del-curso">Descripción de la Actividad</label>
-                      <textarea class="form-control" id="descripcion-del-curso"></textarea>
+                      <label for="descripcion-del-curso">Descripción de la actividad</label>
+                      <textarea class="form-control" id="descripcion-del-curso" name="descripcion-del-curso"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary" id="btn-add-user">Crear curso</button>
+                    <button type="submit" class="btn btn-primary" id="btn-add-user">Crear actividad</button>
                 </div>
+
+                <input type="hidden" name="courseID" value="<?php echo $_GET['courseid']?>">
+
               </form>
 
             </div>
