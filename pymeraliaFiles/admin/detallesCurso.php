@@ -264,18 +264,23 @@ if (isset($_GET['courseid'])) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 
+              <form id="formCreateActivity action="" method="post">
                 <div class="modal-body">
-                    <form id="addUserForm" action="../PHP/asignarCurso.php" method="post">
-                        <div class="md-3">
-                            <label for="userToAdd" class="col-form-label">Nombre de usuario o correo electrónico</label>
-                            <input type="text" class="form-control" name="usertoadd" id="userToAdd">
-                        </div>
-                    </form>
+                    <div class="md-3">
+                      <label for="nombre-del-curso">Nombre de la Actividad</label>
+                      <input type="text" class="form-control" id="nombre-del-curso">
+                    </div>
+                    <div class="form-group campo-formulario">
+                      <label for="descripcion-del-curso">Descripción de la Actividad</label>
+                      <textarea class="form-control" id="descripcion-del-curso"></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="btn-add-user">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" id="btn-add-user">Crear curso</button>
                 </div>
+              </form>
+
             </div>
         </div>
     </div>
