@@ -122,22 +122,33 @@ if (isset($_GET['courseid'])) {
 
                 $resultatCategories = $curs->get_all_categories();
 
+                echo "<div class='accordion'>";
+
                 foreach ($resultatCategories as $category){
                     $category_id = $category['id_category'];
+                    $category_title = $category['name_category'];
+
+                    echo "
+                        <div class='accordion-item'>
+                            <h2 class='accordion-header' id='heading-$category_id'>
+                                <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapse-$category_id' aria-expanded='true' aria-controls='collapse-$category_id'>
+                                    $category_title
+                                </button>
+                            </h2>
+                            <div id='collapse-$category_id' class='accordion-collapse collapse show' aria-labelledby='heading-$category_id'>
+                                <div class='accordion-body'>";                      
 
                     $category = new Categoria($category_id);
                     $resources = $category->get_all_recursos();
 
                     foreach ($resources as $row) {
-                        echo "<p>$row[name]</p>";
-                        
-                        /* echo "           
-                        <div class='course-element text' id='course-element-$row[type]-$row[id]'>
+                        echo "           
+                        <div class='course-element text p-3 my-2' id='course-element-$row[type]-$row[id]'>
                             <div class='d-flex justify-content-between h5'><h4 id='resource-primary-$row[type]-$row[id]'>$row[name]</h4><button type='button' class='fas fa-ellipsis-v ps-2 pe-2 flex-row-reverse'  data-bs-toggle='dropdown' aria-expanded='false'></button>
                                 <ul class='dropdown-menu'>
                                     <form action='../PHP/borrarRecursURL.php' method='post'>
-                                        <INPUT class='d-none' TYPE='hidden' NAME='id' value='$row[id]'>
-                                        <INPUT class='d-none' TYPE='hidden' NAME='type' value='$row[type]'>
+                                        <input class='d-none' type='hidden' name='id' value='$row[id]'>
+                                        <input class='d-none' type='hidden' name='type' value='$row[type]'>
                                         <input type='hidden' name='id-course' id='delete-id-course' value='$courseId'>
 
                                         <li><button type='submit' ><i class='fas fa-trash-alt'></i>Eliminar</button></li>
@@ -155,10 +166,16 @@ if (isset($_GET['courseid'])) {
                             echo "<p id='resource-secondary-$row[type]-$row[id]'>$row[location_or_description]</p>";
                         }
                         
-                        echo "</div>"; */
+                        echo "</div>"; 
                     }
 
+                    echo "</div>
+                    </div>
+                  </div>";
+
                 };
+
+                echo '</div>'
                 ?>
     
         </div>
