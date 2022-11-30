@@ -64,7 +64,7 @@ if (isset($_GET['courseid'])) {
                 <h3>Acciones rápidas</h3>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <button class="nav-link btn" href="addUsuarioCurso.php" data-bs-toggle="modal"
+                        <button class="nav-link" href="addUsuarioCurso.php" data-bs-toggle="modal"
                             data-bs-target="#addUser">
                             <i class="fa-solid fa-user-plus"></i>Añadir alumno
                         </button>
@@ -74,8 +74,8 @@ if (isset($_GET['courseid'])) {
                             <i class="fa-solid fa-users"></i>Listado de alumnos
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="crearActividad.php">
+                    <li class="nav-item" role="button">
+                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#addActivity">
                             <i class="fa-solid fa-circle-plus"></i>Crear Actividad
                         </a>
                     </li>
@@ -249,6 +249,33 @@ if (isset($_GET['courseid'])) {
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal de crear actividad -->
+    <div class="modal fade" id="addActivity" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                <h2>Crear Actividad</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body">
+                    <form id="addUserForm" action="../PHP/asignarCurso.php" method="post">
+                        <div class="md-3">
+                            <label for="userToAdd" class="col-form-label">Nombre de usuario o correo electrónico</label>
+                            <input type="text" class="form-control" name="usertoadd" id="userToAdd">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="btn-add-user">Save changes</button>
+                </div>
             </div>
         </div>
     </div>
