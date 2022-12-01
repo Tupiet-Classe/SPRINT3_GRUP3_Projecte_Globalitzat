@@ -318,4 +318,27 @@ class Curs
             return $result->fetch_all(MYSQLI_ASSOC)[0]['id_user'];
         }
     }
+
+    public function get_average($id_user){
+        include "../PHP/connexio.php";
+
+        $sql = "SELECT avg(qualification) as avg FROM grade WHERE id_user LIKE $id_user"; 
+        $result = $conn->query($sql);
+        
+        $first_row = $result->fetch_assoc();
+        
+        return $first_row['avg'];
+    }
+    
+    public static function subscription_course_user($id_user){
+        include_once "../PHP/connexio.php";
+        $sql = "SELECT courses.name_course as 'name', courses.id_course as 'id'
+        FROM courses INNER JOIN user_course 
+        ON courses.id_course=user_course.id_course
+        INNER JOIN users ON user_course.id_user=users.id_user WHERE users.id_user = $id_user"; 
+
+        return $conn->query($sql);
+
+        
+    }
 }

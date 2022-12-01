@@ -72,7 +72,7 @@
                         <li class="nav-item"><a class="nav-link" href="index.php"><i
                                     class="fa-solid fa-house"></i>Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href="cursos.php"><i
-                                    class="fa-solid fa-graduation-cap"></i>Cursos</a></li>
+                                    class="fa-solid fa-graduation-cap"></i>Cursos</a></li>  
                         <li class="nav-item"><a class="nav-link" href="emblemas.php"><i
                                     class="fa-solid fa-award"></i>Emblemas</a></li>
                         <li class="nav-item"><a class="nav-link" href="calificaciones.php"><i
@@ -88,7 +88,7 @@
 
 
     <div class="container mt-3">
-        <h2>Cursos</h2>
+        <h2>Cursos</h2> <!-- A partir d'aquí s'ha de poder modificar sense Hardcode  -->
         <div class="accordion pb-3" id="accordionFlushExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">
