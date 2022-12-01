@@ -115,8 +115,8 @@ if (isset($_GET['courseid'])) {
                 $courseId = $_GET['courseid'];
                 
                 echo "
-                    <div class='course-element text' id='course-element'>     
-                    <h1 id='course-title'>$title</h1>
+                    <div class='text' id='course-element'>     
+                        <h1 id='course-title'>$title</h1>
                     </div>
                 ";
 
@@ -144,30 +144,48 @@ if (isset($_GET['courseid'])) {
                     foreach ($resources as $row) {
                         echo "           
                         <div class='course-element text p-3 my-2' id='course-element-$row[type]-$row[id]'>
-                            <div class='d-flex justify-content-between h5'><h4 id='resource-primary-$row[type]-$row[id]'>$row[name]</h4><button type='button' class='fas fa-ellipsis-v ps-2 pe-2 flex-row-reverse'  data-bs-toggle='dropdown' aria-expanded='false'></button>
+                            <div class='d-flex justify-content-between h5'>
+                                <h4 id='resource-primary-$row[type]-$row[id]'>
+                                    $row[name]
+                                </h4>
+                                <button type='button' class='fas fa-ellipsis-v ps-2 pe-2 flex-row-reverse' data-bs-toggle='dropdown' aria-expanded='false'></button>
                                 <ul class='dropdown-menu'>
-                                    <form action='../PHP/borrarRecursURL.php' method='post'>
-                                        <input class='d-none' type='hidden' name='id' value='$row[id]'>
-                                        <input class='d-none' type='hidden' name='type' value='$row[type]'>
-                                        <input type='hidden' name='id-course' id='delete-id-course' value='$courseId'>
+                                    <li>
+                                        <form action='../PHP/borrarRecursURL.php' method='post'>
+                                            <input class='d-none' type='hidden' name='id' value='$row[id]'>
+                                            <input class='d-none' type='hidden' name='type' value='$row[type]'>
+                                            <input type='hidden' name='id-course' id='delete-id-course' value='$courseId'>
 
-                                        <li><button type='submit' ><i class='fas fa-trash-alt'></i>Eliminar</button></li>
-                                    </form>
+                                            <button type='submit'><i class='fas fa-trash-alt'></i>Eliminar</button>
+                                        </form>
+                                    </li>
                                     <li><button type='button' onclick='showEditModal($row[id], `$row[type]`)'><i class='fas fa-edit'></i>Editar</button></li>
                                 </ul> 
                             </div>";
 
+                        // Afegim el contingut
                         if ($row['type']=='url') {
                             echo" <a id='resource-secondary-$row[type]-$row[id]' href=$row[location_or_description]>$row[location_or_description]</a>";
                         } elseif ($row['type']=='file') {
                             echo" <a id='resource-secondary-$row[type]-$row[id]' class='orange-button' href='$row[location_or_description]' download >$row[name]</a>";
                         }
                         else {
-                            echo "<p id='resource-secondary-$row[type]-$row[id]'>$row[location_or_description]</p>";
+                            echo "<p id='resource-secondary-$row[type]-$row[id]' class='m-0'>$row[location_or_description]</p>";
                         }
                         
                         echo "</div>"; 
                     }
+
+                    echo "
+                        <div class='new-resource d-flex align-items-center justify-content-center' role='button' data-bs-toggle='dropdown'>
+                            <i class='fa fa-add'></i>
+                            <ul class='dropdown-menu'>
+                                <li><button type='button' onclick='addDocument(`file`)'> <i class='far fa-file-pdf'></i>Añadir Documento</button></li>
+                                <li><button type='button' onclick='addDocument(`text`)'> <i class='fas fa-file-alt'></i>Añadir Texto</button></li>
+                                <li><button type='button' onclick='addDocument(`url`)'> <i class='fas fa-link'></i>Añadir URL</button></li>
+
+                            </ul> 
+                         </div>";
 
                     echo "</div>
                     </div>
