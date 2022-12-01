@@ -64,7 +64,7 @@ if (isset($_GET['courseid'])) {
                 <h3>Acciones rápidas</h3>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <button class="nav-link btn" href="addUsuarioCurso.php" data-bs-toggle="modal"
+                        <button class="nav-link" href="addUsuarioCurso.php" data-bs-toggle="modal"
                             data-bs-target="#addUser">
                             <i class="fa-solid fa-user-plus"></i>Añadir alumno
                         </button>
@@ -74,8 +74,8 @@ if (isset($_GET['courseid'])) {
                             <i class="fa-solid fa-users"></i>Listado de alumnos
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="crearActividad.php">
+                    <li class="nav-item" role="button">
+                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#addActivity">
                             <i class="fa-solid fa-circle-plus"></i>Crear Actividad
                         </a>
                     </li>
@@ -115,52 +115,85 @@ if (isset($_GET['courseid'])) {
                 $courseId = $_GET['courseid'];
                 
                 echo "
-                <div class='course-element text' id='course-element'>     
-                <h1 id='course-title'>$title</h1>
-                </div>
+                    <div class='text' id='course-element'>     
+                        <h1 id='course-title'>$title</h1>
+                    </div>
                 ";
 
                 $resultatCategories = $curs->get_all_categories();
 
+                echo "<div class='accordion'>";
+
                 foreach ($resultatCategories as $category){
                     $category_id = $category['id_category'];
-                    echo $category_id;
-                    echo 'hola';
+                    $category_title = $category['name_category'];
+
+                    echo "
+                        <div class='accordion-item'>
+                            <h2 class='accordion-header' id='heading-$category_id'>
+                                <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapse-$category_id' aria-expanded='true' aria-controls='collapse-$category_id'>
+                                    $category_title
+                                </button>
+                            </h2>
+                            <div id='collapse-$category_id' class='accordion-collapse collapse show' aria-labelledby='heading-$category_id'>
+                                <div class='accordion-body'>";                      
 
                     $category = new Categoria($category_id);
                     $resources = $category->get_all_recursos();
 
                     foreach ($resources as $row) {
-                        echo 'ddd';
-                        
-                        /* echo "           
-                        <div class='course-element text' id='course-element-$row[type]-$row[id]'>
-                            <div class='d-flex justify-content-between h5'><h4 id='resource-primary-$row[type]-$row[id]'>$row[name]</h4><button type='button' class='fas fa-ellipsis-v ps-2 pe-2 flex-row-reverse'  data-bs-toggle='dropdown' aria-expanded='false'></button>
+                        echo "           
+                        <div class='course-element text p-3 my-2' id='course-element-$row[type]-$row[id]'>
+                            <div class='d-flex justify-content-between h5'>
+                                <h4 id='resource-primary-$row[type]-$row[id]'>
+                                    $row[name]
+                                </h4>
+                                <button type='button' class='fas fa-ellipsis-v ps-2 pe-2 flex-row-reverse' data-bs-toggle='dropdown' aria-expanded='false'></button>
                                 <ul class='dropdown-menu'>
-                                    <form action='../PHP/borrarRecursURL.php' method='post'>
-                                        <INPUT class='d-none' TYPE='hidden' NAME='id' value='$row[id]'>
-                                        <INPUT class='d-none' TYPE='hidden' NAME='type' value='$row[type]'>
-                                        <input type='hidden' name='id-course' id='delete-id-course' value='$courseId'>
+                                    <li>
+                                        <form action='../PHP/borrarRecursURL.php' method='post'>
+                                            <input class='d-none' type='hidden' name='id' value='$row[id]'>
+                                            <input class='d-none' type='hidden' name='type' value='$row[type]'>
+                                            <input type='hidden' name='id-course' id='delete-id-course' value='$courseId'>
 
-                                        <li><button type='submit' ><i class='fas fa-trash-alt'></i>Eliminar</button></li>
-                                    </form>
+                                            <button type='submit'><i class='fas fa-trash-alt'></i>Eliminar</button>
+                                        </form>
+                                    </li>
                                     <li><button type='button' onclick='showEditModal($row[id], `$row[type]`)'><i class='fas fa-edit'></i>Editar</button></li>
                                 </ul> 
                             </div>";
 
+                        // Afegim el contingut
                         if ($row['type']=='url') {
                             echo" <a id='resource-secondary-$row[type]-$row[id]' href=$row[location_or_description]>$row[location_or_description]</a>";
                         } elseif ($row['type']=='file') {
                             echo" <a id='resource-secondary-$row[type]-$row[id]' class='orange-button' href='$row[location_or_description]' download >$row[name]</a>";
                         }
                         else {
-                            echo "<p id='resource-secondary-$row[type]-$row[id]'>$row[location_or_description]</p>";
+                            echo "<p id='resource-secondary-$row[type]-$row[id]' class='m-0'>$row[location_or_description]</p>";
                         }
                         
-                        echo "</div>"; */
+                        echo "</div>"; 
                     }
 
+                    echo "
+                        <div class='new-resource d-flex align-items-center justify-content-center' role='button' data-bs-toggle='dropdown'>
+                            <i class='fa fa-add'></i>
+                            <ul class='dropdown-menu'>
+                                <li><button type='button' onclick='addDocument(`file`)'> <i class='far fa-file-pdf'></i>Añadir Documento</button></li>
+                                <li><button type='button' onclick='addDocument(`text`)'> <i class='fas fa-file-alt'></i>Añadir Texto</button></li>
+                                <li><button type='button' onclick='addDocument(`url`)'> <i class='fas fa-link'></i>Añadir URL</button></li>
+
+                            </ul> 
+                         </div>";
+
+                    echo "</div>
+                    </div>
+                  </div>";
+
                 };
+
+                echo '</div>'
                 ?>
     
         </div>
@@ -251,6 +284,41 @@ if (isset($_GET['courseid'])) {
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal de crear actividad -->
+    <div class="modal fade" id="addActivity" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                <h2>Crear Actividad</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+              <form id="formCreateActivity action="../PHP/crearActividad.php" method="post">
+                <div class="modal-body">
+                    <div class="md-3">
+                      <label for="nombre-del-curso">Nombre de la actividad</label>
+                      <input type="text" class="form-control" id="nombre-del-curso" name="nombre-del-curso">
+                    </div>
+                    <div class="form-group campo-formulario">
+                      <label for="descripcion-del-curso">Descripción de la actividad</label>
+                      <textarea class="form-control" id="descripcion-del-curso" name="descripcion-del-curso"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" id="btn-add-user">Crear actividad</button>
+                </div>
+
+                <input type="hidden" name="courseID" value="<?php echo $_GET['courseid']?>">
+
+              </form>
+
             </div>
         </div>
     </div>

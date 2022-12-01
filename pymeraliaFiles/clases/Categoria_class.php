@@ -9,30 +9,28 @@ class Categoria
     /**
      * __construct - Constructor de clase
      *
-     * @param  mixed $idCurso
-     * @param  mixed $nombreCurso
-     * @param  mixed $descripcionCurso
-     * @param  mixed $imagenCurso
+     * @param  mixed $idCategoria
+     * @param  mixed $nombreCategoría
      * @return void
      */
     public function __construct(){
-  
         $arguments = func_get_args();
         $numberOfArguments = func_num_args();
-    
+
         if (method_exists($this, $function = '__construct'.$numberOfArguments)) {
             call_user_func_array(array($this, $function), $arguments);
         }
-      }
+    }
+    
     public function __construct1($idCategoria)
     {
-        $this->$idCategoria = $idCategoria;
+        $this->idCategoria = $idCategoria;
     }
 
     public function get_all_recursos(){
         include '../PHP/connexio.php';
         $id_category = $this->idCategoria;
-
+        
         $recursosQuery = $conn->prepare(
         "SELECT `id_resource_url` as id, `name_resource_url` as name, `location` as location_or_description, `id_category`, `hidden`, 'url' as type 
         FROM `resources_url` 
