@@ -64,7 +64,7 @@ if (isset($_GET['courseid'])) {
                 <h3>Acciones rápidas</h3>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <button class="nav-link btn" href="addUsuarioCurso.php" data-bs-toggle="modal"
+                        <button class="nav-link" href="addUsuarioCurso.php" data-bs-toggle="modal"
                             data-bs-target="#addUser">
                             <i class="fa-solid fa-user-plus"></i>Añadir alumno
                         </button>
@@ -74,8 +74,8 @@ if (isset($_GET['courseid'])) {
                             <i class="fa-solid fa-users"></i>Listado de alumnos
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="crearActividad.php">
+                    <li class="nav-item" role="button">
+                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#addActivity">
                             <i class="fa-solid fa-circle-plus"></i>Crear Actividad
                         </a>
                     </li>
@@ -284,6 +284,41 @@ if (isset($_GET['courseid'])) {
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal de crear actividad -->
+    <div class="modal fade" id="addActivity" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                <h2>Crear Actividad</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+              <form id="formCreateActivity action="../PHP/crearActividad.php" method="post">
+                <div class="modal-body">
+                    <div class="md-3">
+                      <label for="nombre-del-curso">Nombre de la actividad</label>
+                      <input type="text" class="form-control" id="nombre-del-curso" name="nombre-del-curso">
+                    </div>
+                    <div class="form-group campo-formulario">
+                      <label for="descripcion-del-curso">Descripción de la actividad</label>
+                      <textarea class="form-control" id="descripcion-del-curso" name="descripcion-del-curso"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" id="btn-add-user">Crear actividad</button>
+                </div>
+
+                <input type="hidden" name="courseID" value="<?php echo $_GET['courseid']?>">
+
+              </form>
+
             </div>
         </div>
     </div>
