@@ -337,8 +337,12 @@ class Curs
         ON courses.id_course=user_course.id_course
         INNER JOIN users ON user_course.id_user=users.id_user WHERE users.id_user = $id_user"; 
 
-        return $conn->query($sql);
+        return $conn->query($sql);        
+    }
+    public static function check_activities($id_course){
+        include_once "../PHP/connexio.php";
+        $sql = "SELECT name_activity as 'Activitat', description_activity as 'Descripció' FROM `activities` WHERE id_course = $id_course";
 
-        
+        return $conn->query($sql);        
     }
 }
