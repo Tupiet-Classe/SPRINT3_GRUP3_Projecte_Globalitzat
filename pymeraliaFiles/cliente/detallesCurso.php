@@ -24,7 +24,7 @@ if (isset($_GET['courseid'])) {
     <link href="../css/brands.min.css" rel="stylesheet">
     <link href="../css/solid.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-    <link rel="stylesheet" href="../css/detallesCursos.css">
+    <link rel="stylesheet" href="../css/detallesCurso.css">
 
 </head>
 
