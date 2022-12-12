@@ -19,3 +19,7 @@
     border: 3px #a9c4ff dashed;
     border-radius: 10px;
 }
+
+.new-resource:hover {
+    background: #e8edf8;
+}

@@ -183,7 +183,6 @@ if (isset($_GET['courseid'])) {
                                 <li><button type='button' onclick='addDocument(`file`)'> <i class='far fa-file-pdf'></i>Añadir Documento</button></li>
                                 <li><button type='button' onclick='addDocument(`text`)'> <i class='fas fa-file-alt'></i>Añadir Texto</button></li>
                                 <li><button type='button' onclick='addDocument(`url`)'> <i class='fas fa-link'></i>Añadir URL</button></li>
-
                             </ul> 
                          </div>";
 
