@@ -36,7 +36,7 @@ class Activities{
         //definim la query com una variable
         $sql = "SELECT * FROM `activities` WHERE id_activity = $this->activity_id;";
 
-        //enviem la query a la bbdd
+        //enviem la query a la bbdd i fem un objecte que conte l'informacio de la primera (i unica) fila
         $result = $conn->query($sql);
         $result->fetch_object();
 
@@ -73,6 +73,14 @@ class Activities{
          $conn->close();
     }
 
+    public function showActivity(){
+
+
+
+
+    }
+    
+    
     public function getIdActivity(){
         return $this->idActividad;
     }
