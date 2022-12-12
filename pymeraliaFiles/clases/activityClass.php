@@ -40,9 +40,11 @@ class Activities{
         $result = $conn->query($sql);
         $result->fetch_object();
 
-        $this->activity_id = $result->activity_id;
-        $this->activity_name = $result->activity_name;
-        $this->course_id = $result->course_id;
+        print_r($result);
+
+        $this->activity_name = $result->name_activity;
+        $this->activity_description = $result->description_activity;
+        $this->course_id = $result->id_course;
     
         //tancar connexioDB
         $conn->close();
