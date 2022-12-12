@@ -1,5 +1,6 @@
 <?php
 class Activities{
+    private $activity_id;
     private $activity_name;
     private $activity_description;
     private $courseID;
@@ -24,6 +25,30 @@ class Activities{
             call_user_func_array(array($this, $funcion_constructor), $params);
         }
     }
+
+
+    //Constructor principal para mostrar actividad
+    function __construct1($activity_id)
+    {
+        $this->activity_id = $activity_id;
+        include_once '../PHP/connexio.php';
+        
+        //definim la query com una variable
+        $sql = "SELECT * FROM `activities` WHERE id_activity = $this->activity_id;";
+
+        //enviem la query a la bbdd
+        $result = $conn->query($sql);
+        $result->fetch_object();
+
+        $this->activity_id = $result->activity_id;
+        $this->activity_name = $result->activity_name;
+        $this->course_id = $result->course_id;
+    
+        //tancar connexioDB
+        $conn->close();
+    }
+
+
 
     //Constructor principal para crear actividad
     function __construct3($activity_name, $activity_description, $courseID)
