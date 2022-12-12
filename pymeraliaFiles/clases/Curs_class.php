@@ -187,7 +187,7 @@ class Curs
 
         $id_course = $this->idCurso;
 
-        $categoriesQuery = $conn->prepare('SELECT id_category, name_category, hidden FROM categories WHERE id_course = ?');
+        $categoriesQuery = $conn->prepare('SELECT id_category, name_category, hidden FROM categories WHERE id_course = ?  and hidden is null');
         $categoriesQuery->bind_param('i', $id_course);
         $categoriesQuery->execute();
 

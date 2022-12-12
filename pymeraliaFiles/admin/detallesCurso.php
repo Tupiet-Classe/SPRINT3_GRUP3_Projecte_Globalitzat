@@ -121,20 +121,31 @@ if (isset($_GET['courseid'])) {
                     $category_title = $category['name_category'];
 
                     echo "
-                        <div class='accordion-item'>
+                        <div class='accordion-item position-relative' id='category-$category_id'>
+                            <div class='dropdown'>
+                                <button class='badge-config position-absolute top-0 start-100 translate-middle badge rounded-pill' style='z-index: 10' data-bs-toggle='dropdown' aria-expanded='false'><i class='fa fa-ellipsis'></i></button>
+                                <ul class='dropdown-menu'>
+                                    <li>
+                                        <button type='submit' onclick='deleteCategory($category_id)'><i class='fas fa-trash-alt'></i>Eliminar</button>
+                                    </li>
+                                    <li>
+                                        <button type='button' onclick='showEditCategoryModal($category_id)'><i class='fas fa-edit'></i>Editar</button>
+                                    </li>
+                                </ul>
+                            </div>
                             <h2 class='accordion-header' id='heading-$category_id'>
                                 <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapse-$category_id' aria-expanded='true' aria-controls='collapse-$category_id'>
                                     $category_title
                                 </button>
                             </h2>
                             <div id='collapse-$category_id' class='accordion-collapse collapse show' aria-labelledby='heading-$category_id'>
-                                <div class='accordion-body'>";                      
+                                <div class='accordion-body'>";                                                      
 
                     $category = new Categoria($category_id);
                     $resources = $category->get_all_recursos();
 
                     foreach ($resources as $row) {
-                        echo "           
+                        echo "
                         <div class='course-element text p-3 my-2' id='course-element-$row[type]-$row[id]'>
                             <div class='d-flex justify-content-between h5'>
                                 <h4 id='resource-primary-$row[type]-$row[id]'>
