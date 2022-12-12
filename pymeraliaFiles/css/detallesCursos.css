@@ -23,3 +23,18 @@
 .new-resource:hover {
     background: #e8edf8;
 }
+
+.element-card {
+    background: #ffeee6;
+    border-radius: 10px;
+    margin: 0.5rem;
+}
+
+.element-card > * {
+    margin: 0;
+}
+
+.element-card > i {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}

@@ -170,7 +170,7 @@ if (isset($_GET['courseid'])) {
 
                     echo "
                         <div class='new-resource d-flex align-items-center justify-content-center' role='button' 
-                            data-bs-toggle='modal' data-bs-target='#addElementToCategory'>
+                            onclick='showAddElementToCategoryModal($category_id)'>
 
                             <i class='fa fa-add'></i>
                          </div>";
@@ -233,8 +233,9 @@ if (isset($_GET['courseid'])) {
                             <label for="descripcionURL" class="col-form-label">Descripción o URL</label>
 
                             <input type="text" class="form-control" name="descripcionURL" id="descripcionURL">
-                            <input type="hidden" name="type" id="edit-recurs-type">
+                            <input type="hidden" name="type" id="add-recurs-type">
                             <input type="hidden" name="id-course" id="add-id-course" value="<?php echo $_GET['courseid'] ?>">
+                            <input type="hidden" name="id-category" id="add-id-category" value="">
 
                         </div>
                 </div>
@@ -282,13 +283,23 @@ if (isset($_GET['courseid'])) {
                     <h1 class="modal-title fs-5" id="addElementToCategoryLabel">Añadir elemento</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <button>
+                <div class="modal-body row d-flex flex-row justify-content-around">
+                    <button class="element-card p-3 col-11 col-sm-5" data-bs-toggle="modal" onclick='addDocument("text")'>
                         <i class="fa fa-file-alt"></i>
+                        Añadir texto
                     </button>
-                    <button><i class="fa fa-link"></i></button>
-                    <button><i class="fa fa-file-pdf"></i></button>
-                    <button><i class="fa fa-file-upload"></i></button>
+                    <button class="element-card p-3 col-11 col-sm-5" onclick='addDocument("url")'>
+                        <i class="fa fa-link"></i>
+                        Añadir enlace
+                    </button>
+                    <button class="element-card p-3 col-11 col-sm-5" onclick='addDocument("file")'>
+                        <i class="fa fa-file-pdf"></i>
+                        Añadir archivo
+                    </button>
+                    <button class="element-card p-3 col-11 col-sm-5">
+                        <i class="fa fa-file-upload"></i>
+                        Añadir actividad
+                    </button>
 
                     <input type="hidden" name="id-course" id="add-id-course" value="<?php echo $_GET['courseid'] ?>">
                 </div>
