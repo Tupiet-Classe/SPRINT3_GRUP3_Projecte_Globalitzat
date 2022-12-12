@@ -298,7 +298,7 @@ if (isset($_GET['courseid'])) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 
-              <form id="formCreateActivity action="../PHP/crearActividad.php" method="post">
+              <form id="formCreateActivity" action="../PHP/crearActividad.php" method="post">
                 <div class="modal-body">
                     <div class="md-3">
                       <label for="nombre-del-curso">Nombre de la actividad</label>
