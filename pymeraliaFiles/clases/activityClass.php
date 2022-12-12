@@ -1,7 +1,7 @@
 <?php
 class Activities{
     private $activity_name;
-    private $acivity_description;
+    private $activity_description;
     private $courseID;
     private $start_date;
     private $final_date;
@@ -26,11 +26,11 @@ class Activities{
     }
 
     //Constructor principal para crear actividad
-    function __construct3($activity_name, $acivity_description, $courseID)
+    function __construct3($activity_name, $activity_description, $courseID)
     {
         $this->activity_name = $activity_name;
-        $this->$acivity_description = $acivity_description;
-        $this->$courseID = $courseID;
+        $this->activity_description = $activity_description;
+        $this->courseID = $courseID;
     }
 
 
@@ -39,19 +39,10 @@ class Activities{
          include_once '../PHP/connexio.php';
         
          //definim la query com una variable
-         $sql = "INSERT INTO `activities` (name_activity, description_activity, id_course) VALUES ($this->activity_name, $this->activity_description, $this->courseID)";
+         $sql = "INSERT INTO `activities` (name_activity, description_activity, id_course) VALUES ('$this->activity_name','$this->activity_description', $this->courseID)";
  
          //enviem la query a la bbdd
          $conn->query($sql);
- 
-         //mirem si la query ha sigut exitosa
-         //creem una variable que representa la query a la bbdd, si aquesta variable es true la query a tingut exit
-         if ($test = $conn->query($sql)){
-              echo "La query ha sigut exitosa";
-         }
-         else{
-             echo "La query es un fracas"; 
-         }
      
          //tancar connexioDB
          $conn->close();
@@ -74,24 +65,36 @@ class Activities{
      * @param mixed $idActividad
      * @return void
      */
+
+    /*
+
     public function setIdActividad(){
         $this->idActividad = $idActividad;
-    }
+}
+
+    **/
+    
     /**
      * setNotaActividad
      * 
      * @param mixed $notaActividad
      * @return void
      */
+
+    /*
+    
     public function setNotaActividad(){
         $this->notaActividad = $notaActividad;
     }
+
+    **/
+
     /**
      * anadirActividad - Método que se utilizara para añadir una nueva actividad
      * 
      * @return void
      */
-
+ 
     /**
      * editarActividad - Método que se utilizara para editar una actividad
      * 
