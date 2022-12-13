@@ -36,15 +36,14 @@ class Activities{
         //definim la query com una variable
         $sql = "SELECT * FROM `activities` WHERE id_activity = $this->activity_id;";
 
-        //enviem la query a la bbdd i fem un objecte que conte l'informacio de la primera (i unica) fila
+        //enviem la query a la bbdd i guardem el contingut a la variable $result
         $result = $conn->query($sql);
-        $result->fetch_object();
+        //fem un objecte que conte l'informacio que extreiem de de result amb "fetch_object()"
+        $obj = $result->fetch_object();
 
-        print_r($result);
-
-        $this->activity_name = $result->name_activity;
-        $this->activity_description = $result->description_activity;
-        $this->course_id = $result->id_course;
+        $this->activity_name = $obj->name_activity;
+        $this->activity_description = $obj->description_activity;
+        $this->course_id = $obj->id_course;
     
         //tancar connexioDB
         $conn->close();
@@ -76,10 +75,7 @@ class Activities{
     }
 
     public function showActivity(){
-
-
-
-
+        echo $this->activity_description;
     }
     
     
