@@ -45,6 +45,17 @@ class Categoria
         return $insertQuery->execute();
     }
 
+    public function delete() {
+        include '../PHP/connexio.php';
+
+        $category_id = $this->idCategoria;
+        $today = date("Y-m-d");  
+
+        $updateQuery = $conn->prepare('UPDATE categories SET hidden = ? WHERE id_category = ?');
+        $updateQuery->bind_param('si', $today, $category_id);
+        return $updateQuery->execute();
+    }
+
     public function get_all_recursos(){
         include '../PHP/connexio.php';
         $id_category = $this->idCategoria;

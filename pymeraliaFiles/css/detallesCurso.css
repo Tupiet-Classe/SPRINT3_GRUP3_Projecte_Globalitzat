@@ -1,6 +1,11 @@
+:root {
+    --bg-pymeralia: #ff6720;
+    --bg-btn: #ff9950;
+}
+
 .orange-button:hover {
     color: white;
-    background: #ff9950;
+    background: var(--bg-btn);
 }
 
 .admin-course-tools {
@@ -37,4 +42,13 @@
 .element-card > i {
     font-size: 1.5rem;
     margin-right: 0.5rem;
+}
+
+.badge-config {
+    background: var(--bg-pymeralia);
+}
+
+.badge-config > i {
+    margin: 0;
+    font-size: 1.2rem;
 }
