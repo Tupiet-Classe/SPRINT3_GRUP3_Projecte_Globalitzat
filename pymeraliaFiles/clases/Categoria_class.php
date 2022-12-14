@@ -5,6 +5,7 @@ class Categoria
 {
     private $idCategoria;
     private $nombreCategoria;
+    private $idCurso;
 
     /**
      * __construct - Constructor de clase
@@ -25,6 +26,34 @@ class Categoria
     public function __construct1($idCategoria)
     {
         $this->idCategoria = $idCategoria;
+    }
+
+    public function __construct2($nombreCategoria, $idCurso)
+    {
+        $this->nombreCategoria = $nombreCategoria;
+        $this->idCurso = $idCurso;
+    }
+
+    public function create() {
+        include '../PHP/connexio.php';
+
+        $name = $this->nombreCategoria;
+        $course_id = $this->idCurso;
+
+        $insertQuery = $conn->prepare('INSERT INTO categories (name_category, id_course) VALUES (?, ?)');
+        $insertQuery->bind_param('si', $name, $course_id);
+        return $insertQuery->execute();
+    }
+
+    public function delete() {
+        include '../PHP/connexio.php';
+
+        $category_id = $this->idCategoria;
+        $today = date("Y-m-d");  
+
+        $updateQuery = $conn->prepare('UPDATE categories SET hidden = ? WHERE id_category = ?');
+        $updateQuery->bind_param('si', $today, $category_id);
+        return $updateQuery->execute();
     }
 
     public function get_all_recursos(){
@@ -53,8 +82,6 @@ class Categoria
 
         return $recursosQuery->get_result();
     }
-    
-    
 
     public function get_title() {
         include_once '../PHP/connexio.php';

@@ -1,0 +1,21 @@
+[
+    {
+        "id": 0,
+        "curso": "Ciberseguridad para Empresas",
+        "img-bg": "imagen1.jpg",
+        "available": true
+    },
+    {
+        "id": 1,
+        "curso": "Ciberseguridad para Autónomos",
+        "img-bg": "imagen2.jpg",
+        "available": false
+    },
+    {
+        "id": 2,
+        "curso": "Como proteger contraseñas",
+        "img-bg": "imagen3.jpg",
+        "available": true
+    }
+]
+   

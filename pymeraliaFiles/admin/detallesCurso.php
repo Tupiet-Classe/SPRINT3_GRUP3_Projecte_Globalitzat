@@ -26,7 +26,7 @@ if (isset($_GET['courseid'])) {
     <link href="../css/brands.min.css" rel="stylesheet">
     <link href="../css/solid.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-    <link rel="stylesheet" href="../css/detallesCursos.css">
+    <link rel="stylesheet" href="../css/detallesCurso.css">
 
 </head>
 
@@ -64,7 +64,7 @@ if (isset($_GET['courseid'])) {
                 <h3>Acciones rápidas</h3>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <button class="nav-link" href="addUsuarioCurso.php" data-bs-toggle="modal"
+                        <button class="nav-link" data-bs-toggle="modal"
                             data-bs-target="#addUser">
                             <i class="fa-solid fa-user-plus"></i>Añadir alumno
                         </button>
@@ -90,17 +90,9 @@ if (isset($_GET['courseid'])) {
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">
-                        <div><button type='button'  data-bs-toggle='dropdown' aria-expanded='false'><i class="fas fa-file-medical"></i>Añadir Recurso</button>
-
-                            <ul class='dropdown-menu'>
-                                <li><button type='button' onclick='addDocument("file")'> <i class="far fa-file-pdf"></i>Añadir Documento</button></li>
-                                <li><button type='button' onclick='addDocument("text")'> <i class="fas fa-file-alt"></i>Añadir Texto</button></li>
-                                <li><button type='button' onclick='addDocument("url")'> <i class="fas fa-link"></i>Añadir URL</button></li>
-
-                            </ul> 
-</div>
-                        </a>
+                        <button class="nav-link" data-bs-toggle="modal" data-bs-target="#addCategory">
+                            <i class="fa-solid fa-user-plus"></i>Añadir categoría
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -129,20 +121,31 @@ if (isset($_GET['courseid'])) {
                     $category_title = $category['name_category'];
 
                     echo "
-                        <div class='accordion-item'>
+                        <div class='accordion-item position-relative' id='category-$category_id'>
+                            <div class='dropdown'>
+                                <button class='badge-config position-absolute top-0 start-100 translate-middle badge rounded-pill' style='z-index: 10' data-bs-toggle='dropdown' aria-expanded='false'><i class='fa fa-ellipsis'></i></button>
+                                <ul class='dropdown-menu'>
+                                    <li>
+                                        <button type='submit' onclick='deleteCategory($category_id)'><i class='fas fa-trash-alt'></i>Eliminar</button>
+                                    </li>
+                                    <li>
+                                        <button type='button' onclick='showEditCategoryModal($category_id)'><i class='fas fa-edit'></i>Editar</button>
+                                    </li>
+                                </ul>
+                            </div>
                             <h2 class='accordion-header' id='heading-$category_id'>
                                 <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapse-$category_id' aria-expanded='true' aria-controls='collapse-$category_id'>
                                     $category_title
                                 </button>
                             </h2>
                             <div id='collapse-$category_id' class='accordion-collapse collapse show' aria-labelledby='heading-$category_id'>
-                                <div class='accordion-body'>";                      
+                                <div class='accordion-body'>";                                                      
 
                     $category = new Categoria($category_id);
                     $resources = $category->get_all_recursos();
 
                     foreach ($resources as $row) {
-                        echo "           
+                        echo "
                         <div class='course-element text p-3 my-2' id='course-element-$row[type]-$row[id]'>
                             <div class='d-flex justify-content-between h5'>
                                 <h4 id='resource-primary-$row[type]-$row[id]'>
@@ -177,14 +180,10 @@ if (isset($_GET['courseid'])) {
                     }
 
                     echo "
-                        <div class='new-resource d-flex align-items-center justify-content-center' role='button' data-bs-toggle='dropdown'>
-                            <i class='fa fa-add'></i>
-                            <ul class='dropdown-menu'>
-                                <li><button type='button' onclick='addDocument(`file`)'> <i class='far fa-file-pdf'></i>Añadir Documento</button></li>
-                                <li><button type='button' onclick='addDocument(`text`)'> <i class='fas fa-file-alt'></i>Añadir Texto</button></li>
-                                <li><button type='button' onclick='addDocument(`url`)'> <i class='fas fa-link'></i>Añadir URL</button></li>
+                        <div class='new-resource d-flex align-items-center justify-content-center' role='button' 
+                            onclick='showAddElementToCategoryModal($category_id)'>
 
-                            </ul> 
+                            <i class='fa fa-add'></i>
                          </div>";
 
                     echo "</div>
@@ -245,8 +244,9 @@ if (isset($_GET['courseid'])) {
                             <label for="descripcionURL" class="col-form-label">Descripción o URL</label>
 
                             <input type="text" class="form-control" name="descripcionURL" id="descripcionURL">
-                            <input type="hidden" name="type" id="edit-recurs-type">
+                            <input type="hidden" name="type" id="add-recurs-type">
                             <input type="hidden" name="id-course" id="add-id-course" value="<?php echo $_GET['courseid'] ?>">
+                            <input type="hidden" name="id-category" id="add-id-category" value="">
 
                         </div>
                 </div>
@@ -257,6 +257,68 @@ if (isset($_GET['courseid'])) {
             </div>
             </form>
 
+        </div>
+    </div>
+
+    <!-- Add category -->
+    <div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="addCategoryLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <form action="../PHP/inserirCategoria.php" method="post">
+
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addCategoryLabel">Añadir categoría</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="titulo" class="col-form-label">Nombre de la categoría</label>
+                    <input type="text" class="form-control" name="titulo" id="titulo">
+
+                    <input type="hidden" name="id-course" id="add-id-course" value="<?php echo $_GET['courseid'] ?>">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" id="btn-add-user">Guardar</button>
+                </div>
+            </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Add element to category -->
+    <div class="modal fade" id="addElementToCategory" tabindex="-1" aria-labelledby="addElementToCategoryLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addElementToCategoryLabel">Añadir elemento</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body row d-flex flex-row justify-content-around">
+                    <button class="element-card p-3 col-11 col-sm-5" data-bs-toggle="modal" onclick='addDocument("text")'>
+                        <i class="fa fa-file-alt"></i>
+                        Añadir texto
+                    </button>
+                    <button class="element-card p-3 col-11 col-sm-5" onclick='addDocument("url")'>
+                        <i class="fa fa-link"></i>
+                        Añadir enlace
+                    </button>
+                    <button class="element-card p-3 col-11 col-sm-5" onclick='addDocument("file")'>
+                        <i class="fa fa-file-pdf"></i>
+                        Añadir archivo
+                    </button>
+                    <button class="element-card p-3 col-11 col-sm-5">
+                        <i class="fa fa-file-upload"></i>
+                        Añadir actividad
+                    </button>
+
+                    <input type="hidden" name="id-course" id="add-id-course" value="<?php echo $_GET['courseid'] ?>">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" id="btn-add-user">Guardar</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -299,7 +361,7 @@ if (isset($_GET['courseid'])) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 
-              <form id="formCreateActivity action="../PHP/crearActividad.php" method="post">
+              <form id="formCreateActivity" action="../PHP/crearActividad.php" method="post">
                 <div class="modal-body">
                     <div class="md-3">
                       <label for="nombre-del-curso">Nombre de la actividad</label>
