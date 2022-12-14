@@ -8,6 +8,7 @@ let actualCategoryId
 
 let modal = new bootstrap.Modal(id('addUser'))
 let editModal = new bootstrap.Modal(id('edit-user-modal'))
+let editCategoryModal = new bootstrap.Modal(id('edit-category-modal'))
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -84,6 +85,15 @@ function showAddElementToCategoryModal(idCategory) {
     addElementToCategory.show()
 }
 
+function showEditCategoryModal(idCategory) {
+    // Guardem la id de la categoria en una variable global
+    actualCategoryId = idCategory
+    // Mostrem el nom actual de la categoria
+    id('edit-category-modal-primary').value = id('heading-' + idCategory).children[0].innerText
+    // Mostrem el diàleg
+    editCategoryModal.show()
+}
+
 function addDocument(type) {
     
     id('addDocumentLabel').innerText = (type == 'text') ? 'Añadir Texto' : 'Añadir URL'
@@ -113,6 +123,31 @@ async function deleteCategory(idCategory) {
     }
 
 }
+async function editCategory() {
+    let idCategory = actualCategoryId
+    let newName = id('edit-category-modal-primary').value
+    let response = await fetch('../PHP/editCategory.php', {
+        method: 'POST',
+        body: JSON.stringify({
+            idCategory,
+            newName
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    if (response.ok) {
+        let result = await response.json()
+        if (result.ok) {
+            id('heading-' + idCategory).children[0].innerText = newName
+            editCategoryModal.hide()
+        }
+    }
+
+}
+
+
 
 const successToast = new bootstrap.Toast(id('successToast'))
 const errorToast = new bootstrap.Toast(id('errorToast'))

@@ -350,6 +350,26 @@ if (isset($_GET['courseid'])) {
         </div>
     </div>
 
+    <!-- Edit category modal -->
+    <div class="modal fade" id="edit-category-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="edit-category-modal-primary" id="edit-category-modal-primary-label" class="form-label">Nom</label>
+                    <input class="form-control" type="text" name="primary" id="edit-category-modal-primary"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" onclick="editCategory()">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Modal de crear actividad -->
     <div class="modal fade" id="addActivity" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">

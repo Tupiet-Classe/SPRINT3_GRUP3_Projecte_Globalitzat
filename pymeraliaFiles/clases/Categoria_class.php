@@ -45,6 +45,16 @@ class Categoria
         return $insertQuery->execute();
     }
 
+    public function update($new_name) {
+        include '../PHP/connexio.php';
+
+        $id_category = $this->idCategoria;
+
+        $updateQuery = $conn->prepare('UPDATE categories SET name_category = ? WHERE id_category = ?');
+        $updateQuery->bind_param('si', $new_name, $id_category);
+        return $updateQuery->execute();
+    }
+
     public function delete() {
         include '../PHP/connexio.php';
 
