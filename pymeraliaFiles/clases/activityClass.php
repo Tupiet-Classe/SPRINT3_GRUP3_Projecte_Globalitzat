@@ -74,14 +74,20 @@ class Activities{
          $conn->close();
     }
 
-    public function showActivity(){
-        echo $this->activity_description;
+    public function getActivityId(){
+        return $this->activity_id;
     }
     
-    
-    public function getIdActivity(){
-        return $this->idActividad;
+    public function getActivityName(){
+        return $this->activity_name;
     }
+
+    public function getActivityDescription(){
+        return $this->activity_description;
+    }
+
+
+    
     /**
      * getNotaActividad
      * 
