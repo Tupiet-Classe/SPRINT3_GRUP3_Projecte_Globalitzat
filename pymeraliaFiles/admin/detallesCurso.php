@@ -126,7 +126,7 @@ if (isset($_GET['courseid'])) {
                                 <button class='badge-config position-absolute top-0 start-100 translate-middle badge rounded-pill' style='z-index: 10' data-bs-toggle='dropdown' aria-expanded='false'><i class='fa fa-ellipsis'></i></button>
                                 <ul class='dropdown-menu'>
                                     <li>
-                                        <button type='submit' onclick='deleteCategory($category_id)'><i class='fas fa-trash-alt'></i>Eliminar</button>
+                                        <button type='button' onclick='deleteCategory($category_id)'><i class='fas fa-trash-alt'></i>Eliminar</button>
                                     </li>
                                     <li>
                                         <button type='button' onclick='showEditCategoryModal($category_id)'><i class='fas fa-edit'></i>Editar</button>

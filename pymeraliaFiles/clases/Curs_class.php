@@ -36,6 +36,7 @@ class Curs
         $this->descripcionCurso = $descripcionCurso;
     }
 
+
     /**
      * getIdCurso
      *
@@ -332,6 +333,7 @@ class Curs
     
     public static function subscription_course_user($id_user){
         include_once "../PHP/connexio.php";
+
         $sql = "SELECT courses.name_course as 'name', courses.id_course as 'id'
         FROM courses INNER JOIN user_course 
         ON courses.id_course=user_course.id_course
@@ -339,10 +341,10 @@ class Curs
 
         return $conn->query($sql);        
     }
-    public static function check_activities($id_course){
+    public static function check_activities($idCurso){
         include_once "../PHP/connexio.php";
-        $sql = "SELECT name_activity as 'Activitat', description_activity as 'Descripció' FROM `activities` WHERE id_course = $id_course";
+        $sql2 = "SELECT name_activity as 'Activitat', description_activity as 'Descripció' FROM `activities` WHERE id_course = $idCurso";
 
-        return $conn->query($sql);        
+        return $conn->query($sql2);        
     }
 }
