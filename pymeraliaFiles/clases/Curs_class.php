@@ -323,7 +323,11 @@ class Curs
     public function get_average($id_user){
         include "../PHP/connexio.php";
 
-        $sql = "SELECT avg(qualification) as avg FROM grade WHERE id_user LIKE $id_user"; 
+        $sql = "SELECT avg(grade) as avg 
+        FROM deliveries 
+        INNER JOIN activities
+        ON deliveries.id_activity = activities.id_activity
+        WHERE id_user LIKE $id_user AND activities.id_course = $this->idCurso"; 
         $result = $conn->query($sql);
         
         $first_row = $result->fetch_assoc();
@@ -332,8 +336,7 @@ class Curs
     }
     
     public static function subscription_course_user($id_user){
-        include_once "../PHP/connexio.php";
-
+        include "../PHP/connexio.php";
         $sql = "SELECT courses.name_course as 'name', courses.id_course as 'id'
         FROM courses INNER JOIN user_course 
         ON courses.id_course=user_course.id_course
@@ -341,10 +344,9 @@ class Curs
 
         return $conn->query($sql);        
     }
-    public static function check_activities($idCurso){
-        include_once "../PHP/connexio.php";
-        $sql2 = "SELECT name_activity as 'Activitat', description_activity as 'Descripció' FROM `activities` WHERE id_course = $idCurso";
-
+    public function check_activities(){
+        include "../PHP/connexio.php";
+        $sql2 = "SELECT name_activity as 'Activitat', description_activity as 'Descripció', grade as 'Nota' FROM `activities` INNER JOIN deliveries ON activities.id_activity = deliveries.id_activity WHERE id_course = $this->idCurso AND deliveries.id_user=1";
         return $conn->query($sql2);        
     }
 }
