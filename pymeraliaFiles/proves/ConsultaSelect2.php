@@ -22,24 +22,60 @@
 
       $llistatCursos = Curs::subscription_course_user(1);
 
-
       foreach ($llistatCursos as $curs) {
          //echo  "<strong>  $curs[name] </strong>";
          echo " 
          <div class='accordion-item'>
           <h2 class='accordion-header' id='heading$curs[id]'>
             <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapse$curs[id]' aria-expanded='true' aria-controls='collapse$curs[id]'>
+            
               $curs[name] $curs[id]
             </button>
+              
           </h2>
           <div id='collapse$curs[id]' class='accordion-collapse collapse show' aria-labelledby='heading$curs[id]' data-bs-parent='#accordionExample'>
-            <div class='accordion-body'>
-      
-            </div>
+            <div class='accordion-body'>";
+            // MOSTRAR ACTIVITATS A PARTIR D'AQUÍ
+
+            echo "<table class='table'>
+              <thead>
+                <tr>
+                  <th scope='col'>Nom activitat</th>
+                  <th scope='col'>Nota</th>
+                </tr>
+              </thead>
+              <tbody>
+         ";
+
+            $curset = new Curs($curs['id']);
+            $mitjana = $curset->get_average(1);
+
+            $llistatActivitats = $curset->check_activities();
+            foreach($llistatActivitats as $activitats){
+              echo "
+              <tr>
+                <td>$activitats[Activitat]</td>
+                <td>$activitats[Nota]</td>
+              </tr>";
+            }
+
+            echo "
+           <td class='table-warning'> <strong> Nota total </strong></td> 
+           <td class='table-warning'> $mitjana</td> 
+            ";
+
+            echo "
+                </tbody>
+              </table>";
+
+
+               // MOSTRAR ACTIVITATS FINS D'AQUÍ
+          echo"  </div>
           </div>
         </div>
          ";
       }
+      
       ?>
   
 </div>
