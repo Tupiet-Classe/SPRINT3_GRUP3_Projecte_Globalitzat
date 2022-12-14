@@ -1,5 +1,6 @@
 <?php
 include("../clases/Curs_class.php");
+include("../clases/Categoria_class.php");
 
 $courseId;
 
@@ -37,35 +38,65 @@ if (isset($_GET['courseid'])) {
 
         <?php
             $curs = new Curs($courseId);
-            $resultat = $curs->showAllRecursosURL();
             $title = $curs->get_title();
             $courseId = $_GET['courseid'];
-
+            
             echo "
-            <div class='course-element text' id='course-element'>     
-                <h1 id='course-title'>$title</h1>
-            </div>
-            ";
+                    <div class='text' id='course-element'>     
+                        <h1 id='course-title'>$title</h1>
+                    </div>
+                ";
 
-            foreach ($resultat as $row){
-                if($row['hidden'] != null){
+            $resultatCategories = $curs->get_all_categories();
 
-                }else{
-                echo "<div class='course-element text' id='course-element-$row[type]-$row[id]'>";
+            echo "<div class='accordion'>";
 
-                if ($row['type']=='url') {
-                    echo" <a id='resource-secondary-$row[type]-$row[id]' href=$row[location_or_description]>$row[location_or_description]</a>";
-                } elseif ($row['type']=='file') {
-                    echo" <a id='resource-secondary-$row[type]-$row[id]' class='orange-button' href='$row[location_or_description]' download >$row[name]</a>";
-                }
-                else {
-                    echo "<p id='resource-secondary-$row[type]-$row[id]'>$row[location_or_description]</p>";
-                }
-                
-                echo "</div>"; 
-            }
+                foreach ($resultatCategories as $category){
+                    $category_id = $category['id_category'];
+                    $category_title = $category['name_category'];
 
-            };
+                    echo "
+                        <div class='accordion-item position-relative' id='category-$category_id'>
+                            <h2 class='accordion-header' id='heading-$category_id'>
+                                <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapse-$category_id' aria-expanded='true' aria-controls='collapse-$category_id'>
+                                    $category_title
+                                </button>
+                            </h2>
+                            <div id='collapse-$category_id' class='accordion-collapse collapse show' aria-labelledby='heading-$category_id'>
+                                <div class='accordion-body'>";                                                      
+
+                    $category = new Categoria($category_id);
+                    $resources = $category->get_all_recursos();
+
+                    foreach ($resources as $row) {
+                        echo "
+                        <div class='course-element text p-3 my-2' id='course-element-$row[type]-$row[id]'>
+                            <div class='d-flex justify-content-between h5'>
+                                <h4 id='resource-primary-$row[type]-$row[id]'>
+                                    $row[name]
+                                </h4>
+                            </div>";
+
+                        // Afegim el contingut
+                        if ($row['type']=='url') {
+                            echo" <a id='resource-secondary-$row[type]-$row[id]' href=$row[location_or_description]>$row[location_or_description]</a>";
+                        } elseif ($row['type']=='file') {
+                            echo" <a id='resource-secondary-$row[type]-$row[id]' class='orange-button' href='$row[location_or_description]' download >$row[name]</a>";
+                        }
+                        else {
+                            echo "<p id='resource-secondary-$row[type]-$row[id]' class='m-0'>$row[location_or_description]</p>";
+                        }
+                        
+                        echo "</div>"; 
+                    }
+
+                    echo "</div>
+                    </div>
+                  </div>";
+
+                };
+
+                echo '</div>'
             ?>
 
         
