@@ -22,16 +22,40 @@
 ?>
 
 <body class="d-flex flex-column min-vh-100">
-    <main class="container m-5">
-        <div class='course-element text' id='course-element'>     
-            <h1 id='course-title'>NombreDeActivitatAqui</h1>
-        </div>
+    <?php
+        /*Aquesta es la part de codi php que importa la id de l'activitat que hem de mostrar i
+        l'utilitza per a construir un objecte de classe "Activities" amb el __construct1.
+        Aquest construct obte, entre altres el nom i la descripcio de l'activitat, llavors importem 
+        aquesta informacio amb getters i la depositem a variables que podrem fer servir als echos
+        que contenen codi html
 
-        <div class='text mt-5'>     
-            <text>Contingut de la palabreria aqui</text>
-        </div>
+        */
 
-    </main>
+        #importem la classe de les activitats per a poder utilitzar-la
+        include_once '../clases/activityClass.php';
+        
+        #importem les dades de la activitat a visualitzar a partir la id d'aquesta
+        #$activity_id = $_GET['activity_id'];
+        $activity_id = 11; #hardcoded
+        $activity = new Activities($activity_id);
+
+        #usem els getters per a obtenir l'informació i la guardem en variables per a
+        #utilitzar-les mes avall
+        $activity_name = $activity->getActivityName();
+        $activity_description = $activity->getActivityDescription();
+
+
+        echo "<main class='container m-5'>";
+        echo    "<div class='course-element text' id='course-element'>" ;    
+        echo        "<h1 id='course-title'>$activity_name</h1>";
+        echo    "</div>";
+
+        echo "<div class='text mt-5'>";     
+        echo    "<text>$activity_description</text>";
+        echo "</div>";
+
+        echo "</main>";
+    ?>
 
 </body>
 </main>
@@ -40,17 +64,7 @@
   include_once '../includes/footer.php'; 
 ?>
 
-<script>
 
-
-    function playVid() {
-        video.play();
-    }
-
-    function pauseVid() {
-        video.pause();
-    } 
-</script>
 </body>
 
 </html>

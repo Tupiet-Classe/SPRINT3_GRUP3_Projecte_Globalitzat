@@ -1,7 +1,5 @@
 <?php
 include_once "../PHP/databaseFunctions.php";
-include_once "../PHP/connexio.php";
-
 
 class Curs
 {

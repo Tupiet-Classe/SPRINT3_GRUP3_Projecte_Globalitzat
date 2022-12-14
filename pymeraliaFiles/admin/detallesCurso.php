@@ -126,7 +126,7 @@ if (isset($_GET['courseid'])) {
                                 <button class='badge-config position-absolute top-0 start-100 translate-middle badge rounded-pill' style='z-index: 10' data-bs-toggle='dropdown' aria-expanded='false'><i class='fa fa-ellipsis'></i></button>
                                 <ul class='dropdown-menu'>
                                     <li>
-                                        <button type='submit' onclick='deleteCategory($category_id)'><i class='fas fa-trash-alt'></i>Eliminar</button>
+                                        <button type='button' onclick='deleteCategory($category_id)'><i class='fas fa-trash-alt'></i>Eliminar</button>
                                     </li>
                                     <li>
                                         <button type='button' onclick='showEditCategoryModal($category_id)'><i class='fas fa-edit'></i>Editar</button>
@@ -346,6 +346,26 @@ if (isset($_GET['courseid'])) {
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit category modal -->
+    <div class="modal fade" id="edit-category-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="edit-category-modal-primary" id="edit-category-modal-primary-label" class="form-label">Nom</label>
+                    <input class="form-control" type="text" name="primary" id="edit-category-modal-primary"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" onclick="editCategory()">Actualizar</button>
+                </div>
             </div>
         </div>
     </div>

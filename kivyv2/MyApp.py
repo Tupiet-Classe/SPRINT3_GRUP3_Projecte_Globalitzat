@@ -1,5 +1,6 @@
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
+from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.list import OneLineListItem
 import json
 
@@ -7,6 +8,9 @@ class MyApp(MDApp):
     
     def build(self):
         self.title ="TEST"
+        sm = MDScreenManager()
+        sm.add_widget(ListOfCourses())
+        return sm
             
 class ListOfCourses(MDScreen):
     def on_enter(self):
