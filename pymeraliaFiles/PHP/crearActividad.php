@@ -4,9 +4,10 @@ include_once '../clases/activityClass.php';
 $activity_name = $_POST['nombre-del-curso'];
 $activity_description = $_POST['descripcion-del-curso'];
 $courseID = $_POST['courseID'];
+$category_id = $_POST['category_id'];
 
 
-$activity = new Activities($activity_name, $activity_description, $courseID);
+$activity = new Activities($activity_name, $activity_description, $category_id);
 $activity->addActivityToDatabase();
 
 header("location: ../admin/detallesCurso.php?courseid=$courseID");

@@ -108,13 +108,10 @@ function addDocument(type) {
     id('addDocumentLabel').innerText = (type == 'text') ? 'Añadir Texto' : 'Añadir URL'
     id("add-recurs-type").value = type
     id("add-id-category").value = actualCategoryId
+    id("category_id_create_activity").value = actualCategoryId
 
     addElementToCategory.hide()
     type == 'activity' ? addActivityModal.show() : modalDocument.show()
-}
-
-function addActivity() {
-
 }
 
 async function deleteCategory(idCategory) {

@@ -4,7 +4,7 @@ class Activities{
     private $activity_id;
     private $activity_name;
     private $activity_description;
-    private $courseID;
+    private $category_id;
     private $start_date;
     private $final_date;
    
@@ -53,11 +53,11 @@ class Activities{
 
 
     //Constructor principal para crear actividad
-    function __construct3($activity_name, $activity_description, $courseID)
+    function __construct3($activity_name, $activity_description, $category_id)
     {
         $this->activity_name = $activity_name;
         $this->activity_description = $activity_description;
-        $this->courseID = $courseID;
+        $this->category_id = $category_id;
     }
 
 
@@ -66,7 +66,7 @@ class Activities{
          include_once '../PHP/connexio.php';
         
          //definim la query com una variable
-         $sql = "INSERT INTO `activities` (name_activity, description_activity, id_course) VALUES ('$this->activity_name','$this->activity_description', $this->courseID)";
+         $sql = "INSERT INTO `activities` (name_activity, description_activity, id_category) VALUES ('$this->activity_name','$this->activity_description', $this->category_id)";
  
          //enviem la query a la bbdd
          $conn->query($sql);

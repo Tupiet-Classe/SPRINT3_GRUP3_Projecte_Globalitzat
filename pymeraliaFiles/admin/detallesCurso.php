@@ -414,6 +414,7 @@ if (isset($_GET['courseid'])) {
                 </div>
 
                 <input type="hidden" name="courseID" value="<?php echo $_GET['courseid']?>">
+                <input type="hidden" name="category_id" id="category_id_create_activity" value="">
 
               </form>
 
