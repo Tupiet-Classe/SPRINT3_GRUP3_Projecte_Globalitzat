@@ -25,141 +25,77 @@
 <body class="d-flex flex-column min-vh-100">
     <div class="container mt-3">
         <h2>Cursos</h2>
-        <div class="accordion pb-3" id="accordionFlushExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        Ciberseguridad para empresas
-                    </button>
-                </h2>
-                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">
-                        <div>
-                            <table class="table table-striped align-middle">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Actividades</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Nota</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Seguridad en la empresa: buenas contraseñas</th>
-                                        <td>Corregido</td>
-                                        <td>8,5</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Copias de seguridad automáticas</th>
-                                        <td>Corregido</td>
-                                        <td>5,5</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Firewall: principios básicos</th>
-                                        <td>Pendiente de corrección</td>
-                                        <td>-</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="accordion" id="accordionExample">
+  <?php
+      include_once "../clases/Curs_class.php";
+
+
+      $llistatCursos = Curs::subscription_course_user(1);
+
+      foreach ($llistatCursos as $curs) {
+         //echo  "<strong>  $curs[name] </strong>";
+         echo " 
+         <div class='accordion-item'>
+          <h2 class='accordion-header' id='heading$curs[id]'>
+            <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapse$curs[id]' aria-expanded='true' aria-controls='collapse$curs[id]'>
+            
+              $curs[name] $curs[id]
+            </button>
+              
+          </h2>
+          <div id='collapse$curs[id]' class='accordion-collapse collapse show' aria-labelledby='heading$curs[id]' data-bs-parent='#accordionExample'>
+            <div class='accordion-body'>";
+            // MOSTRAR ACTIVITATS A PARTIR D'AQUÍ
+
+            echo "<table class='table'>
+              <thead>
+                <tr>
+                  <th scope='col'>Nom activitat</th>
+                  <th scope='col'>Nota</th>
+                </tr>
+              </thead>
+              <tbody>
+         ";
+
+            $curset = new Curs($curs['id']);
+            $mitjana = $curset->get_average(1);
+
+            $llistatActivitats = $curset->check_activities();
+            foreach($llistatActivitats as $activitats){
+              echo "
+              <tr>
+                <td>$activitats[Activitat]</td>
+                <td>$activitats[Nota]</td>
+              </tr>";
+            }
+
+            echo "
+           <td class='table-warning'> <strong> Nota total </strong></td> 
+           <td class='table-warning'> $mitjana</td> 
+            ";
+
+            echo "
+                </tbody>
+              </table>";
+
+
+               // MOSTRAR ACTIVITATS FINS D'AQUÍ
+          echo"  </div>
+          </div>
         </div>
-        <div class="accordion pb-3" id="accordionFlushExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                        Ciberseguridad para autónomos
-                    </button>
-                </h2>
-                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-                    data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">
-                        <div>
-                            <table class="table table-striped align-middle">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Actividades</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Nota</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Ficha sobre nmap</th>
-                                        <td>Corregido</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Telnet vs SSH: Diferencias y similitudes</th>
-                                        <td>Corregido</td>
-                                        <td>8,5</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Resumen del libro "Crafting Interpreters"</th>
-                                        <td>En corrección</td>
-                                        <td>-</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="accordion pb-3" id="accordionFlushExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                        Políticas de contraseñas
-                    </button>
-                </h2>
-                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
-                    data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">
-                        <div>
-                            <table class="table table-striped align-middle">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Actividades</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Nota</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Invención de una política de privacidad</th>
-                                        <td>Corregido</td>
-                                        <td>7,5</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">¿Cómo asegurarme de que la contraseña es segura?</th>
-                                        <td>Pendiente de corrección</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Encriptación síncrona: resumen</th>
-                                        <td>Pendiente de corrección</td>
-                                        <td>-</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+         ";
+      }
+      
+      ?>
+  
+</div>
     </div>
+    <br>
+
  
 <?php 
   include_once '../includes/footer.php'; 
 ?>
-
 </body>
 
 </html>
