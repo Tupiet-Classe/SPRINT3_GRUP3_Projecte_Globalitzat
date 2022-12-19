@@ -180,5 +180,13 @@ class Activities{
     public function  calcularNotaFinal(){
         
     }
+
+//Mètode show_deliveries
+public function show_deliveries(){
+    include "../PHP/connexio.php";
+    $sql = "";
+    return $conn->query($sql2);        
+}
+
 }
 ?>

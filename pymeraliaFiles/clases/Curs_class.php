@@ -349,4 +349,9 @@ class Curs
         $sql2 = "SELECT name_activity as 'Activitat', description_activity as 'Descripció', grade as 'Nota' FROM `activities` INNER JOIN deliveries ON activities.id_activity = deliveries.id_activity WHERE id_course = $this->idCurso AND deliveries.id_user=1";
         return $conn->query($sql2);        
     }
+    public function apply_grades(){
+        include "../PHP/connexio.php";
+        $sql = "INSERT INTO `deliveries` (`id_delivery`, `locate`, `grade`, `id_activity`, `id_user`) VALUES ('9', 'Exemple entrega 1, si', '8', '1', '1')";
+        return $conn->query($sql2);        
+    }
 }
