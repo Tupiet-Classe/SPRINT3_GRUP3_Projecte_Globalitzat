@@ -43,6 +43,9 @@ class Deliver{
     }
 
     function getFile(){
+        include_once '../PHP/connexio.php';
+        
+        
         $file = $this->deliver_file;
 
         $filename = $file['name'];
@@ -62,13 +65,22 @@ class Deliver{
         if(!is_dir($route)){
         mkdir($route, 0777);
         }
+
         if(in_array($file_type, $allowed_types)){
 
             //Miramos si el archivo ocupa 1MB o menos (expresado en bytes)
             if($file_size <= 10000000){
-                // Movemos el archivo al directorio que toca i guardamos la ruta de este en la variable "locate"
+                //Movemos el archivo al directorio que toca i guardamos la ruta de este en la variable "locate"
                 move_uploaded_file($file['tmp_name'], $route . $final_file_name);
                 $this->locate = $route . $final_file_name;
+
+                //Finalmente si todo va bien le introducimos la informacion a la base de datos
+            
+                $sql = "INSERT INTO `deliveries` ";
+
+                $conn->query($sql);
+                $conn->close();
+
             }
 
             else{
