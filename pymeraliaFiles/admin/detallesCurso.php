@@ -79,14 +79,9 @@ if (isset($_GET['courseid'])) {
                             <i class="fa-solid fa-circle-plus"></i>Crear Actividad
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="editarCurso.php">
+                    <li class="nav-item" role="button">
+                        <a class="nav-link" onclick="showEditCourseModal()">
                             <i class="fa-solid fa-award"></i>Editar Curso
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="editarNotaUsuarios.php">
-                            <i class="fa-solid fa-star"></i>Editar Nota
                         </a>
                     </li>
                     <li class="nav-item">
@@ -307,7 +302,7 @@ if (isset($_GET['courseid'])) {
                         <i class="fa fa-file-pdf"></i>
                         Añadir archivo
                     </button>
-                    <button class="element-card p-3 col-11 col-sm-5">
+                    <button class="element-card p-3 col-11 col-sm-5" onclick="addDocument('activity')">
                         <i class="fa fa-file-upload"></i>
                         Añadir actividad
                     </button>
@@ -370,6 +365,27 @@ if (isset($_GET['courseid'])) {
         </div>
     </div>
 
+    <!-- Edit course modal -->
+    <div class="modal fade" id="edit-course-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="edit-course-modal-primary" id="edit-course-modal-primary-label" class="form-label">Nom</label>
+                    <input class="form-control" type="text" name="primary" id="edit-course-modal-primary"/>
+                    <input type="hidden" id="edit-course-id-modal" name="courseID" value="<?php echo $_GET['courseid']?>">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" onclick="editCourse()">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Modal de crear actividad -->
     <div class="modal fade" id="addActivity" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
@@ -411,17 +427,6 @@ if (isset($_GET['courseid'])) {
     <script src="../scripts/detallesCurso.js"></script>
 
     <script src="../scripts/borrarURL.js" ></script>
-    <script>
-
-
-        function playVid() {
-            video.play();
-        }
-
-        function pauseVid() {
-            video.pause();
-        } 
-    </script>
 </body>
 
 </html>

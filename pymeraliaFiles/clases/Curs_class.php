@@ -121,6 +121,16 @@ class Curs
         $this->imagenCurso = $imagenCurso;
     }
 
+    public function update($new_name) {
+        include '../PHP/connexio.php';
+
+        $id_course = $this->idCurso;
+
+        $updateQuery = $conn->prepare('UPDATE courses SET name_course = ? WHERE id_course = ?');
+        $updateQuery->bind_param('si', $new_name, $id_course);
+        return $updateQuery->execute();
+    }
+
     /**
      * addCurso - Futuro método para añadir cursos
      *

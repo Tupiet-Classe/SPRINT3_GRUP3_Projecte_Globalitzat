@@ -4,10 +4,12 @@ let btn = id('btn-add-user')
 let form = id('addUserForm')
 let addElementToCategory = new bootstrap.Modal(id('addElementToCategory'))
 let modalDocument = new bootstrap.Modal(id('addDocument'))
+let addActivityModal = new bootstrap.Modal(id('addActivity'))
 let actualCategoryId
 
 let modal = new bootstrap.Modal(id('addUser'))
 let editModal = new bootstrap.Modal(id('edit-user-modal'))
+let editCourseModal = new bootstrap.Modal(id('edit-course-modal'))
 let editCategoryModal = new bootstrap.Modal(id('edit-category-modal'))
 
 form.addEventListener('submit', (e) => {
@@ -94,6 +96,13 @@ function showEditCategoryModal(idCategory) {
     editCategoryModal.show()
 }
 
+function showEditCourseModal() {
+    // Mostrem el nom actual del curs
+    id('edit-course-modal-primary').value = id('course-title').innerText
+    // Mostrem el diàleg
+    editCourseModal.show()
+}
+
 function addDocument(type) {
     
     id('addDocumentLabel').innerText = (type == 'text') ? 'Añadir Texto' : 'Añadir URL'
@@ -101,7 +110,11 @@ function addDocument(type) {
     id("add-id-category").value = actualCategoryId
 
     addElementToCategory.hide()
-    modalDocument.show()
+    type == 'activity' ? addActivityModal.show() : modalDocument.show()
+}
+
+function addActivity() {
+
 }
 
 async function deleteCategory(idCategory) {
@@ -144,7 +157,29 @@ async function editCategory() {
             editCategoryModal.hide()
         }
     }
+}
 
+async function editCourse() {
+    let idCourse = +id('edit-course-id-modal').value
+    let newName = id('edit-course-modal-primary').value
+    let response = await fetch('../PHP/editCourse.php', {
+        method: 'POST',
+        body: JSON.stringify({
+            idCourse,
+            newName
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    if (response.ok) {
+        let result = await response.json()
+        if (result.ok) {
+            id('course-title').innerText = newName
+            editCourseModal.hide()
+        }
+    }
 }
 
 
