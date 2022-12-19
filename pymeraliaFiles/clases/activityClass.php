@@ -1,4 +1,5 @@
 <?php
+
 class Activities{
     private $activity_id;
     private $activity_name;
@@ -182,11 +183,55 @@ class Activities{
     }
 
 //Mètode show_deliveries
-public function show_deliveries(){
+public function show_deliveries($activity_id){
     include "../PHP/connexio.php";
-    $sql = "";
-    return $conn->query($sql2);        
+    //Select per a la taula
+    $sql = "SELECT locate as 'localitzacio', grade as 'nota' , users.name_user as 'usuari' 
+    FROM deliveries 
+    INNER JOIN users
+    ON deliveries.id_user = users.id_user
+    WHERE id_activity = $activity_id";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        //Mostrar una taula id usuari, nom arxiu (location), nota
+        echo "
+        <table class='table'>
+            <thead>
+                <tr>
+                <th scope='col'>Usuari</th>
+                <th scope='col'>Locate</th>
+                <th scope='col'>Nota</th>
+                </tr>
+            </thead>
+        <tbody>
+        ";
+
+        while($row = $result->fetch_assoc()) {
+            
+            echo"
+            <tr>
+            <td> $row[usuari] </td>
+            <td> <a href='../../content/activities/$row[localitzacio]' download > $row[localitzacio] </a> </td>
+            ";
+            if(empty($row['nota'])) {
+                echo"<td> Sense nota </td>";
+            } else {
+                echo"
+                <td> $row[nota]</td>
+                ";
+            }
+        }
+
+    
+        echo"
+        </tr>
+        </tbody>
+        </table>
+        ";
+    
+    }
+}
 }
 
-}
 ?>
