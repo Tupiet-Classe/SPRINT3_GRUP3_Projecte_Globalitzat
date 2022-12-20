@@ -1,7 +1,7 @@
 <?php
 //Classe
 class Deliver{
-    private $delivery_id;
+    private $deliver_id;
     private $activity_id;
     private $user_id;
 
@@ -43,7 +43,6 @@ class Deliver{
         $this->deliver_file = $file;
         $this->activity_id = $activity_id;
         $this->user_id = $user_id;
-        /////////////////////////////////////////
     }
 
 
@@ -65,7 +64,7 @@ class Deliver{
 
         ///////////////////////////////////////////
 
-         //Miramos si el directorio en el que queremos guardar el archivo existe, en caso de no
+        //Miramos si el directorio en el que queremos guardar el archivo existe, en caso de no
         //existir lo crearemos i le assignaremos permisos.
         if(!is_dir($route)){
         mkdir($route, 0777);
@@ -79,9 +78,9 @@ class Deliver{
                 move_uploaded_file($file['tmp_name'], $route . $final_file_name);
                 $this->locate = $route . $final_file_name;
 
+                
                 //Finalmente si todo va bien le introducimos la informacion a la base de datos
-            
-                $sql = "INSERT INTO `deliveries` ";
+                $sql = "INSERT INTO `deliveries` (id_activity,id_user,locate) VALUES ($this->activity_id,$this->user_id,'$this->locate');";
 
                 $conn->query($sql);
                 $conn->close();
