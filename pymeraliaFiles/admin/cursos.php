@@ -38,11 +38,11 @@
       $cursos = Curs::get_all_non_hidden_courses();
       
       if ($cursos) {
-        echo'<div class="row justify-content-evenly" id="contenedor-cursos">';
+        echo'<div class="row justify-content-around" id="contenedor-cursos">';
 
         foreach ($cursos as $curso) {
             echo 
-                '<div class="col-12 card vista-curso" style="width: 18rem;">',
+                '<div class="col-12 card vista-curso align-self-center" style="width: 18rem;">',
                     '<img src="../images/imagenes-curso/' . $curso['image'] . '" class="card-img" alt="imagen seguridad empresa">',
                     '<div class="card-body">',
                         '<h5 class="card-title">' . $curso['name_course'] . '</h5>',
@@ -60,22 +60,21 @@
     <div class="modal fade" id="addCurso" tabindex="-1" aria-labelledby="addCursoLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-            <form action="../PHP/inserirCourse.php" method="post">
+            <form action="../PHP/inserirCourse.php" method="post" enctype="multipart/form-data">
 
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="addCursoLabel"></h1>
+                    <h1 class="modal-title fs-5" id="addCursoLabel">Crear un nuevo curso</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" >
-                        <div class="md-3">
-                            <label for="titulo" class="col-form-label" >Título</label>
-                            <input type="text" class="form-control" name="name_course" id="name_course">
-                            <label for="descripcionURL" class="col-form-label">Descripción o URL</label>
+                    <label for="titulo" class="col-form-label" >Título</label>
+                    <input type="text" class="form-control" name="name_course" id="name_course">
 
-                            <input type="text" class="form-control" name="description_course" id="description_course">
-                            <input type="hidden" name="type" id="edit-recurs-type">
-
-                        </div>
+                    <label for="descripcionURL" class="col-form-label">Descripción</label>
+                    <input type="text" class="form-control" name="description_course" id="description_course">
+                    
+                    <label for="image" class="col-form-label">Imagen de cabezera</label>
+                    <input type="file" class="form-control" name="image" id="image">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

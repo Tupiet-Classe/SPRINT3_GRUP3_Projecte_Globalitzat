@@ -30,10 +30,11 @@ class Curs
     {
         $this->idCurso = $idCurso;
     }
-    public function __construct2($nombreCurso, $descripcionCurso)
+    public function __construct3($nombreCurso, $descripcionCurso, $imagenCurso)
     {
         $this->nombreCurso = $nombreCurso;
         $this->descripcionCurso = $descripcionCurso;
+        $this->imagenCurso = $imagenCurso;
     }
 
     public function update($new_name, $new_description) {
@@ -61,11 +62,41 @@ class Curs
      *
      * @return void
      */
-    public function addCurso()
-    {
-        $sql="INSERT INTO courses(name_course, description_course) VALUES('$this->nombreCurso','$this->descripcionCurso')";
+    public function addCurso() {
+        $name_course = $this->nombreCurso;
+        $description_course = $this->descripcionCurso;
+        $image = $this->imagenCurso;
+
+        // Recuperem el nom, tipus i mida de la imatge
+        $image_name = $image['name'];
+        $image_type = $image['type'];
+        $image_size = $image['size'];
+
+        // Ruta on guardarem les imatges
+        $route = '../images/imagenes-curso/'; 
+
+        // Generem un hash aleatori
+        $hash = bin2hex(random_bytes(32));
+
+        // Guardem el nom de l'arxiu amb el hash
+        $final_file_name = $hash.'_'.$image_name;
+
+        // Definim el tipus d'arxiu que acceptem (només imatges JPG/JPEG i PNG)
+        $allowed_types = array("image/jpg" , "image/jpeg" , "image/png");
+
+        // Si el directori on anem a guardar les dades no existeix, crea'l
+        if(!is_dir($route)){
+            mkdir($route, 0755);
+        }
+
+        // Si l'arxiu té el format correcte i pesa menys d'1MB, penjarem l'arxiu al servidor
+        if (in_array($image_type, $allowed_types) && $image_size <= 1000000) {
+            move_uploaded_file($image['tmp_name'], $route . $final_file_name);
+        }
+
+        $sql="INSERT INTO courses(name_course, description_course, image) VALUES('$name_course','$description_course', '$final_file_name')";
         
-            return db_query($sql);
+        return db_query($sql);
     }
     
     public function showCursos()
