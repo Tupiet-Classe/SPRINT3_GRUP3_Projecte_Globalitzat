@@ -89,15 +89,15 @@ class Categoria
         
         UNION
 
-        SELECT `id_resource_text`, `name_resource_text`, `description_resource_text`, `id_category`, `hidden`, 'text' as type 
-        FROM `resources_text`
+        SELECT `id_activity`, `name_activity`, `description_activity`, `id_category`, `hidden`, 'activity' as type 
+        FROM `activities`
         where id_category = ?
         
         ");
 
         // ARREGLAR EL DE DALT; ACTIVITATS NO VA
 
-        $recursosQuery->bind_param('iii', $id_category, $id_category, $id_category);
+        $recursosQuery->bind_param('iiii', $id_category, $id_category, $id_category, $id_category);
         $recursosQuery->execute();
 
         return $recursosQuery->get_result();
