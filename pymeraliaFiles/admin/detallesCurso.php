@@ -76,7 +76,7 @@ if (isset($_GET['courseid'])) {
                     </li>
                     <li class="nav-item" role="button">
                         <a class="nav-link" onclick="showEditCourseModal()">
-                            <i class="fa-solid fa-award"></i>Editar curso
+                            <i class="fa-solid fa-pen-to-square"></i>Editar curso
                         </a>
                     </li>
                     <li class="nav-item" role="button">
@@ -86,7 +86,7 @@ if (isset($_GET['courseid'])) {
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" data-bs-toggle="modal" data-bs-target="#addCategory">
-                            <i class="fa-solid fa-user-plus"></i>Añadir categoría
+                            <i class="fa-solid fa-file-circle-plus"></i>Añadir categoría
                         </button>
                     </li>
                 </ul>

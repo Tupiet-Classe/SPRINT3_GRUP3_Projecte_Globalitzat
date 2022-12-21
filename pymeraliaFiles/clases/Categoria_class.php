@@ -73,29 +73,27 @@ class Categoria
         $recursosQuery = $conn->prepare(
         "SELECT `id_resource_url` as id, `name_resource_url` as name, `location` as location_or_description, `id_category`, `hidden`, 'url' as type 
         FROM `resources_url` 
-        where id_category = ?
+        where id_category = ? and hidden is null
         
         UNION
 
         SELECT id_resource_file, name_resource_file, location, id_category, hidden, 'file' as type 
         FROM resources_files 
-        where id_category = ?
+        where id_category = ? and hidden is null
 
         UNION
         
         SELECT `id_resource_text`, `name_resource_text`, `description_resource_text`, `id_category`, `hidden`, 'text' as type 
         FROM `resources_text`
-        where id_category = ?
+        where id_category = ? and hidden is null
         
         UNION
 
         SELECT `id_activity`, `name_activity`, `description_activity`, `id_category`, `hidden`, 'activity' as type 
         FROM `activities`
-        where id_category = ?
+        where id_category = ? and hidden is null
         
         ");
-
-        // ARREGLAR EL DE DALT; ACTIVITATS NO VA
 
         $recursosQuery->bind_param('iiii', $id_category, $id_category, $id_category, $id_category);
         $recursosQuery->execute();
