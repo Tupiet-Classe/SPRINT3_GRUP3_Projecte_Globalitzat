@@ -166,6 +166,8 @@ if (isset($_GET['courseid'])) {
                             echo" <a id='resource-secondary-$row[type]-$row[id]' href=$row[location_or_description]>$row[location_or_description]</a>";
                         } elseif ($row['type']=='file') {
                             echo" <a id='resource-secondary-$row[type]-$row[id]' class='orange-button' href='$row[location_or_description]' download >$row[name]</a>";
+                        } elseif ($row['type'] == 'activity') {
+                            echo" <a id='resource-secondary-$row[type]-$row[id]' class='orange-button' href=actividad.php?id=$row[id]>Completar actividad</a>";
                         }
                         else {
                             echo "<p id='resource-secondary-$row[type]-$row[id]' class='m-0'>$row[location_or_description]</p>";
