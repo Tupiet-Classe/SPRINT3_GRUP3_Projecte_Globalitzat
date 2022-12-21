@@ -1,6 +1,16 @@
+#:import CourseScreen views.CourseScreen
 
-<ListOfCourses>:
-    MDScrollView:
-        MDList:
-            id: test
+<MainScreen@MDScreen>:
+    BoxLayout:
+        Button:
+            text: "Go to courses"
+            color: 'black'
+            on_press:
+                root.manager.current = 'course'
 
+MDScreenManager:
+    MainScreen:
+        name: 'main'
+    CourseScreen:
+        name: 'course'
+    

@@ -1,33 +1,18 @@
 from kivymd.app import MDApp
-from kivymd.uix.screen import MDScreen
 from kivymd.uix.screenmanager import MDScreenManager
-from kivymd.uix.list import OneLineListItem
-import json
+from views.CourseScreen import CourseScreen
 
 class MyApp(MDApp):
-    
+    # Mètode per crear la classe, aquí estaria l'inici
     def build(self):
-        self.title ="TEST"
-        sm = MDScreenManager()
-        sm.add_widget(ListOfCourses())
-        return sm
-            
-class ListOfCourses(MDScreen):
-    def on_enter(self):
-        self.list_courses()
+        self.title ="Inici"
         
-    def on_touch_down(self, touch):
-        self.list_courses()
-                        
-    def list_courses(self):
-        print('hellooo')
-        with open('kivyv2/cursoEVAPymeralia.json', 'r') as json_file:
-            json_data = json.load(json_file)
-            
-        for course in json_data:
-            print(course)
-            print(self.ids)
-            self.ids.test.add_widget(OneLineListItem(text="Hello, World!"))
+"""
+        sm = MDScreenManager()
+        sm.add_widget(CourseScreen.CourseScreen())
+        return sm
+"""        
+
 
 if __name__ == "__main__":
     MyApp().run()
