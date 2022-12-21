@@ -21,22 +21,3 @@ class CourseScreen(MDScreen):
         # Per cada curs, imprimeix el seu nom
         for course in json_data:
             self.ids.test.add_widget(OneLineListItem(text=course['curso']))
-  
-"""           
-class ListOfCourses(MDScreen):
-    def on_enter(self):
-        self.list_courses()
-        
-    def on_touch_down(self, touch):
-        self.list_courses()
-                        
-    # Mètode que llista tots els cursos que hi ha
-    def list_courses(self):
-        # Recuperem el JSON amb els cursos i el carreguem
-        with open('kivyv2/cursoEVAPymeralia.json', 'r') as json_file:
-            json_data = json.load(json_file)
-            
-        # Per cada curs, imprimeix el seu nom
-        for course in json_data:
-            self.ids.test.add_widget(OneLineListItem(text=course['curso']))
-"""
