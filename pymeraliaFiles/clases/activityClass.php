@@ -259,11 +259,13 @@ public function show_deliveries($activity_id){
             
       <br>
             ";
+
             echo "
-            <td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa-solid fa-pen-to-square'></i></td>
-          </button>
-          <button type='hidden' id='idDelivery' value='$row[id]'></td>
-          </button>
+            <>
+            <td><button onclick='apply_grade()' type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa-solid fa-pen-to-square'></i></td>
+            </button>
+            <input type='hidden' id='idDelivery' value=''></td>
+            </input>
             ";
         }
 
