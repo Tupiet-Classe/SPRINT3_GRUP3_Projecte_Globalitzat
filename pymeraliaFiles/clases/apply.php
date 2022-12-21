@@ -1,8 +1,8 @@
 <?php
-include "../clases/Tramesa_class.php";
+include "../clases/DeliverClass.php";
 
 $nota = $_POST['nota'];
-$idDelivery = $_POST['id'];
+$idDelivery = $_POST['idDelivery'];
 $aplicar = new Deliver($idDelivery);
 
 if(!empty($nota)){
