@@ -148,9 +148,10 @@ class Curs
      */
     public function assignCurso($user)
     {
-        include_once '../PHP/connexio.php';
+        include '../PHP/connexio.php';
 
         $userId;
+        $courseId = $this->idCurso;
 
         if (preg_match("/^\w+@\w+\.\w+$/", $user)) {
             $emailQuery = $conn->prepare("SELECT id_user FROM users WHERE email = ?");
@@ -165,7 +166,7 @@ class Curs
         }
 
         $insert = $conn->prepare("INSERT INTO user_course (id_user, id_course) VALUES (?, ?)");
-        $insert->bind_param('ii', $userId, $this->idCurso);
+        $insert->bind_param('ii', $userId, $courseId);
 
         $success;
         

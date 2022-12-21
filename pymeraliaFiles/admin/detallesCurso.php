@@ -449,7 +449,7 @@ if (isset($_GET['courseid'])) {
     </div>
 
 
-    <span id="courseId" style="display: none;">4</span>
+    <span id="courseId" style="display: none;"><?php echo $_GET['courseid']?></span>
 
     <script src="../scripts/detallesCurso.js"></script>
 
