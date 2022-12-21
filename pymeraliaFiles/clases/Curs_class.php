@@ -131,6 +131,16 @@ class Curs
         return $updateQuery->execute();
     }
 
+    public function delete() {
+        include '../PHP/connexio.php';
+
+        $id_course = $this->idCurso;
+
+        $updateQuery = $conn->prepare('DELETE FROM courses WHERE id_course = ?');
+        $updateQuery->bind_param('i', $id_course);
+        return $updateQuery->execute();
+    }
+
     /**
      * addCurso - Futuro método para añadir cursos
      *

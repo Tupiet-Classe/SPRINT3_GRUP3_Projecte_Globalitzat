@@ -179,6 +179,26 @@ async function editCourse() {
     }
 }
 
+async function deleteCourse() {
+    let idCourse = +id('delete-course-id-modal').value
+    let response = await fetch('../PHP/deleteCourse.php', {
+        method: 'POST',
+        body: JSON.stringify({
+            idCourse,
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    if (response.ok) {
+        let result = await response.json()
+        if (result.ok) {
+            location.href = 'cursos.php'
+        }
+    }
+}
+
 
 
 const successToast = new bootstrap.Toast(id('successToast'))

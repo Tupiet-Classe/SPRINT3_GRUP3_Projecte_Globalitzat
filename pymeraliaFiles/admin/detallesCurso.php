@@ -75,13 +75,13 @@ if (isset($_GET['courseid'])) {
                         </a>
                     </li>
                     <li class="nav-item" role="button">
-                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#addActivity">
-                            <i class="fa-solid fa-circle-plus"></i>Crear Actividad
+                        <a class="nav-link" onclick="showEditCourseModal()">
+                            <i class="fa-solid fa-award"></i>Editar curso
                         </a>
                     </li>
                     <li class="nav-item" role="button">
-                        <a class="nav-link" onclick="showEditCourseModal()">
-                            <i class="fa-solid fa-award"></i>Editar Curso
+                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#delete-course-modal">
+                            <i class="fa-solid fa-trash-can"></i>Eliminar curso
                         </a>
                     </li>
                     <li class="nav-item">
@@ -288,7 +288,7 @@ if (isset($_GET['courseid'])) {
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="addElementToCategoryLabel">Añadir elemento</h1>
+                    <h5 class="modal-title fs-5" id="addElementToCategoryLabel">Añadir elemento</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body row d-flex flex-row justify-content-around">
@@ -372,7 +372,7 @@ if (isset($_GET['courseid'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">Editar modal</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -383,6 +383,26 @@ if (isset($_GET['courseid'])) {
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary" onclick="editCourse()">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete course modal -->
+    <div class="modal fade" id="delete-course-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Eliminar curso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <span>¿Estás seguro de querer eliminar el curso?</span>
+                    <input type="hidden" id="delete-course-id-modal" name="courseID" value="<?php echo $_GET['courseid']?>">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" onclick="deleteCourse()">Eliminar curso</button>
                 </div>
             </div>
         </div>
