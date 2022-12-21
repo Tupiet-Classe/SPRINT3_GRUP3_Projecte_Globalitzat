@@ -85,7 +85,17 @@ class Categoria
         
         SELECT `id_resource_text`, `name_resource_text`, `description_resource_text`, `id_category`, `hidden`, 'text' as type 
         FROM `resources_text`
-        where id_category = ?");
+        where id_category = ?
+        
+        UNION
+
+        SELECT `id_resource_text`, `name_resource_text`, `description_resource_text`, `id_category`, `hidden`, 'text' as type 
+        FROM `resources_text`
+        where id_category = ?
+        
+        ");
+
+        // ARREGLAR EL DE DALT; ACTIVITATS NO VA
 
         $recursosQuery->bind_param('iii', $id_category, $id_category, $id_category);
         $recursosQuery->execute();
