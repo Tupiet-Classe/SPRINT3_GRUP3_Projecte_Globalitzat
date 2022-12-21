@@ -99,6 +99,7 @@ function showEditCategoryModal(idCategory) {
 function showEditCourseModal() {
     // Mostrem el nom actual del curs
     id('edit-course-modal-primary').value = id('course-title').innerText
+    id('edit-course-modal-secondary').value = id('course-description').innerText
     // Mostrem el diàleg
     editCourseModal.show()
 }
@@ -159,11 +160,13 @@ async function editCategory() {
 async function editCourse() {
     let idCourse = +id('edit-course-id-modal').value
     let newName = id('edit-course-modal-primary').value
+    let newDescription = id('edit-course-modal-secondary').value
     let response = await fetch('../PHP/editCourse.php', {
         method: 'POST',
         body: JSON.stringify({
             idCourse,
-            newName
+            newName,
+            newDescription
         }),
         headers: {
             'Content-Type': 'application/json'
@@ -174,6 +177,7 @@ async function editCourse() {
         let result = await response.json()
         if (result.ok) {
             id('course-title').innerText = newName
+            id('course-description').innerText = newDescription
             editCourseModal.hide()
         }
     }
@@ -198,8 +202,6 @@ async function deleteCourse() {
         }
     }
 }
-
-
 
 const successToast = new bootstrap.Toast(id('successToast'))
 const errorToast = new bootstrap.Toast(id('errorToast'))

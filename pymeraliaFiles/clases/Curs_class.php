@@ -36,98 +36,13 @@ class Curs
         $this->descripcionCurso = $descripcionCurso;
     }
 
-
-    /**
-     * getIdCurso
-     *
-     * @return void
-     */
-    public function getIdCurso()
-    {
-        return $this->idCurso;
-    }
-    
-    /**
-     * getNombreCurso
-     *
-     * @return void
-     */
-    public function getNombreCurso()
-    {
-        return $this->nombreCurso;
-    }
-
-    /**
-     * getDescripcionCurso
-     *
-     * @return void
-     */
-    public function getDescripcionCurso()
-    {
-        return $this->descripcionCurso;
-    }
-
-    /**
-     * getImagenCurso
-     *
-     * @return void
-     */
-    public function getImagenCurso()
-    {
-        return $this->imagenCurso;
-    }
-
-    /**
-     * setIdCurso
-     *
-     * @param  mixed $idCurso
-     * @return void
-     */
-    public function setIdCurso($idCurso)
-    {
-        $this->idCurso = $idCurso;
-    }
-
-    /**
-     * setNombreCurso
-     *
-     * @param  mixed $nombreCurso
-     * @return void
-     */
-    public function setNombreCurso($nombreCurso)
-    {
-        $this->nombreCurso = $nombreCurso;
-    }
-
-    /**
-     * setDescripcionCurso
-     *
-     * @param  mixed $descripcionCurso
-     * @return void
-     */
-    public function setDescripcionCurso($descripcionCurso)
-    {
-        $this->descripcionCurso = $descripcionCurso;
-    }
-
-    /**
-     * setImagenCurso
-     *
-     * @param  mixed $imagenCurso
-     * @return void
-     */
-    public function setImagenCurso($imagenCurso)
-    {
-        $this->imagenCurso = $imagenCurso;
-    }
-
-    public function update($new_name) {
+    public function update($new_name, $new_description) {
         include '../PHP/connexio.php';
 
         $id_course = $this->idCurso;
 
-        $updateQuery = $conn->prepare('UPDATE courses SET name_course = ? WHERE id_course = ?');
-        $updateQuery->bind_param('si', $new_name, $id_course);
+        $updateQuery = $conn->prepare('UPDATE courses SET name_course = ?, description_course = ? WHERE id_course = ?');
+        $updateQuery->bind_param('ssi', $new_name, $new_description, $id_course);
         return $updateQuery->execute();
     }
 
@@ -152,27 +67,7 @@ class Curs
         
             return db_query($sql);
     }
-    /**
-     * editCurso - Futuro método para editar cursos
-     *
-     * @return void
-     */
-    public function editCurso()
-    {
-    }
-    /**
-     * deleteCurso - Futuro método para eliminar cursos
-     *
-     * @return void
-     */
-    public function deleteCurso()
-    {
-    }
-    /**
-     * showCursos - Futuro método para mostrar cursos
-     *
-     * @return void
-     */
+    
     public function showCursos()
     {
         $sql = "SELECT name_course from courses where id_course = $this->idCurso"; 
@@ -303,7 +198,7 @@ class Curs
     }
 
     public function get_title() {
-        include_once '../PHP/connexio.php';
+        include '../PHP/connexio.php';
         $courseId = $this->idCurso;
         $selectQuery = $conn->prepare('SELECT name_course FROM courses WHERE id_course = ?');
         $selectQuery->bind_param('i', $courseId);
@@ -313,6 +208,19 @@ class Curs
         $result = $selectQuery->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC)[0]['name_course'];
+    }
+
+    public function get_description() {
+        include '../PHP/connexio.php';
+        $courseId = $this->idCurso;
+        $selectQuery = $conn->prepare('SELECT description_course FROM courses WHERE id_course = ?');
+        $selectQuery->bind_param('i', $courseId);
+        $selectQuery->execute();
+
+        // Guardem el resultat
+        $result = $selectQuery->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC)[0]['description_course'];
     }
 
     public function get_users_from_course() {

@@ -99,11 +99,13 @@ if (isset($_GET['courseid'])) {
                 
                 $curs = new Curs($courseId);
                 $title = $curs->get_title();
+                $description = $curs->get_description();
                 $courseId = $_GET['courseid'];
                 
                 echo "
                     <div class='text' id='course-element'>     
                         <h1 id='course-title'>$title</h1>
+                        <p id='course-description'>$description</p>
                     </div>
                 ";
 
@@ -376,8 +378,10 @@ if (isset($_GET['courseid'])) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <label for="edit-course-modal-primary" id="edit-course-modal-primary-label" class="form-label">Nom</label>
+                    <label for="edit-course-modal-primary" id="edit-course-modal-primary-label" class="form-label">Nombre</label>
                     <input class="form-control" type="text" name="primary" id="edit-course-modal-primary"/>
+                    <label for="edit-course-modal-secondary" id="edit-course-modal-secondary-label" class="form-label">Descripción</label>
+                    <input class="form-control" type="text" name="secondary" id="edit-course-modal-secondary"/>
                     <input type="hidden" id="edit-course-id-modal" name="courseID" value="<?php echo $_GET['courseid']?>">
                 </div>
                 <div class="modal-footer">
