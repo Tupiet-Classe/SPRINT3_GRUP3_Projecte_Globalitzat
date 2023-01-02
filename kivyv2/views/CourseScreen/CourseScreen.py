@@ -1,8 +1,17 @@
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.list import OneLineListItem
+from kivymd.uix.card import MDCard
+from kivy.properties import StringProperty
 from kivy.lang import Builder
 import json
+
+class MD3Card(MDCard):
+    text = StringProperty()
+    def __init__(self, *args, **kwargs):
+        self.text = kwargs.pop("text", "")
+        super().__init__(*args, **kwargs)
+
 
 class CourseScreen(MDScreen):
     # Carreguem el fitxer
@@ -20,4 +29,4 @@ class CourseScreen(MDScreen):
             
         # Per cada curs, imprimeix el seu nom
         for course in json_data:
-            self.ids.test.add_widget(OneLineListItem(text=course['curso']))
+            self.ids.test.add_widget(MD3Card(text=course['curso']))
