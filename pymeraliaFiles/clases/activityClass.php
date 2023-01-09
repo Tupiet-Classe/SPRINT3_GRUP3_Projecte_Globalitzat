@@ -100,16 +100,6 @@ class Activities{
         return $status;
     }
 
-
-    
-    /**
-     * getNotaActividad
-     * 
-     * @return void
-     */
-    public function getNotaActividad(){
-        return $this->notaActividad;
-    }
     
 
 //Mètode show_deliveries
