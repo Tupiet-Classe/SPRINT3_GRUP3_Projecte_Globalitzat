@@ -21,7 +21,7 @@ if (isset($_GET['courseid'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/main.css">
-    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
     <link href="../css/brands.min.css" rel="stylesheet">
     <link href="../css/solid.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
@@ -102,6 +102,20 @@ if (isset($_GET['courseid'])) {
                 echo '</div>'
             ?>
 
+        <div class="feedback my-5 p-3">
+            <h3>Queremos saber su opinión</h3>
+            <input type="radio" name="feedback" id="feedback-1" onclick="updateStar()" class="fa fa-star" value="1">
+            <input type="radio" name="feedback" id="feedback-2" onclick="updateStar()" class="fa fa-star" value="2">
+            <input type="radio" name="feedback" id="feedback-3" onclick="updateStar()" class="fa fa-star" value="3">
+            <input type="radio" name="feedback" id="feedback-4" onclick="updateStar()" class="fa fa-star" value="4">
+            <input type="radio" name="feedback" id="feedback-5" onclick="updateStar()" class="fa fa-star" value="5">
+            
+            <div class="form-floating mt-3">
+                <textarea class="form-control" placeholder="Creo que este curso..." id="feedback-textarea"></textarea>
+                <label for="feedback-textarea">Opinión</label>
+            </div>
+        </div>
+
         
 
     </main>
@@ -113,17 +127,8 @@ if (isset($_GET['courseid'])) {
   include_once '../includes/footer.php'; 
 ?>
 
-<script>
+<script src="../scripts/detallesCursoCliente.js"></script>
 
-
-    function playVid() {
-        video.play();
-    }
-
-    function pauseVid() {
-        video.pause();
-    } 
-</script>
 </body>
 
 </html>

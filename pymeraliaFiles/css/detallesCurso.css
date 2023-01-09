@@ -75,3 +75,19 @@ div.accordion {
     --bs-accordion-active-color: black;
     --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem #69220033;
 }
+
+.feedback {
+    background-color: var(--bg-accordion-active);
+    border-radius: 10px;
+}
+
+input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;    
+
+    font-size: large;
+}
+
+.checked {
+    color: gold;
+}
