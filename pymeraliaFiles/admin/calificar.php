@@ -20,24 +20,31 @@
     <?php
     include "../clases/activityClass.php";
     $prova = new Activities();
-    $prova->show_deliveries(1);
+    $prova->show_deliveries($_GET['id']);
+
+    $idCurs;
+
+    if (isset($_GET['idCurs'])) {
+        $idCurs = $_GET['idCurs'];
+} 
     ?> 
 
           <!-- Inici Modal -->
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
-            <form method="POST" id="verify" action="verify.php">
+            <form method="POST" id="apply" action="../../PHP/apply.php">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Insereix el nom de l'usuari per verificar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div class="modal-body">  <!-- Finestra que mostra usuaris que sol·liciten la verificació -->
+              <div class="modal-body">  
 
-                <!-- Mostrar usuaris no verificats-->                   
+                <!-- Mostrar nota-->                   
                 <div class="input-group">
-                    <label for="message-text" class="col-form-label">Nom usuari: </label>
-                    <input id = "user" class="form-control" name="user">
+                    <label for="message-text" class="col-form-label">Nota: </label>
+                    <input id = "nota" class="form-control" name="nota" >
+                    <input type="hidden" id="IdTramesa" name="id-tramesa">
                 </div>
                   
               </div>
@@ -55,8 +62,17 @@
 
 <!-- Final Modal -->
 
-<br>
 
+
+
+<br>
+<script>
+  function actualitzarId(idTramesa) {
+    document.getElementById('IdTramesa').value = idTramesa;
+    
+  }
+
+</script>
 
 
 </body>

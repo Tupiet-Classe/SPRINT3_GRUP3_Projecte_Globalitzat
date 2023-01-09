@@ -224,45 +224,10 @@ public function show_deliveries($activity_id){
                 ";
             }
             
-            //Inici Modal
-            echo"
-            <div class='modal fade' id='exampleModal' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-              <div class='modal-dialog'>
-                <div class='modal-content'>
-                
-                  <form method='POST' id='apply' action='../clases/apply.php'>
-                    <div class='modal-header'>
-                      <h5 class='modal-title' id='exampleModalLabel'>Insereix la qualifiació</h5>
-                      <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                    </div>
-                    <div class='modal-body'> ";
-                    
-                    // Finestra que mostra usuaris que sol·liciten la verificació -->
-                    echo"
-                      <div class='input-group'>
-                          <label for='message-text' class='col-form-label'> Qualificació: </label>
-                          <input id = 'nota' class='form-control' name='nota'>
-                      </div>
-                        
-                    </div>
-                    <div class='modal-footer'>
-                      <button  type='submit' class='btn btn-primary' id ='si'>Guardar canvis</button>
-                      <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Tanca</button>
-                    </div>
-                    </form>    
-                </div>
-              </div>
-            </div>
-          </div>
-          <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js' integrity='sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc' crossorigin='anonymous'></script>
-          <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-            
-      <br>
-            ";
+
 
             echo "
-            <>
-            <td><button onclick='apply_grade()' type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa-solid fa-pen-to-square'></i></td>
+            <td><button onclick='actualitzarId($row[id])' type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa-solid fa-pen-to-square'></i></td>
             </button>
             <input type='hidden' id='idDelivery' value=''></td>
             </input>
