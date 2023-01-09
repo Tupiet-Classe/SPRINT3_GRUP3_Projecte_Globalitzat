@@ -1,3 +1,6 @@
 node_modules
 pymeraliaDB
 package-lock.json
+**/__pycache__/
+**/images/imagenes-curso
+**/content/resources

@@ -1,0 +1,44 @@
+<CourseScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        MDLabel:
+            text: "Cursos"
+            font_style: 'H3'
+            size_hint: 1, None
+            padding_x: "24dp"
+            padding_y: "24dp"
+        
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            size_hint: 1, 1
+            MDList:
+                MDGridLayout:
+                    id: test
+                    size_hint: 1, None
+                    height: self.minimum_height
+                    cols: 2
+                    spacing: "8dp"
+                    padding: "8dp"
+
+
+
+<MD3Card>
+    size_hint: 1, None
+    height: "200dp"
+    radius: 12
+    ripple_behavior: True
+
+    MDRelativeLayout:
+
+        MDBoxLayout:
+            padding: "12dp"
+
+        MDLabel:
+            text: root.text
+            bold: True
+            adaptive_height: True
+            font_style: "H6"
+            halign: "left"
+            padding_x: "24dp"
+            pos_hint: {"center_y": .65}

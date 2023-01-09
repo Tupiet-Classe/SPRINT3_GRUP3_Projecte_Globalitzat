@@ -30,104 +30,30 @@ class Curs
     {
         $this->idCurso = $idCurso;
     }
-    public function __construct2($nombreCurso, $descripcionCurso)
+    public function __construct3($nombreCurso, $descripcionCurso, $imagenCurso)
     {
         $this->nombreCurso = $nombreCurso;
         $this->descripcionCurso = $descripcionCurso;
-    }
-
-
-    /**
-     * getIdCurso
-     *
-     * @return void
-     */
-    public function getIdCurso()
-    {
-        return $this->idCurso;
-    }
-    
-    /**
-     * getNombreCurso
-     *
-     * @return void
-     */
-    public function getNombreCurso()
-    {
-        return $this->nombreCurso;
-    }
-
-    /**
-     * getDescripcionCurso
-     *
-     * @return void
-     */
-    public function getDescripcionCurso()
-    {
-        return $this->descripcionCurso;
-    }
-
-    /**
-     * getImagenCurso
-     *
-     * @return void
-     */
-    public function getImagenCurso()
-    {
-        return $this->imagenCurso;
-    }
-
-    /**
-     * setIdCurso
-     *
-     * @param  mixed $idCurso
-     * @return void
-     */
-    public function setIdCurso($idCurso)
-    {
-        $this->idCurso = $idCurso;
-    }
-
-    /**
-     * setNombreCurso
-     *
-     * @param  mixed $nombreCurso
-     * @return void
-     */
-    public function setNombreCurso($nombreCurso)
-    {
-        $this->nombreCurso = $nombreCurso;
-    }
-
-    /**
-     * setDescripcionCurso
-     *
-     * @param  mixed $descripcionCurso
-     * @return void
-     */
-    public function setDescripcionCurso($descripcionCurso)
-    {
-        $this->descripcionCurso = $descripcionCurso;
-    }
-
-    /**
-     * setImagenCurso
-     *
-     * @param  mixed $imagenCurso
-     * @return void
-     */
-    public function setImagenCurso($imagenCurso)
-    {
         $this->imagenCurso = $imagenCurso;
     }
 
-    public function update($new_name) {
+    public function update($new_name, $new_description) {
         include '../PHP/connexio.php';
 
         $id_course = $this->idCurso;
 
-        $updateQuery = $conn->prepare('UPDATE courses SET name_course = ? WHERE id_course = ?');
-        $updateQuery->bind_param('si', $new_name, $id_course);
+        $updateQuery = $conn->prepare('UPDATE courses SET name_course = ?, description_course = ? WHERE id_course = ?');
+        $updateQuery->bind_param('ssi', $new_name, $new_description, $id_course);
+        return $updateQuery->execute();
+    }
+
+    public function delete() {
+        include '../PHP/connexio.php';
+
+        $id_course = $this->idCurso;
+
+        $updateQuery = $conn->prepare('DELETE FROM courses WHERE id_course = ?');
+        $updateQuery->bind_param('i', $id_course);
         return $updateQuery->execute();
     }
 
@@ -136,33 +62,43 @@ class Curs
      *
      * @return void
      */
-    public function addCurso()
-    {
-        $sql="INSERT INTO courses(name_course, description_course) VALUES('$this->nombreCurso','$this->descripcionCurso')";
+    public function addCurso() {
+        $name_course = $this->nombreCurso;
+        $description_course = $this->descripcionCurso;
+        $image = $this->imagenCurso;
+
+        // Recuperem el nom, tipus i mida de la imatge
+        $image_name = $image['name'];
+        $image_type = $image['type'];
+        $image_size = $image['size'];
+
+        // Ruta on guardarem les imatges
+        $route = '../images/imagenes-curso/'; 
+
+        // Generem un hash aleatori
+        $hash = bin2hex(random_bytes(32));
+
+        // Guardem el nom de l'arxiu amb el hash
+        $final_file_name = $hash.'_'.$image_name;
+
+        // Definim el tipus d'arxiu que acceptem (només imatges JPG/JPEG i PNG)
+        $allowed_types = array("image/jpg" , "image/jpeg" , "image/png");
+
+        // Si el directori on anem a guardar les dades no existeix, crea'l
+        if(!is_dir($route)){
+            mkdir($route, 0755);
+        }
+
+        // Si l'arxiu té el format correcte i pesa menys d'1MB, penjarem l'arxiu al servidor
+        if (in_array($image_type, $allowed_types) && $image_size <= 1000000) {
+            move_uploaded_file($image['tmp_name'], $route . $final_file_name);
+        }
+
+        $sql="INSERT INTO courses(name_course, description_course, image) VALUES('$name_course','$description_course', '$final_file_name')";
         
-            return db_query($sql);
+        return db_query($sql);
     }
-    /**
-     * editCurso - Futuro método para editar cursos
-     *
-     * @return void
-     */
-    public function editCurso()
-    {
-    }
-    /**
-     * deleteCurso - Futuro método para eliminar cursos
-     *
-     * @return void
-     */
-    public function deleteCurso()
-    {
-    }
-    /**
-     * showCursos - Futuro método para mostrar cursos
-     *
-     * @return void
-     */
+    
     public function showCursos()
     {
         $sql = "SELECT name_course from courses where id_course = $this->idCurso"; 
@@ -212,9 +148,10 @@ class Curs
      */
     public function assignCurso($user)
     {
-        include_once '../PHP/connexio.php';
+        include '../PHP/connexio.php';
 
         $userId;
+        $courseId = $this->idCurso;
 
         if (preg_match("/^\w+@\w+\.\w+$/", $user)) {
             $emailQuery = $conn->prepare("SELECT id_user FROM users WHERE email = ?");
@@ -229,7 +166,7 @@ class Curs
         }
 
         $insert = $conn->prepare("INSERT INTO user_course (id_user, id_course) VALUES (?, ?)");
-        $insert->bind_param('ii', $userId, $this->idCurso);
+        $insert->bind_param('ii', $userId, $courseId);
 
         $success;
         
@@ -293,7 +230,7 @@ class Curs
     }
 
     public function get_title() {
-        include_once '../PHP/connexio.php';
+        include '../PHP/connexio.php';
         $courseId = $this->idCurso;
         $selectQuery = $conn->prepare('SELECT name_course FROM courses WHERE id_course = ?');
         $selectQuery->bind_param('i', $courseId);
@@ -303,6 +240,19 @@ class Curs
         $result = $selectQuery->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC)[0]['name_course'];
+    }
+
+    public function get_description() {
+        include '../PHP/connexio.php';
+        $courseId = $this->idCurso;
+        $selectQuery = $conn->prepare('SELECT description_course FROM courses WHERE id_course = ?');
+        $selectQuery->bind_param('i', $courseId);
+        $selectQuery->execute();
+
+        // Guardem el resultat
+        $result = $selectQuery->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC)[0]['description_course'];
     }
 
     public function get_users_from_course() {

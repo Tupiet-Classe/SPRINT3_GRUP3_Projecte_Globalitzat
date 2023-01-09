@@ -147,6 +147,8 @@
       include_once '../includes/footer.php';
     ?>
 
+    <script src="../scripts/usuariosCurso.js"></script>
+
 </body>
 
 </html>

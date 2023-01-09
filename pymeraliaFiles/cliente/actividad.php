@@ -35,8 +35,7 @@
         include_once '../clases/activityClass.php';
         
         #importem les dades de la activitat a visualitzar a partir la id d'aquesta
-        #$activity_id = $_GET['activity_id'];
-        $activity_id = 11; #hardcoded
+        $activity_id = $_GET['activity_id'];
         $activity = new Activities($activity_id);
 
         #usem els getters per a obtenir l'informació i la guardem en variables per a

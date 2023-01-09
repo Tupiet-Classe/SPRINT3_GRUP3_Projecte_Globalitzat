@@ -33,9 +33,9 @@ class Deliver{
         }
     }
 
-    function __construct1($delivery_id)
+    function __construct1($deliver_id)
     {
-        $this->delivery_id = $delivery_id;
+        $this->deliver_id = $deliver_id;
     }
 
     function __construct2($delivery_id, $grade)

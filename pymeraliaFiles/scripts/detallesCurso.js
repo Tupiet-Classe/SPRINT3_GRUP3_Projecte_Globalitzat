@@ -99,6 +99,7 @@ function showEditCategoryModal(idCategory) {
 function showEditCourseModal() {
     // Mostrem el nom actual del curs
     id('edit-course-modal-primary').value = id('course-title').innerText
+    id('edit-course-modal-secondary').value = id('course-description').innerText
     // Mostrem el diàleg
     editCourseModal.show()
 }
@@ -109,6 +110,7 @@ function addDocument(type) {
     id("add-recurs-type").value = type
     id("add-id-category").value = actualCategoryId
     id("category_id_create_activity").value = actualCategoryId
+    id('descripcionURL').type = (type == 'file') ? 'file' : 'text'
 
     addElementToCategory.hide()
     type == 'activity' ? addActivityModal.show() : modalDocument.show()
@@ -159,11 +161,13 @@ async function editCategory() {
 async function editCourse() {
     let idCourse = +id('edit-course-id-modal').value
     let newName = id('edit-course-modal-primary').value
+    let newDescription = id('edit-course-modal-secondary').value
     let response = await fetch('../PHP/editCourse.php', {
         method: 'POST',
         body: JSON.stringify({
             idCourse,
-            newName
+            newName,
+            newDescription
         }),
         headers: {
             'Content-Type': 'application/json'
@@ -174,12 +178,31 @@ async function editCourse() {
         let result = await response.json()
         if (result.ok) {
             id('course-title').innerText = newName
+            id('course-description').innerText = newDescription
             editCourseModal.hide()
         }
     }
 }
 
+async function deleteCourse() {
+    let idCourse = +id('delete-course-id-modal').value
+    let response = await fetch('../PHP/deleteCourse.php', {
+        method: 'POST',
+        body: JSON.stringify({
+            idCourse,
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
 
+    if (response.ok) {
+        let result = await response.json()
+        if (result.ok) {
+            location.href = 'cursos.php'
+        }
+    }
+}
 
 const successToast = new bootstrap.Toast(id('successToast'))
 const errorToast = new bootstrap.Toast(id('errorToast'))
