@@ -33,9 +33,9 @@ class Deliver{
         }
     }
 
-    function __construct1($delivery_id)
+    function __construct1($deliver_id)
     {
-        $this->delivery_id = $delivery_id;
+        $this->deliver_id = $deliver_id;
     }
 
     function __construct3($file, $activity_id, $user_id)
@@ -99,7 +99,7 @@ class Deliver{
     
     public function apply_grade($grade){
         include "../PHP/connexio.php";
-        $sql= "UPDATE `deliveries` SET `grade` = '$grade' WHERE `deliveries`.`id_delivery`= $this->delivery_id";
+        $sql= "UPDATE `deliveries` SET `grade` = '$grade' WHERE `deliveries`.`id_delivery`= $this->deliver_id";
         return $conn->query($sql);        
 
     }
