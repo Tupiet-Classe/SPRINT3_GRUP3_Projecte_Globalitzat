@@ -4,6 +4,7 @@ class Recursos{
     private $idRecurso;
     private $titulo;
     private $descripcion;
+    private $image;
     private $type;
     private $idCategoria;
 
@@ -42,8 +43,13 @@ class Recursos{
     }
     public function __construct4($titulo,$descripcion, $type, $idCategoria){
         $this->titulo = $titulo;
-        $this->descripcion = $descripcion;
         $this->type = $type;
+
+        if ($type == 'file') {
+            $this->image = $descripcion;
+        } else {
+            $this->descripcion = $descripcion;
+        }
         $this->idCategoria = $idCategoria;
     }
 
@@ -102,14 +108,48 @@ class Recursos{
         
             return db_query($sql);
         }elseif($this->type == 'file'){
-            $sql="INSERT INTO resources_files(name_resource_files, location, id_category) VALUES('$this->titulo','$this->descripcion', $this->idCategoria)";
+            $file_name = $this->uploadFile();
+            $sql="INSERT INTO resources_files(name_resource_file, location, id_category) VALUES('$this->titulo','$file_name', $this->idCategoria)";
         
             return db_query($sql);
         }elseif($this->type == 'text'){
             $sql="INSERT INTO resources_text(name_resource_text, description_resource_text, id_category) VALUES('$this->titulo','$this->descripcion', $this->idCategoria)";
         
             return db_query($sql);
+        } 
+    }
+
+    public function uploadFile() {
+        $image = $this->image;
+
+        // Recuperem el nom, tipus i mida de la imatge
+        $image_name = $image['name'];
+        $image_type = $image['type'];
+        $image_size = $image['size'];
+
+        // Ruta on guardarem les imatges
+        $route = '../content/resources/'; 
+
+        // Generem un hash aleatori
+        $hash = bin2hex(random_bytes(32));
+
+        // Guardem el nom de l'arxiu amb el hash
+        $final_file_name = $hash.'_'.$image_name;
+
+        // Definim el tipus d'arxiu que acceptem (només imatges JPG/JPEG i PNG)
+        $allowed_types = array("image/jpg" , "image/jpeg" , "image/png", "application/pdf", "application/zip");
+
+        // Si el directori on anem a guardar les dades no existeix, crea'l
+        if(!is_dir($route)){
+            mkdir($route, 0755);
         }
+
+        // Si l'arxiu té el format correcte i pesa menys d'1MB, penjarem l'arxiu al servidor
+        if (in_array($image_type, $allowed_types) && $image_size <= 1000000) {
+            move_uploaded_file($image['tmp_name'], $route . $final_file_name);
+        }
+
+        return $final_file_name;
     }
     
 

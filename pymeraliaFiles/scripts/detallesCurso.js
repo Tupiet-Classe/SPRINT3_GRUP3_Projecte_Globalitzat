@@ -110,6 +110,7 @@ function addDocument(type) {
     id("add-recurs-type").value = type
     id("add-id-category").value = actualCategoryId
     id("category_id_create_activity").value = actualCategoryId
+    id('descripcionURL').type = (type == 'file') ? 'file' : 'text'
 
     addElementToCategory.hide()
     type == 'activity' ? addActivityModal.show() : modalDocument.show()
