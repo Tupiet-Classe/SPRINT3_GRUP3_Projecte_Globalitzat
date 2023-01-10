@@ -4,9 +4,9 @@ class Deliver{
     private $deliver_id;
     private $activity_id;
     private $user_id;
-    private $locate;
 
     private $deliver_file;
+    private $locate;
     
     private $grade;
 
@@ -36,24 +36,13 @@ class Deliver{
     function __construct1($deliver_id)
     {
         $this->deliver_id = $deliver_id;
+    }
 
-        include '../PHP/connexio.php';
-        
-        //definim la query com una variable
-        $sql = "SELECT * FROM `deliveries` WHERE id_delivery = $this->deliver_id;";
+    function __construct2($delivery_id, $grade)
+    {
+        $this->delivery_id = $delivery_id;
+        $this->grade = $grade;
 
-        //enviem la query a la bbdd i guardem el contingut a la variable $result
-        $result = $conn->query($sql);
-        //fem un objecte que conte l'informacio que extreiem de de result amb "fetch_object()"
-        $obj = $result->fetch_object();
-
-        $this->activity_id = $obj->id_activity;
-        $this->user_id = $obj->id_user; 
-        $this->locate = $obj->locate;        
-        $this->grade = $obj->grade;
-    
-        //tancar connexioDB
-        $conn->close();
     }
 
 
@@ -118,7 +107,11 @@ class Deliver{
     
     public function apply_grade(){
         include "../PHP/connexio.php";
-        $sql= "UPDATE `deliveries` SET `grade` = '$this->grade' WHERE `deliveries`.`id_delivery`= $this->deliver_id";
+<<<<<<< HEAD:pymeraliaFiles/clases/DeliverClass.php
+        $sql= "UPDATE `deliveries` SET `grade` = '$this->grade' WHERE `deliveries`.`id_delivery`= $this->delivery_id";
+=======
+        $sql= "UPDATE `deliveries` SET `grade` = '$grade' WHERE `deliveries`.`id_delivery`= $this->deliver_id";
+>>>>>>> f3c8e63430c2356f0a4fcd73e4241e6736862023:pymeraliaFiles/clases/Deliver_Class.php
         return $conn->query($sql);        
 
     }
