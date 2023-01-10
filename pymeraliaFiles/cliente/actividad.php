@@ -35,6 +35,7 @@
         include_once '../clases/activityClass.php';
         
         #importem les dades de la activitat a visualitzar a partir la id d'aquesta
+        $user_id = 1; #hardcoded
         $activity_id = $_GET['activity_id'];
         $activity = new Activities($activity_id);
 
@@ -53,8 +54,14 @@
         echo    "<text>$activity_description</text>";
         echo "</div>";
 
-        
-        echo "<button type='submit' class='btn btn-primary btn-sm'>Añadir entrega</button>";
+        echo "<form method='POST' id='upload_file' action='../../PHP/addDeliver.php'>";
+        echo "<input type='file' class='form-control' name='nombreArchivo' id='subirArxivo'>";
+        echo "<input value='Subir' type='submit' class='form-control mt-5' id='montar'>";
+
+        echo "<input type='hidden' id='ActividadID' name='idActividad' value='$activity_id'";
+        echo "<input type='hidden' id='UsuarioID' name='idUsuario' value='$activity_id'";
+
+        echo "</form>";
 
         echo "</main>";
     ?>
