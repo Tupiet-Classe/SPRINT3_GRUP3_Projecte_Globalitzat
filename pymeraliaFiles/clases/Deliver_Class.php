@@ -107,11 +107,7 @@ class Deliver{
     
     public function apply_grade(){
         include "../PHP/connexio.php";
-<<<<<<< HEAD:pymeraliaFiles/clases/DeliverClass.php
         $sql= "UPDATE `deliveries` SET `grade` = '$this->grade' WHERE `deliveries`.`id_delivery`= $this->delivery_id";
-=======
-        $sql= "UPDATE `deliveries` SET `grade` = '$grade' WHERE `deliveries`.`id_delivery`= $this->deliver_id";
->>>>>>> f3c8e63430c2356f0a4fcd73e4241e6736862023:pymeraliaFiles/clases/Deliver_Class.php
         return $conn->query($sql);        
 
     }
