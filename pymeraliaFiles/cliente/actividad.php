@@ -54,12 +54,12 @@
         echo    "<text>$activity_description</text>";
         echo "</div>";
 
-        echo "<form method='POST' id='upload_file' action='../../PHP/addDeliver.php'>";
-        echo "<input type='file' class='form-control' name='nombreArchivo' id='subirArxivo'>";
+        echo "<form method='POST' id='upload_file' action='../../PHP/addDeliver.php' enctype='multipart/form-data'>";
+        echo "<input type='file' class='form-control' name='nombreArchivo' id='subirArchivo'>";
         echo "<input value='Subir' type='submit' class='form-control mt-5' id='montar'>";
 
-        echo "<input type='hidden' id='ActividadID' name='idActividad' value='$activity_id'";
-        echo "<input type='hidden' id='UsuarioID' name='idUsuario' value='$activity_id'";
+        echo "<input type='hidden' id='ActividadID' name='idActividad' value='$activity_id'>";
+        echo "<input type='hidden' id='UsuarioID' name='idUsuario' value='$user_id'>";
 
         echo "</form>";
 

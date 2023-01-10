@@ -65,7 +65,7 @@ class Deliver{
         $file_size = $file['size'];
         $hash = md5(uniqid(mt_rand()));
         $final_file_name = $hash.'_'.$filename;
-        $route = "../content/activities";
+        $route = "../content/activities/";
 
         // Comprovamos que el archivo sea formato pdf o zip
         $allowed_types = array("application/pdf" , "application/zip");
@@ -81,7 +81,7 @@ class Deliver{
         if(in_array($file_type, $allowed_types)){
 
             //Miramos si el archivo ocupa 1MB o menos (expresado en bytes)
-            if($file_size <= 10000000){
+            if($file_size <= 1000000){
                 //Movemos el archivo al directorio que toca i guardamos la ruta de este en la variable "locate"
                 move_uploaded_file($file['tmp_name'], $route . $final_file_name);
                 $this->locate = $route . $final_file_name;
@@ -96,12 +96,12 @@ class Deliver{
             }
 
             else{
-                echo "El archivo solo puede ser un ZIP o un PDF";
+                echo "El archivo no puede ocupar mas de 1MB";
             }
         
         }
         else{
-            echo "El archivo no puede ocupar mas de 1MB";
+            echo "El archivo solo puede ser un ZIP o un PDF";
         }
     }
     
