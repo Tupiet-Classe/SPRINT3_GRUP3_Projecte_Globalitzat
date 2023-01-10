@@ -1,0 +1,21 @@
+[
+    {
+        "type": "text",
+        "name": "bienvenida",
+        "description": "hola",
+        "id_course": 1
+    },
+    {
+        "type": "url",
+        "name": "link",
+        "description": "google.com",
+        "id_course": 1
+    },
+    {
+        "type": "activity",
+        "name": "Proyecto Final",
+        "description": "Cómo evitar el phishing",
+        "id_course": 2
+
+    }
+]
