@@ -32,7 +32,7 @@ class Activities{
     function __construct1($activity_id)
     {
         $this->activity_id = $activity_id;
-        include '../PHP/connexio.php';
+        include_once '../PHP/connexio.php';
         
         //definim la query com una variable
         $sql = "SELECT * FROM `activities` WHERE id_activity = $this->activity_id;";
@@ -63,7 +63,7 @@ class Activities{
 
     public function addActivityToDatabase(){
          //connexió a la bdd
-         include '../PHP/connexio.php';
+         include_once '../PHP/connexio.php';
         
          //definim la query com una variable
          $sql = "INSERT INTO `activities` (name_activity, description_activity, id_category) VALUES ('$this->activity_name','$this->activity_description', $this->category_id)";
@@ -87,19 +87,6 @@ class Activities{
         return $this->activity_description;
     }
 
-    public function delete() {
-        include '../PHP/connexio.php';
-
-        $today = date("Y-m-d");
-        $id_activity = $this->activity_id;
-
-        $deleteQuery = $conn->prepare('UPDATE activities SET hidden = ? WHERE id_activity = ?');
-        $deleteQuery->bind_param('si', $today, $id_activity);
-        $status = $deleteQuery->execute();
-        $conn->close(); 
-        return $status;
-    }
-
 
     
     /**
@@ -110,7 +97,90 @@ class Activities{
     public function getNotaActividad(){
         return $this->notaActividad;
     }
+    /**
+     * setIdActividad
+     * 
+     * @param mixed $idActividad
+     * @return void
+     */
+
+    /*
+
+    public function setIdActividad(){
+        $this->idActividad = $idActividad;
+}
+
+    **/
     
+    /**
+     * setNotaActividad
+     * 
+     * @param mixed $notaActividad
+     * @return void
+     */
+
+    /*
+    
+    public function setNotaActividad(){
+        $this->notaActividad = $notaActividad;
+    }
+
+    **/
+
+    /**
+     * anadirActividad - Método que se utilizara para añadir una nueva actividad
+     * 
+     * @return void
+     */
+ 
+    /**
+     * editarActividad - Método que se utilizara para editar una actividad
+     * 
+     * @return void
+     */
+    public function editarActividiad(){
+
+    }
+    /**
+     * eliminarActividad - Método que se utilizara para eliminar una actividad
+     * 
+     * @return void
+     */
+    public function eliminarActividad(){
+
+    }
+    /**
+     * mostrarActividad - Método que se utilizara para mostrar una actividad
+     * 
+     * @return void
+     */
+    public function mostrarActividad(){
+
+    }
+    /**
+     * asignarActividad - Método que se utilizara para asignar una actividad
+     * 
+     * @return void
+     */
+    public function asignarActividad(){
+
+    }
+    /**
+     * desasignarActividad - Método que se utilizara para desasignar una actividad
+     * 
+     * @return void
+     */
+    public function desasignarActividad(){
+
+    }
+    /**
+     * calcularNotaFinal - Método que se utilizara para calcular la nota final
+     * 
+     * @return void
+     */
+    public function  calcularNotaFinal(){
+        
+    }
 
 //Mètode show_deliveries
 public function show_deliveries($activity_id){

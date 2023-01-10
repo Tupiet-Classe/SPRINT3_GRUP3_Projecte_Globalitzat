@@ -38,6 +38,8 @@
         $activity_id = $_GET['activity_id'];
         $activity = new Activities($activity_id);
 
+
+
         #usem els getters per a obtenir l'informació i la guardem en variables per a
         #utilitzar-les mes avall
         $activity_name = $activity->getActivityName();
@@ -56,13 +58,19 @@
         echo "</main>";
     ?>
 
+    <?php
+        $activity_id = $_GET['activity_id'];
+        echo "<a href= 'calificar.php?id=$activity_id'> Avaluar alumnos </a>";
+        exit;
+        
+
+?>
 </body>
 </main>
 
 <?php 
   include_once '../includes/footer.php'; 
 ?>
-
 
 </body>
 
