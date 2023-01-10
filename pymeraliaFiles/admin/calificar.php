@@ -19,17 +19,19 @@
     <br>
     <?php
     include "../clases/activityClass.php";
+
     $prova = new Activities();
-    $prova->show_deliveries($_GET['id']);
-
-    $idCurs;
-
-    if (isset($_GET['idCurs'])) {
-        $idCurs = $_GET['idCurs'];
-} 
+    if (isset($_GET['id'])) {
+      $idCurs = $_GET['id'];
+}
+      $prova->show_deliveries($_GET['id']);
+  
     ?> 
 
-          <!-- Inici Modal -->
+
+          <!-- Inici Modal -->    
+          <span id="courseId" style="display: none;"><?php echo $_GET['courseid']?></span>
+
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -45,6 +47,7 @@
                     <label for="message-text" class="col-form-label">Nota: </label>
                     <input id = "nota" class="form-control" name="nota" >
                     <input type="hidden" id="IdTramesa" name="id-tramesa">
+                    <input type="hidden" id="IdCurs" name="IdCurs" value= "<?php echo $_GET['id'] ?>">
                 </div>
                   
               </div>
