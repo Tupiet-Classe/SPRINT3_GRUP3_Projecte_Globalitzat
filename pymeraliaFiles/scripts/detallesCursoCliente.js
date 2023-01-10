@@ -16,3 +16,23 @@ function updateStar() {
     })
 
 }
+
+async function sendFeedback(courseID) {
+    let rating = document.querySelector('input[name="feedback"]:checked').value,
+        feedback = id('feedback-textarea').value
+
+    let response = await fetch('../PHP/sendFeedback.php', {
+        method: 'POST',
+        body: JSON.stringify({
+            rating,
+            feedback,
+            courseID
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    let res = await response.json()
+    console.log(res)
+}

@@ -114,6 +114,8 @@ if (isset($_GET['courseid'])) {
                 <textarea class="form-control" placeholder="Creo que este curso..." id="feedback-textarea"></textarea>
                 <label for="feedback-textarea">Opinión</label>
             </div>
+
+            <button class="orange-button mt-3" onclick="sendFeedback(<?=$courseId?>)">Enviar opinión</button>
         </div>
 
         

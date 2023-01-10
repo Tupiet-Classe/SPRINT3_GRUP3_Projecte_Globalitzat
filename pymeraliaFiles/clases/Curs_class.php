@@ -207,6 +207,16 @@ class Curs
         $conn->close();
     }
 
+    public function send_feedback($rating, $feedback) {
+        include_once '../PHP/connexio.php';
+
+        $course_id = $this->idCurso;
+
+        $insertQuery = $conn->prepare('INSERT INTO ratings (rating, Feedback, id_course) VALUES (?, ?, ?)');
+        $insertQuery->bind_param('isi', $rating, $feedback, $course_id);
+        return $insertQuery->execute();
+    }
+
     public static function get_all_courses() {
         include_once '../PHP/connexio.php';
         // Recuperem tots els cursos
