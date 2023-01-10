@@ -1,0 +1,29 @@
+{
+       "id": 1,
+       "name": "Como proteger contraseñas",
+       "description": "Este curso te enseñará los conceptos básicos de la seguridad.",
+       "resources": {
+       "text": "No se permiten entregas tras superar el límite del tiempo de entrega",
+       "activity": "Actividad general",
+       "activities": [
+       {
+       "id": 2,
+       "type": "entrega",
+       "name": "Tarea 1",
+       "description": "Enviar el informe de investigación",
+       "due_date": "2022-01-01",
+       "submission_format": "pdf"
+       },
+       
+       {
+       "id": 3,
+       "type": "examen",
+       "name": "Examen Final",
+       "description": "Examen final de la materia",
+       "due_date": "2022-05-12",
+       "submission_format": "pdf"
+        }
+
+        ]
+}
+}

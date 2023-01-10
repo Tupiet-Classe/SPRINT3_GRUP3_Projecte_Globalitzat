@@ -4,9 +4,9 @@ class Deliver{
     private $deliver_id;
     private $activity_id;
     private $user_id;
-    private $locate;
 
     private $deliver_file;
+    private $locate;
     
     private $grade;
 
@@ -36,24 +36,13 @@ class Deliver{
     function __construct1($deliver_id)
     {
         $this->deliver_id = $deliver_id;
+    }
 
-        include '../PHP/connexio.php';
-        
-        //definim la query com una variable
-        $sql = "SELECT * FROM `deliveries` WHERE id_delivery = $this->deliver_id;";
+    function __construct2($delivery_id, $grade)
+    {
+        $this->deliver_id = $delivery_id;
+        $this->grade = $grade;
 
-        //enviem la query a la bbdd i guardem el contingut a la variable $result
-        $result = $conn->query($sql);
-        //fem un objecte que conte l'informacio que extreiem de de result amb "fetch_object()"
-        $obj = $result->fetch_object();
-
-        $this->activity_id = $obj->id_activity;
-        $this->user_id = $obj->id_user; 
-        $this->locate = $obj->locate;        
-        $this->grade = $obj->grade;
-    
-        //tancar connexioDB
-        $conn->close();
     }
 
 

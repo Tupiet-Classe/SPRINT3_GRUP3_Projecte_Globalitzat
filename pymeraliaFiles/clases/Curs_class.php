@@ -207,6 +207,43 @@ class Curs
         $conn->close();
     }
 
+    public function send_feedback($rating, $feedback) {
+        include_once '../PHP/connexio.php';
+
+        $course_id = $this->idCurso;
+
+        $insertQuery = $conn->prepare('INSERT INTO ratings (rating, Feedback, id_course) VALUES (?, ?, ?)');
+        $insertQuery->bind_param('isi', $rating, $feedback, $course_id);
+        return $insertQuery->execute();
+    }
+
+    public function is_course_finished($id_user) {
+        include '../PHP/connexio.php';
+
+        $course_id = $this->idCurso;
+        $numberOfActivitiesQuery = $conn->prepare(
+            'SELECT COUNT(*) 
+            FROM activities
+            INNER JOIN categories ON activities.id_category = categories.id_category
+            WHERE categories.id_course = ?'
+        );
+        $numberOfActivitiesQuery->bind_param('i', $course_id);
+        $activities_count = $numberOfActivitiesQuery->execute();
+        $numberOfActivitiesQuery->close();
+        
+        $numberOfActivitiesDoneQuery = $conn->prepare(
+            'SELECT COUNT(*) 
+            FROM deliveries
+            INNER JOIN activities ON deliveries.id_activity = activities.id_activity
+            INNER JOIN categories ON activities.id_category = categories.id_category
+            WHERE deliveries.grade IS NOT NULL AND categories.id_course = ?'
+        );
+        $numberOfActivitiesDoneQuery->bind_param('i',$course_id);
+        $activities_done_count = $numberOfActivitiesDoneQuery->execute();
+
+        return $activities_count == $activities_done_count;
+    }
+
     public static function get_all_courses() {
         include_once '../PHP/connexio.php';
         // Recuperem tots els cursos
