@@ -87,39 +87,19 @@ class Activities{
         return $this->activity_description;
     }
 
+    public function delete() {
+        include '../PHP/connexio.php';
 
-    
-    /**
-     * getNotaActividad
-     * 
-     * @return void
-     */
-    public function getNotaActividad(){
-        return $this->notaActividad;
+        $today = date("Y-m-d");
+        $id_activity = $this->activity_id;
+
+        $deleteQuery = $conn->prepare('UPDATE activities SET hidden = ? WHERE id_activity = ?');
+        $deleteQuery->bind_param('si', $today, $id_activity);
+        $status = $deleteQuery->execute();
+        $conn->close(); 
+        return $status;
     }
-    /**
-     * setIdActividad
-     * 
-     * @param mixed $idActividad
-     * @return void
-     */
 
-    /*
-
-    public function setIdActividad(){
-        $this->idActividad = $idActividad;
-}
-
-    **/
-    
-    /**
-     * setNotaActividad
-     * 
-     * @param mixed $notaActividad
-     * @return void
-     */
-
-    /*
     
     public function setNotaActividad(){
         $this->notaActividad = $notaActividad;
