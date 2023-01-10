@@ -222,24 +222,30 @@ class Curs
 
         $course_id = $this->idCurso;
         $numberOfActivitiesQuery = $conn->prepare(
-            'SELECT COUNT(*) 
+            'SELECT COUNT(*) as count_value
             FROM activities
             INNER JOIN categories ON activities.id_category = categories.id_category
             WHERE categories.id_course = ?'
         );
         $numberOfActivitiesQuery->bind_param('i', $course_id);
-        $activities_count = $numberOfActivitiesQuery->execute();
+        $numberOfActivitiesQuery->execute();
+        $numberOfActivitiesQueryResult = $numberOfActivitiesQuery->get_result();
+        $activities_count = $numberOfActivitiesQueryResult->fetch_all(MYSQLI_ASSOC)[0]['count_value'];
+
         $numberOfActivitiesQuery->close();
         
         $numberOfActivitiesDoneQuery = $conn->prepare(
-            'SELECT COUNT(*) 
-            FROM deliveries
+            'SELECT COUNT(*) as count_value
+            FROM deliveries 
             INNER JOIN activities ON deliveries.id_activity = activities.id_activity
             INNER JOIN categories ON activities.id_category = categories.id_category
             WHERE deliveries.grade IS NOT NULL AND categories.id_course = ?'
         );
         $numberOfActivitiesDoneQuery->bind_param('i',$course_id);
-        $activities_done_count = $numberOfActivitiesDoneQuery->execute();
+        $numberOfActivitiesDoneQuery->execute();
+        $numberOfActivitiesDoneQueryResult = $numberOfActivitiesDoneQuery->get_result();
+
+        $activities_done_count = $numberOfActivitiesDoneQueryResult->fetch_all(MYSQLI_ASSOC)[0]['count_value'];
 
         return $activities_count == $activities_done_count;
     }
