@@ -49,9 +49,12 @@
         echo        "<h1 id='course-title'>$activity_name</h1>";
         echo    "</div>";
 
-        echo "<div class='text mt-5'>";     
+        echo "<div class='text mt-5 mb-5'>";     
         echo    "<text>$activity_description</text>";
         echo "</div>";
+
+        
+        echo "<button type='submit' class='btn btn-primary btn-sm'>Añadir entrega</button>";
 
         echo "</main>";
     ?>
