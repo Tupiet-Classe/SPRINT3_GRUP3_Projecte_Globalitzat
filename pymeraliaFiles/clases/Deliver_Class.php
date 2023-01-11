@@ -84,7 +84,7 @@ class Deliver{
             if($file_size <= 1000000){
                 //Movemos el archivo al directorio que toca i guardamos la ruta de este en la variable "locate"
                 move_uploaded_file($file['tmp_name'], $route . $final_file_name);
-                $this->locate = $route . $final_file_name;
+                $this->locate = $final_file_name;
 
                 
                 //Finalmente si todo va bien le introducimos la informacion a la base de datos
