@@ -132,8 +132,8 @@ public function show_deliveries($activity_id){
             
             echo"
             <tr>
-            <td id ='user'> $row[usuari] </td>
-            <td> <a href='../../content/activities/$row[localitzacio]' download > $row[localitzacio] </a> </td>
+            <td id ='user-$row[usuari]'> $row[usuari] </td>
+            <td> <a href='../content/activities/$row[localitzacio]' download > $row[localitzacio] </a> </td>
             ";
             if(empty($row['nota'])) {
                 echo"<td> Sense nota </td>";
