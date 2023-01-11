@@ -104,7 +104,7 @@ if (isset($_GET['courseid'])) {
             ?>
 
         <?php
-            if (!$is_finished) {
+            if ($is_finished) {
                 include '../includes/feedback.php';
             }
         ?>
