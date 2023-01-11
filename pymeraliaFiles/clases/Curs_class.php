@@ -165,18 +165,28 @@ class Curs
             $userId = $this->get_id_from_query($usernameQuery);
         }
 
-        $insert = $conn->prepare("INSERT INTO user_course (id_user, id_course) VALUES (?, ?)");
-        $insert->bind_param('ii', $userId, $courseId);
+        $existsQuery = $conn->prepare('SELECT id_user_course FROM user_course WHERE id_user = ? AND id_course = ?');
+        $existsQuery->bind_param('ii', $userId, $courseId);
+        $existsQuery->execute();
 
-        $success;
-        
-        try {
-            $success = $insert->execute();
-        } catch (\Throwable $th) {
+        if ($existsQuery->get_result()->num_rows == 0) {
+            echo 'no existe';
+            $insert = $conn->prepare("INSERT INTO user_course (id_user, id_course) VALUES (?, ?)");
+            $insert->bind_param('ii', $userId, $courseId);
+    
+            $success;
+            
+            try {
+                $success = $insert->execute();
+            } catch (\Throwable $th) {
+                $success = false;
+            }
+    
+            $conn->close();
+
+        } else {
             $success = false;
         }
-
-        $conn->close();
 
         return $success;
 
@@ -202,9 +212,13 @@ class Curs
             $unassignQuery = $conn->prepare('DELETE FROM user_course WHERE id_user_course = ?');
             $unassignQuery->bind_param('i', $idToDelete);
             $unassignQuery->execute();
+            $conn->close();
+            return true;
         } 
 
         $conn->close();
+
+        return false;
     }
 
     public function send_feedback($rating, $feedback) {
@@ -308,8 +322,92 @@ class Curs
 
         $result = $selectQuery->get_result();
         if ($result->num_rows > 0) {
-            return $result->fetch_all(MYSQLI_ASSOC);
-        } else return false;
+            return array('count' => $this->get_number_of_users(), 'data' => $result->fetch_all(MYSQLI_ASSOC));
+        } else return array('count' => 0, 'data' => false);
+
+        $conn->close();
+    } 
+
+    public function get_users_from_course_with_limit($offset, $number_of_values) {
+        include '../PHP/connexio.php';
+
+        $selectQuery = $conn->prepare('SELECT users.id_user, users.nick_name, users.name_user, users.last_name FROM users INNER JOIN user_course ON users.id_user = user_course.id_user WHERE user_course.id_course = ? ORDER BY users.id_user LIMIT ?, ?');
+        $selectQuery->bind_param('iii', $this->idCurso, $offset, $number_of_values);
+
+        $selectQuery->execute();
+
+        $result = $selectQuery->get_result();
+        if ($result->num_rows > 0) {
+            return array('count' => $this->get_number_of_users(), 'data' => $result->fetch_all(MYSQLI_ASSOC));
+        } else return array('count' => 0, 'data' => []);
+
+        $conn->close();
+    } 
+
+    public function search_users_from_course_with_limit($search, $offset, $number_of_values) {
+        include '../PHP/connexio.php';
+
+        $search = '%' . $search . '%';
+
+        $selectQuery = $conn->prepare(
+            'SELECT users.id_user, users.nick_name, users.name_user, users.last_name 
+            FROM users 
+            INNER JOIN user_course ON users.id_user = user_course.id_user 
+            WHERE user_course.id_course = ? 
+            AND users.nick_name LIKE ? OR users.name_user LIKE ? OR users.last_name LIKE ?
+            ORDER BY users.id_user 
+            LIMIT ?, ?'
+        );
+        $selectQuery->bind_param('isssii', $this->idCurso, $search, $search, $search, $offset, $number_of_values);
+
+        $selectQuery->execute();
+
+        $result = $selectQuery->get_result();
+        if ($result->num_rows > 0) {
+            return array('count' => $this->get_number_of_users_with_search($search) ,'data' => $result->fetch_all(MYSQLI_ASSOC));
+        } else return array('count' => 0, 'data' => []);
+
+        $conn->close();
+    } 
+
+    public function get_number_of_users() {
+        include '../PHP/connexio.php';
+
+        $selectQuery = $conn->prepare('SELECT COUNT(*) as count_total FROM users INNER JOIN user_course ON users.id_user = user_course.id_user WHERE user_course.id_course = ?');
+
+        $selectQuery->bind_param('i', $this->idCurso);
+        $selectQuery->execute();
+
+        $result = $selectQuery->get_result();
+        $conn->close();
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_all(MYSQLI_ASSOC)[0]['count_total'];
+        } else return 0;
+
+    }
+
+    public function get_number_of_users_with_search($search) {
+        include '../PHP/connexio.php';
+
+        $search = '%' . $search . '%';
+
+        $selectQuery = $conn->prepare(
+            'SELECT COUNT(*) as count_total
+            FROM users 
+            INNER JOIN user_course ON users.id_user = user_course.id_user 
+            WHERE user_course.id_course = ? 
+            AND users.nick_name LIKE ? OR users.name_user LIKE ? OR users.last_name LIKE ?
+            ORDER BY users.id_user '
+        );
+        $selectQuery->bind_param('isss', $this->idCurso, $search, $search, $search);
+
+        $selectQuery->execute();
+
+        $result = $selectQuery->get_result();
+        if ($result->num_rows > 0) {
+            return $result->fetch_all(MYSQLI_ASSOC)[0]['count_total'];
+        } else return 0;
 
         $conn->close();
     } 
@@ -329,8 +427,10 @@ class Curs
         $sql = "SELECT avg(grade) as avg 
         FROM deliveries 
         INNER JOIN activities
+        INNER JOIN categories
         ON deliveries.id_activity = activities.id_activity
-        WHERE id_user LIKE $id_user AND activities.id_course = $this->idCurso"; 
+        AND activities.id_category = categories.id_category
+        WHERE id_user LIKE $id_user AND categories.id_course = $this->idCurso"; 
         $result = $conn->query($sql);
         
         $first_row = $result->fetch_assoc();

@@ -40,13 +40,23 @@ if (isset($_GET['courseid'])) {
             $curs = new Curs($courseId);
             $title = $curs->get_title();
             $is_finished = $curs->is_course_finished(1);
+            $average = round($curs->get_average(1), 2);
             $courseId = $_GET['courseid'];
-            
+
             echo "
-                    <div class='text' id='course-element'>     
+                    <div class='text mt-3' id='course-element'>     
                         <h1 id='course-title'>$title</h1>
                     </div>
                 ";
+
+                if ($is_finished) {
+                    echo "
+                        <div class='course-finished mb-4'>
+                            <p>¡Has terminado el curso!</p>
+                            <p>Nota media: $average</p>
+                        </div>
+                    ";
+                }
 
             $resultatCategories = $curs->get_all_categories();
 

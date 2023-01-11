@@ -91,3 +91,13 @@ input[type="radio"] {
 .checked {
     color: gold;
 }
+
+.course-finished {
+    padding: 1em;
+    background-color: var(--bg-accordion-active);
+    border-radius: 10px;
+}
+
+.course-finished p {
+    margin-bottom: 0;
+}

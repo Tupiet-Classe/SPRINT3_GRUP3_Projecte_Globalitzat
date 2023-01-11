@@ -32,17 +32,17 @@ async function asignCourse() {
     })
 
     if (response.ok) {
-        let data = await response.json()
-        if (data.ok) {
+        let res = await response.json()
+        if (res.ok) {
             modal.hide()
-            location.reload()
-            sessionStorage.setItem('showToast', 'success')
-            sessionStorage.setItem('messageToast', 'El usuario se ha añadido correctamente')
+            $('#table').bootstrapTable('refresh')
+            id('successToastMessage').innerText = 'El usuario se ha añadido correctamente'
+            successToast.show()
         } else {
-            id('errorToastMessage').innerText = 'El usuario no existe'
+            $('#table').bootstrapTable('refresh')
+            id('errorToastMessage').innerText = 'El usuario no existe o ya está asignado al curso'
             errorToast.show()
         }
-
     }
 }
 
@@ -60,28 +60,16 @@ async function expulsar(userID) {
     })
 
     if (response.ok) {
-        location.reload()
-        sessionStorage.setItem('showToast', 'success')
-        sessionStorage.setItem('messageToast', 'El usuario se ha expulsado correctamente')
-    } else {
-        location.reload()
-        sessionStorage.setItem('showToast', 'error')
-        sessionStorage.setItem('messageToast', 'El usuario no se ha expulsado correctamente')
-    }
-}
-
-window.onload = () => {
-    let showToast = sessionStorage.getItem('showToast')
-    if (showToast == 'success') {
-        sessionStorage.removeItem('showToast')
-        id('successToastMessage').innerText = sessionStorage.getItem('messageToast') ?? 'Correcto'
-        sessionStorage.removeItem('messageToast')
-        successToast.show()
-    } else if (showToast == 'error') {
-        sionStorage.removeItem('showToast')
-        id('errorToastMessage').innerText = sessionStorage.getItem('messageToast') ?? 'Erro'
-        sessionStorage.removeItem('messageToast')
-        errorToast.show()
+        let res = await response.json()
+        if (res.ok) {
+            $('#table').bootstrapTable('refresh')
+            id('successToastMessage').innerText = 'Se ha dado de baja al usuario'
+            successToast.show()
+        } else {
+            $('#table').bootstrapTable('refresh')
+            id('errorToastMessage').innerText = 'Se ha producido un error'
+            errorToast.show()
+        }
     }
 }
 
