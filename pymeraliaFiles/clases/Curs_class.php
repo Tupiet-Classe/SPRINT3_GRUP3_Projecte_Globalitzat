@@ -170,7 +170,6 @@ class Curs
         $existsQuery->execute();
 
         if ($existsQuery->get_result()->num_rows == 0) {
-            echo 'no existe';
             $insert = $conn->prepare("INSERT INTO user_course (id_user, id_course) VALUES (?, ?)");
             $insert->bind_param('ii', $userId, $courseId);
     

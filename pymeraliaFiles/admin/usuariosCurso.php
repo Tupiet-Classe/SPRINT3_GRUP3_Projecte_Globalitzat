@@ -42,48 +42,25 @@
             </button>
         </div>
 
-        <?php
-            include_once '../clases/Curs_class.php';
-            $curs = new Curs($_GET['courseid']);
+        
+        <table class="table table-striped align-middle" 
+            id="table"
+            data-toggle="table"
+            data-search="true"
+            data-side-pagination="server"
+            data-pagination="true"
+            data-locale="es-ES"
+            data-url="http://localhost:83/PHP/showUsersCourse.php">
+            <thead>
+                <tr>
+                    <th scope="col" data-field="nick_name">Nombre de usuario</th>
+                    <th scope="col" data-field="name_user">Nombre</th>
+                    <th scope="col" data-field="last_name">Apellido</th>
+                    <th scope="col" data-formatter="operateFormatter">Opciones</th>
+                </tr>
+            </thead>
 
-            $users = $curs->get_users_from_course();
-
-            if ($users != false) {
-                echo  
-                    '<table class="table table-striped align-middle" 
-                        data-toggle="table"
-                        data-search="true"
-                        >',
-                        '<thead>',
-                            '<tr>',
-                                '<th scope="col">Nombre de usuario</th>',
-                                '<th scope="col">Nombre</th>',
-                                '<th scope="col">Apellido</th>',
-                                '<th scope="col">Opciones</th>',
-                            '</tr>',
-                        '</thead>',
-                        '<tbody>';
-
-                foreach ($users as $key => $user) {
-                    echo
-                        '<tr>',
-                            '<td class="username">' . $user['nick_name'] . '</td>',
-                            '<td class="nombre">' . $user['name_user'] . '</td>',
-                            '<td class="apellido-1">' . $user['last_name'] . '</td>',
-                            '<td class="apellido-2">',
-                                '<button class="orange-button" onclick="expulsar(' . $user['id_user']  . ')">Expulsar</button>',
-                            '</td>',
-                        '</tr>';
-                }
-
-                echo 
-                    '</tbody>',
-                '</table>';
-            } else {
-                echo '<h6>Aún no hay usuarios en este curso</h6>';
-            }
-
-        ?>
+        </table>
 
         <div class="tu-whitespace"></div>
 
@@ -153,8 +130,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table-locale-all.min.js"></script>
 
     <script src="../scripts/usuariosCurso.js"></script>
+
+    <script>
+
+function operateFormatter(value, row, index) {
+    return [
+      '<button class="orange-button" onclick="expulsar(' + row.id_user + ')">Dar de baja</button>'
+    ].join('')
+  }
+
+    </script>
 
 </body>
 
