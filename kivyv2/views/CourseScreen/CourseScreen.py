@@ -20,7 +20,10 @@ class CourseScreen(MDScreen):
     # Quan entris a aquesta pantalla, ensenya la llista de cursos
     def on_enter(self):
         self.list_courses()
-                        
+    def novapage(self,row):
+        print(self.root)
+        self.root.manager.current = "CurseDetails"
+        
     # Mètode que llista tots els cursos que hi ha
     def list_courses(self):
         # Recuperem el JSON amb els cursos i el carreguem
@@ -29,4 +32,4 @@ class CourseScreen(MDScreen):
             
         # Per cada curs, imprimeix el seu nom
         for course in json_data:
-            self.ids.test.add_widget(MD3Card(text=course['curso']))
+            self.ids.test.add_widget(MD3Card(text=course['curso'], on_press=self.novapage))
