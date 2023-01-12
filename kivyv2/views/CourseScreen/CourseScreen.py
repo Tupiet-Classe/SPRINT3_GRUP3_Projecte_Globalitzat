@@ -21,9 +21,8 @@ class CourseScreen(MDScreen):
     def on_enter(self):
         self.list_courses()
     def novapage(self,row):
-        print(self.root)
-        self.root.manager.current = "CurseDetails"
-        
+        app = MDApp.get_running_app()
+        app.switch_screen('CurseDetails')        
     # Mètode que llista tots els cursos que hi ha
     def list_courses(self):
         # Recuperem el JSON amb els cursos i el carreguem
