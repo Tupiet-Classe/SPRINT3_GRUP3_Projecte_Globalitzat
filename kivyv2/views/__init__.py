@@ -1,1 +1,2 @@
 from views.CourseScreen.CourseScreen import CourseScreen
+from views.DetailCourseScreen.DetailCourseScreen import DetailCourseScreen

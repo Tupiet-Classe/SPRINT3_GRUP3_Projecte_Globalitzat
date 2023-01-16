@@ -62,7 +62,7 @@
         $activity_id = $_GET['activity_id'];
 
         echo "
-        <p align='right'> 
+        <p align='left'> 
         <a class='btn btn-primary' href= 'calificar.php?id=$activity_id'> Avaluar alumnos </a>
         </p>";
         exit;

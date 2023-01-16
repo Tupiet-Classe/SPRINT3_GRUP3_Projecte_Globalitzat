@@ -1,13 +1,13 @@
 [
     {
         "type": "text",
-        "name": "bienvenida",
-        "description": "hola",
+        "name": "Bienvenido/a",
+        "description": "¡Bienvenidos al curso de ciberseguridad! En este curso, aprenderán sobre los desafíos y amenazas en el mundo digital, y cómo protegerse a sí mismos y a sus organizaciones contra ellos.",
         "id_course": 1
     },
     {
         "type": "url",
-        "name": "link",
+        "name": "Link",
         "description": "google.com",
         "id_course": 1
     },
