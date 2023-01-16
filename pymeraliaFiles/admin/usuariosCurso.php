@@ -42,6 +42,7 @@
             </button>
         </div>
 
+        <!-- //! AIXÒ NO DIFERÈNCIA ENTRE CURSOS, FALTA ARREGLAR -->
         
         <table class="table table-striped align-middle" 
             id="table"
@@ -50,7 +51,7 @@
             data-side-pagination="server"
             data-pagination="true"
             data-locale="es-ES"
-            data-url="http://localhost:83/PHP/showUsersCourse.php">
+            data-url="http://localhost:83/PHP/showUsersCourse.php?courseid=<?=$_GET['courseid']?>">
             <thead>
                 <tr>
                     <th scope="col" data-field="nick_name">Nombre de usuario</th>
