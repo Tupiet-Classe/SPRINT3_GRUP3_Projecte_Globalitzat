@@ -80,14 +80,19 @@ if (isset($_GET['courseid'])) {
                         </a>
                     </li>
                     <li class="nav-item" role="button">
-                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#delete-course-modal">
-                            <i class="fa-solid fa-trash-can"></i>Eliminar curso
+                        <a class="nav-link" href="feedback.php?courseid=<?=$courseId?>">
+                            <i class="fa-solid fa-star"></i>Ver valoriaciones
                         </a>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" data-bs-toggle="modal" data-bs-target="#addCategory">
                             <i class="fa-solid fa-file-circle-plus"></i>Añadir categoría
                         </button>
+                    </li>
+                    <li class="nav-item" role="button">
+                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#delete-course-modal">
+                            <i class="fa-solid fa-trash-can"></i>Eliminar curso
+                        </a>
                     </li>
                 </ul>
             </div>
