@@ -1,4 +1,5 @@
 #:import CourseScreen views.CourseScreen
+#:import DetailCourseScreen views.DetailCourseScreen
 
 <MainScreen@MDScreen>:
     BoxLayout:
@@ -8,9 +9,15 @@
             on_press:
                 root.manager.current = 'course'
 
-MDScreenManager:
-    MainScreen:
-        name: 'main'
-    CourseScreen:
-        name: 'course'
+MDNavigationLayout:
+    MDScreenManager:
+        MainScreen:
+            name: 'main'
+        CourseScreen:
+            name: 'course'
+        DetailCourseScreen:
+            name: 'CurseDetails'
+
+
+    
     

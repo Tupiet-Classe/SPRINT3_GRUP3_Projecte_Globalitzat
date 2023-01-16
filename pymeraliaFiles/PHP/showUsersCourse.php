@@ -1,11 +1,13 @@
 <?php
 include '../clases/Curs_class.php';
 
+$id_course = $_GET['courseid'];
+
 $offset = $_GET['offset'];
 $limit = $_GET['limit'];
 $search; $count; $users;
 
-$curs = new Curs(1);
+$curs = new Curs($id_course);
 
 if (isset($_GET['search']) && !empty($_GET['search'])) {
     $search = $_GET['search'];  

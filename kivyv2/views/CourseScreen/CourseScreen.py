@@ -1,6 +1,6 @@
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
-from kivymd.uix.list import OneLineListItem
+from kivymd.uix.list import OneLineListItem, ThreeLineListItem
 from kivymd.uix.card import MDCard
 from kivy.properties import StringProperty
 from kivy.lang import Builder
@@ -20,7 +20,12 @@ class CourseScreen(MDScreen):
     # Quan entris a aquesta pantalla, ensenya la llista de cursos
     def on_enter(self):
         self.list_courses()
-                        
+
+    def accedir(self, *args):
+        print("Accedir als detalls")
+        app = MDApp.get_running_app()
+        app.sm.get_screen('CurseDetails').open("ID_PASSED") 
+        
     # Mètode que llista tots els cursos que hi ha
     def list_courses(self):
         # Recuperem el JSON amb els cursos i el carreguem
@@ -29,4 +34,4 @@ class CourseScreen(MDScreen):
             
         # Per cada curs, imprimeix el seu nom
         for course in json_data:
-            self.ids.test.add_widget(MD3Card(text=course['curso']))
+            self.ids.test.add_widget(MD3Card(text=course['curso'], on_press=self.accedir))
