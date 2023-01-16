@@ -353,7 +353,7 @@ class Curs
             FROM users 
             INNER JOIN user_course ON users.id_user = user_course.id_user 
             WHERE user_course.id_course = ? 
-            AND users.nick_name LIKE ? OR users.name_user LIKE ? OR users.last_name LIKE ?
+            AND (users.nick_name LIKE ? OR users.name_user LIKE ? OR users.last_name LIKE ?)
             ORDER BY users.id_user 
             LIMIT ?, ?'
         );
@@ -396,7 +396,7 @@ class Curs
             FROM users 
             INNER JOIN user_course ON users.id_user = user_course.id_user 
             WHERE user_course.id_course = ? 
-            AND users.nick_name LIKE ? OR users.name_user LIKE ? OR users.last_name LIKE ?
+            AND (users.nick_name LIKE ? OR users.name_user LIKE ? OR users.last_name LIKE ?)
             ORDER BY users.id_user '
         );
         $selectQuery->bind_param('isss', $this->idCurso, $search, $search, $search);
