@@ -63,7 +63,7 @@
         <p class='m-5' align='left'> 
         <a class='m-0 btn btn-primary' data-bs-toggle='modal' data-bs-target='#edit-activity-modal'> Editar actividad </a>
         
-        <a class='m-1 btn btn-primary' href= 'calificar.php?id=<?php $activity_id ?>'> Avaluar alumnos </a>
+        <a id='avaluar_id' class='m-1 btn btn-primary' href= 'calificar.php?id=<?=$activity_id?>'> Avaluar alumnos </a>
         </p>
        
 
