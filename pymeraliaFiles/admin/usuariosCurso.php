@@ -137,7 +137,11 @@
 
     <script>
 
-function operateFormatter(value, row, index) {
+function operateFormatter(value, row, index, field) {
+    console.log(value)
+    console.log(row)
+    console.log(index)
+    console.log(field)
     return [
       '<button class="orange-button" onclick="expulsar(' + row.id_user + ')">Dar de baja</button>'
     ].join('')
