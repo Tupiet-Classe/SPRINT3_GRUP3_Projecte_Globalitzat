@@ -137,7 +137,9 @@ if (isset($_GET['courseid'])) {
   include_once '../includes/footer.php'; 
 ?>
 
+<script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js"></script>
 <script src="../scripts/detallesCursoCliente.js"></script>
+<script>showConfetti()</script>
 
 </body>
 
