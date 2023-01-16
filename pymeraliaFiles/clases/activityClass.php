@@ -35,7 +35,7 @@ class Activities{
         include '../PHP/connexio.php';
         
         //definim la query com una variable
-        $sql = "SELECT * FROM `activities` WHERE id_activity = $this->activity_id;";
+        $sql = "SELECT * FROM `activities` WHERE id_activity = $this->activity_id";
 
         //enviem la query a la bbdd i guardem el contingut a la variable $result
         $result = $conn->query($sql);
@@ -75,6 +75,25 @@ class Activities{
          $conn->close();
     }
 
+
+
+    public function updateActivity(){
+
+        //connexió a la bdd
+        include '../PHP/connexio.php';
+       
+        //definim la query com una variable
+        $sql = "UPDATE `activities` SET name_activity = '$this->activity_name', description_activity = '$this->activity_description' where id_activity = '$this->activity_id'";
+
+        //enviem la query a la bbdd
+        $conn->query($sql);
+    
+        //tancar connexioDB
+        $conn->close();
+   }
+
+
+
     public function getActivityId(){
         return $this->activity_id;
     }
@@ -85,6 +104,36 @@ class Activities{
 
     public function getActivityDescription(){
         return $this->activity_description;
+    }
+
+
+
+    public function setActivityName($a){
+        $this->activity_name = $a;
+    }
+
+    public function setActivityDescription($a){
+        $this->activity_description = $a;
+    }
+
+
+
+
+
+
+
+    public function getActivityCourse(){
+         //connexió a la bdd
+         include '../PHP/connexio.php';
+       
+         //definim la query com una variable
+         $sql = "SELECT `activities` SET name_activity = '$this->activity_name', description_activity = '$this->activity_description' where id_activity = '$this->activity_id';";
+ 
+         //enviem la query a la bbdd
+         $conn->query($sql);
+     
+         //tancar connexioDB
+         $conn->close();
     }
 
     public function delete() {

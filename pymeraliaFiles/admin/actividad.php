@@ -21,6 +21,7 @@
   include_once '../includes/header.php'; 
 ?>
 
+
 <body class="d-flex flex-column min-vh-100">
     <?php
         /*Aquesta es la part de codi php que importa la id de l'activitat que hem de mostrar i
@@ -38,8 +39,7 @@
         $activity_id = $_GET['activity_id'];
         $activity = new Activities($activity_id);
 
-
-
+        
         #usem els getters per a obtenir l'informació i la guardem en variables per a
         #utilitzar-les mes avall
         $activity_name = $activity->getActivityName();
@@ -58,23 +58,51 @@
         echo "</main>";
     ?>
 
-    <?php
-        $activity_id = $_GET['activity_id'];
-
-        echo "
-        <p align='right'> 
-        <a class='btn btn-primary' href= 'calificar.php?id=$activity_id'> Avaluar alumnos </a>
-        </p>";
-        exit;
+    
         
+        <p class='m-5' align='left'> 
+        <a class='m-0 btn btn-primary' data-bs-toggle='modal' data-bs-target='#edit-activity-modal'> Editar actividad </a>
+        
+        <a class='m-1 btn btn-primary' href= 'calificar.php?id=<?php $activity_id ?>'> Avaluar alumnos </a>
+        </p>
+       
 
-?>
 </body>
 </main>
 
 <?php 
   include_once '../includes/footer.php'; 
 ?>
+
+
+
+<!-- Edit activity modal-->
+<div class="modal fade" id="edit-activity-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="../PHP/edit_Activity.php" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="edit-activity-modal-primary" id="edit-activity-modal-primary-label" class="form-label">Nombre Actividad</label>
+                        <input class="form-control" type="text" name="new-activity-name" id="edit-user-modal-primary" value="<?=$activity_name?>"/>
+                        <br>
+                        <label for="edit-activity-modal-secondary" id="edit-activity-modal-secondary-label" class="form-label">Contenido Actividad</label>
+                        <textarea class="form-control" type="text" name="new-activity-description" id="edit-activity-modal-secondary"><?=$activity_description?></textarea>
+
+                        <input type="hidden" name="id-activity" id="edit-id-activity" value="<?=$activity_id?>">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 
