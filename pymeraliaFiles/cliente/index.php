@@ -33,17 +33,6 @@
                     <div class="p-3 border" id="bg-cursos"><span id="borde-texto">Cursos</span></div>
                 </a>
             </div>
-            <div class="w-100"></div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <a href="emblemas.php">
-                    <div class="p-3 border" id="bg-emblemas"><span id="borde-texto">Emblemas</span></div>
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <a href="calificaciones.php">
-                    <div class="p-3 border" id="bg-calificaciones"><span id="borde-texto">Calificaciones</span></div>
-                </a>
-            </div>
         </div>
     </div>
  
