@@ -60,22 +60,16 @@
 
     <?php
         $activity_id = $_GET['activity_id'];
-
         echo "
-        <p align='left'> 
-        <a class='btn btn-primary' href= 'calificar.php?id=$activity_id'> Avaluar alumnos </a>
+        <style>
+        .marge {
+          margin-left: 20px; 
+        }
+        </style>
+        <p class='marge' align='left'> 
+          <a class='btn btn-primary' href= 'calificar.php?id=$activity_id'> Avaluar alumnos </a>
         </p>";
-        exit;
-        
-
 ?>
 </body>
-</main>
-
-<?php 
-  include_once '../includes/footer.php'; 
-?>
-
-</body>
-
+<?php include_once '../includes/footer.php'; ?>
 </html>

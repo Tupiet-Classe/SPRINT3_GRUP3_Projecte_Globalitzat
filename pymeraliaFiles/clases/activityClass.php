@@ -116,16 +116,18 @@ public function show_deliveries($activity_id){
     if ($result->num_rows > 0) {
         //Mostrar una taula id usuari, nom arxiu (location), nota
         echo "
-        <table class='table'>
-            <thead>
-                <tr>
-                <th scope='col'>Usuari</th>
-                <th scope='col'>Locate</th>
-                <th scope='col'>Nota</th>
-                <th scope='col'>Actualitzar nota</th>
-                </tr>
-            </thead>
-        <tbody>
+        <div class='table-responsive'>
+            <table class='table container'>
+                <thead>
+                    <tr>
+                    <th scope='col'>Usuari</th>
+                    <th scope='col'>Locate</th>
+                    <th scope='col'>Nota</th>
+                    <th scope='col'>Actualitzar nota</th>
+                    </tr>
+                </thead>
+            <tbody>
+        </div>
         ";
 
         while($row = $result->fetch_assoc()) {
