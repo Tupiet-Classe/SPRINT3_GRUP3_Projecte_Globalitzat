@@ -14,5 +14,5 @@ $activity->updateActivity();
 
 
 #tornar a la pagina de la que venim
-header("location: ../admin/actividad.php?activity_id=$activity_id   ");
+header("location: ../admin/actividad.php?activity_id=$activity_id");
 ?>

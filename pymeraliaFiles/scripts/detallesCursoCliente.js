@@ -36,3 +36,9 @@ async function sendFeedback(courseID) {
     let res = await response.json()
     console.log(res)
 }
+
+function showConfetti() {
+    party.confetti(id('course-finished'), {
+        count: party.variation.range(20, 40)
+    });
+}

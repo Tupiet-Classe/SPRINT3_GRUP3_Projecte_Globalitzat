@@ -40,7 +40,10 @@ if (isset($_GET['courseid'])) {
             $curs = new Curs($courseId);
             $title = $curs->get_title();
             $is_finished = $curs->is_course_finished(1);
-            $average = round($curs->get_average(1), 2);
+            $average;
+            if ($is_finished) {
+                $average = round($curs->get_average(1), 2);
+            }
             $courseId = $_GET['courseid'];
 
             echo "
@@ -51,11 +54,13 @@ if (isset($_GET['courseid'])) {
 
                 if ($is_finished) {
                     echo "
-                        <div class='course-finished mb-4'>
+                        <div id='course-finished' class='course-finished mb-4'>
                             <p>¡Has terminado el curso!</p>
                             <p>Nota media: $average</p>
                         </div>
                     ";
+
+                    echo '<script>showConfetti()</script>';
                 }
 
             $resultatCategories = $curs->get_all_categories();
@@ -132,7 +137,9 @@ if (isset($_GET['courseid'])) {
   include_once '../includes/footer.php'; 
 ?>
 
+<script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js"></script>
 <script src="../scripts/detallesCursoCliente.js"></script>
+<script>showConfetti()</script>
 
 </body>
 
