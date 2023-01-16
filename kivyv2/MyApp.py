@@ -16,4 +16,6 @@ class MyApp(MDApp):
         self.sm.current = screen_name
 
 if __name__ == "__main__":
-    MyApp().run()
+    app = MyApp() #Instància d'una classe
+    app.run()
+ 
