@@ -162,7 +162,7 @@ CREATE TABLE `activities` (
   `description_activity` varchar(500),
   `start_date` datetime,
   `final_date` datetime,
-  `id_course` int NOT NULL,
+  `id_category` int NOT NULL,
   `hidden` date
 );
 
@@ -288,8 +288,6 @@ ALTER TABLE `task_budget` ADD FOREIGN KEY (`id_task`) REFERENCES `tasks` (`id_ta
 
 ALTER TABLE `task_budget` ADD FOREIGN KEY (`id_budget`) REFERENCES `budgets` (`id_budget`);
 
-ALTER TABLE `activities` ADD FOREIGN KEY (`id_course`) REFERENCES `courses` (`id_course`);
-
 ALTER TABLE `inventories` ADD FOREIGN KEY (`id_device`) REFERENCES `devices` (`id_device`);
 
 ALTER TABLE `questionnaries` ADD FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
@@ -322,6 +320,7 @@ ALTER TABLE `resources_files` ADD FOREIGN KEY (`id_category`) REFERENCES `catego
 
 ALTER TABLE `resources_url` ADD FOREIGN KEY (`id_category`) REFERENCES `categories` (`id_category`);
 
+ALTER TABLE `activities` ADD FOREIGN KEY (`id_category`) REFERENCES `categories` (`id_category`);
 
 
 
