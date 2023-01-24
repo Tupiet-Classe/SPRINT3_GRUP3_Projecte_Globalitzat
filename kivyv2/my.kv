@@ -1,23 +1,23 @@
 #:import CourseScreen views.CourseScreen
 #:import DetailCourseScreen views.DetailCourseScreen
 
+#Aquesta es la pantalla principal, la primera en obrir-se
 <MainScreen@MDScreen>:
     BoxLayout:
         Button:
             text: "Go to courses"
             color: 'black'
+
+            #quan fessim clic anirem a la pantalla "course" basantmos en el nom de la classe (CourseScreen)
+            #definida al arxiu "CourseScreen"
             on_press:
                 root.manager.current = 'course'
 
-MDNavigationLayout:
-    MDScreenManager:
-        MainScreen:
-            name: 'main'
-        CourseScreen:
-            name: 'course'
-        DetailCourseScreen:
-            name: 'CurseDetails'
-
-
-    
+MDScreenManager:
+    MainScreen:
+        name: 'main'
+    CourseScreen:
+        name: 'course'
+    DetailCourseScreen:
+        name: 'CurseDetails'
     

@@ -14,20 +14,21 @@ class DetailCourseScreen(MDScreen):
     def on_enter(self, *args):
         self.list_description()
    
-    
+    #definim el format d'aquesta pagina
     Builder.load_file('kivyv2/views/DetailCourseScreen/detailscoursescreen.kv')
 
     def list_description(self):
         #Obrir l'arxiu JSON i aquests els carregarem en una variable
         with open("kivyv2/views/DetailCourseScreen/cursoDetallesCurso.json") as json_file:
-            ## Utilitzem les dades JSON i afegim elements a la vista de llista
+            #Utilitzem les dades JSON i afegim elements a la vista de llista
             list_items = json.load(json_file)
-                
+
+            #Amb aquest bucle importem les dades del json per id i creem les utilitzem per crear caixetes
             list_view = MDList()
             for item in list_items:
                 self.ids["detalls2"].add_widget(ThreeLineListItem(text=item["name"], secondary_text=item["type"], tertiary_text=item["description"]))
             return list_view
         
-    def open(self,row):
+    def openscreen(self,row):
         app = MDApp.get_running_app()
         app.switch_screen('CurseDetails')       
