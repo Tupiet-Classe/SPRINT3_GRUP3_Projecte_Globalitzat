@@ -411,6 +411,21 @@ class Curs
         $conn->close();
     } 
 
+    public function get_feedback() {
+        include '../PHP/connexio.php';
+        $feedbackQuery = $conn->prepare('SELECT rating, Feedback FROM ratings WHERE id_course = ?');
+        $feedbackQuery->bind_param('i', $this->idCurso);
+        $feedbackQuery->execute();
+
+        $result = $feedbackQuery->get_result();
+        $conn->close();
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+        return false;
+    }
+
     public function get_id_from_query($query) {
         $query->execute();
         
