@@ -24,23 +24,23 @@ CREATE TABLE `categories` (
 
 CREATE TABLE `resources_files` (
   `id_resource_file` int PRIMARY KEY AUTO_INCREMENT,
-  `name_resource_file` varchar(50) NOT NULL,
-  `location` varchar(50) NOT NULL,
+  `name_resource_file` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL,
   `id_category` int NOT NULL,
   `hidden` date
 );
 
 CREATE TABLE `resources_url` (
   `id_resource_url` int PRIMARY KEY AUTO_INCREMENT,
-  `name_resource_url` varchar(50) NOT NULL,
-  `location` varchar(100) NOT NULL,
+  `name_resource_url` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL,
   `id_category` int NOT NULL,
   `hidden` date
 );
 
 CREATE TABLE `resources_text` (
   `id_resource_text` int PRIMARY KEY AUTO_INCREMENT,
-  `name_resource_text` varchar(50) NOT NULL,
+  `name_resource_text` varchar(255) NOT NULL,
   `description_resource_text` varchar(1000) NOT NULL,
   `id_category` int NOT NULL,
   `hidden` date
@@ -48,8 +48,8 @@ CREATE TABLE `resources_text` (
 
 CREATE TABLE `deliveries` (
   `id_delivery` int PRIMARY KEY AUTO_INCREMENT,
-  `locate` varchar(50) NOT NULL,
-  `grade` decimal(2,2),
+  `locate` varchar(255) NOT NULL,
+  `grade` decimal(2,0),
   `id_activity` int,
   `id_user` int
 );
@@ -65,7 +65,7 @@ CREATE TABLE `grade` (
 CREATE TABLE `ratings` (
   `id_rating` int PRIMARY KEY AUTO_INCREMENT,
   `rating` varchar(50) NOT NULL,
-  `Feedback` varchar(50) NOT NULL,
+  `Feedback` varchar(255) NOT NULL,
   `id_course` int NOT NULL,
   `hidden` date
 );
@@ -321,3 +321,16 @@ ALTER TABLE `resources_text` ADD FOREIGN KEY (`id_category`) REFERENCES `categor
 ALTER TABLE `resources_files` ADD FOREIGN KEY (`id_category`) REFERENCES `categories` (`id_category`);
 
 ALTER TABLE `resources_url` ADD FOREIGN KEY (`id_category`) REFERENCES `categories` (`id_category`);
+
+
+
+
+INSERT INTO `users` (`id_user`, `dni`, `name_user`, `last_name`, `phone_number`, `email`, `emblems`, `nick_name`, `password`, `hidden`, `id_company`, `type_user`) VALUES
+(1, '2345678', 'aleix', 'Escrihuela', 456789, 'fghjkl@ghjkl.dd', NULL, 'aleix', 'aleix', NULL, NULL, 'client'),
+(2, '79138078P', 'Sergi', 'Fornós', 607802908, 'thalia@gmail.com', NULL, 'sergi', 'Emilio Adrian', NULL, NULL, 'admin'),
+(3, '58853433U', 'Júlia', 'Krukonis', 606654707, 'maricelaelizabeth@gmail.com', NULL, 'julia', 'Ivan Miguel', NULL, NULL, 'admin'),
+(4, '49639928Y', 'Xavi', 'Fibla', 686144758, 'robertleslie@gmail.com', NULL, 'xavi', 'Miguel Mauricio', NULL, NULL, 'admin'),
+(5, '84213946C', 'Andrei', 'Zahorneanu', 670862477, 'doloresbegoña@gmail.com', NULL, 'andrei', 'Simeon', NULL, NULL, 'admin'),
+(6, '88228487E', 'Julen', 'Martínez', 645144828, 'davidbernardo@gmail.com', NULL, 'julen', 'Jofre', NULL, NULL, 'admin'),
+(7, '27853385Q', 'Toni', 'Morant', 607164167, 'charafeddine@gmail.com', NULL, 'toni', 'Gustavo Ricardo', NULL, NULL, 'admin'),
+(8, '12444561S', 'Sergio Blanco', 'Siquier', 608099047, 'eugene@gmail.com', NULL, 'sergio', 'Ana Eugenia', NULL, NULL, 'admin');
